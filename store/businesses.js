@@ -19,7 +19,7 @@ export const getters = {
     id = parseInt(id)
     return state.list[id] ? state.list[id] : null
   },
-  list: (state) => state.list,
+  list: (state) => Object.values(state.list),
 }
 
 export const actions = {
