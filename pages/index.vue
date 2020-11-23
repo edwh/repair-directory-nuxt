@@ -2,13 +2,14 @@
   <div class="layout">
     <div class="sidebar">
       <div class="d-flex justify-content-around bg-white p-3">
-        <b-img-lazy src="/logo.png" class="logo" />
+        <b-img src="/logo.png" class="logo" />
       </div>
       <div class="sidebar__content mb-2 p-2">
         <p class="sidebar__copy font-weight-bold">
           Find a London business to repair your broken devices.
           <span class="more-info"
-            >(More info <v-icon name="question-circle" scale="0.75" />)</span
+            >(More info TODO
+            <v-icon name="question-circle" scale="0.75" />)</span
           >
         </p>
         <div class="formlayout">
@@ -91,8 +92,6 @@
         <l-map
           ref="map"
           style="width: 100%; height: 100vh"
-          :min-zoom="minZoom"
-          :max-zoom="maxZoom"
           :center="center"
           @ready="ready"
           @zoomend="idle"
@@ -116,12 +115,16 @@
 import { mapGetters } from 'vuex'
 import Business from '~/components/Business'
 
+let L = null
+
+if (process.browser) {
+  L = require('leaflet')
+}
+
 export default {
   components: { Business },
   data() {
     return {
-      minZoom: 10,
-      maxZoom: 16,
       osmtile:
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png',
       attribution:
@@ -314,6 +317,29 @@ export default {
       center: 'businesses/center',
     }),
   },
+  watch: {
+    businesses: {
+      immediate: true,
+      handler(newVal) {
+        if (this.$refs.map) {
+          // We want to fit the map to the new businesses
+
+          const markers = []
+          newVal.forEach((b) => {
+            markers.push(
+              // eslint-disable-next-line new-cap
+              new L.Marker([b.geolocation.latitude, b.geolocation.longitude])
+            )
+          })
+
+          // eslint-disable-next-line new-cap
+          const fg = new L.featureGroup(markers)
+
+          this.$refs.map.mapObject.fitBounds(fg.getBounds().pad(0.1))
+        }
+      },
+    },
+  },
   mounted() {
     this.search()
   },
@@ -381,6 +407,11 @@ export default {
 
 .sidebar__input,
 .sidebar__select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-border-radius: 0; /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+  -moz-border-radius: 0; /* Firefox 1-3.6 */
+  border-radius: 0; /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
   border-radius: 0;
   color: white;
   background: #22737d; /* For browsers that do not support gradients */
@@ -402,16 +433,8 @@ export default {
   &:focus {
     color: white;
   }
-}
 
-.sidebar__select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -webkit-border-radius: 0; /* Safari 3-4, iOS 1-3.2, Android 1.6- */
-  -moz-border-radius: 0; /* Firefox 1-3.6 */
-  border-radius: 0; /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
-
-  > option {
+  ::v-deep option {
     color: black;
   }
 }
