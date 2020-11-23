@@ -16,7 +16,7 @@
               target="_blank"
               rel="noopener"
               :href="business.website"
-              onclick="trackOutboundLink('https://dansphonecentre.business.site/');"
+              onclick="trackOutboundLink(business.website);"
             >
               {{ business.website }}
             </a>
@@ -25,9 +25,9 @@
           <p class="business-detail">
             <v-icon name="phone" class="icon" />
             <a
-              href="tel:020 8366 5335"
+              :href="'tel:' + business.landline"
               rel="noopener"
-              onclick="trackOutboundLink('tel:020 8366 5335');"
+              onclick="trackOutboundLink('tel:' + business.landline);"
             >
               {{ business.landline }}
             </a>
@@ -51,6 +51,11 @@ export default {
     },
   },
   computed: {},
+  methods: {
+    trackOutboundLink() {
+      // TODO
+    },
+  },
 }
 </script>
 <style scoped lang="scss">

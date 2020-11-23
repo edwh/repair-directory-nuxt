@@ -4,13 +4,51 @@
       <div class="d-flex justify-content-around bg-white p-4">
         <b-img-lazy src="/logo.png" />
       </div>
-      <div class="sidebar__content">
+      <div class="sidebar__content mb-2 p-4">
         <p class="sidebar__copy font-weight-bold">
           Find a London business to repair your broken devices.
           <span class="more-info"
             >(More info <v-icon name="question-circle" />)</span
           >
         </p>
+        <div class="formlayout">
+          <div class="left">
+            <label for="location">Where are you looking?</label>
+            <b-input
+              id="location"
+              v-model="location"
+              placeholder="Enter a postcode or area"
+              class="sidebar__input"
+            />
+          </div>
+          <div class="right">
+            <label for="radius">Search radius?</label>
+            <b-select
+              id="radius"
+              v-model="radius"
+              :options="radiusOptions"
+              class="sidebar__select"
+            />
+          </div>
+          <div class="left">
+            <label for="category">What do you need to fix?</label>
+            <b-select
+              id="categegory"
+              v-model="category"
+              :options="categoryOptions"
+              class="sidebar__select"
+            />
+          </div>
+          <div class="right align-self-end d-flex justify-content-end">
+            <b-btn
+              class="sidebar__button"
+              variant="warning"
+              squared
+              @click="search"
+              >Search</b-btn
+            >
+          </div>
+        </div>
       </div>
       <div class="text-center bg-white p-2 font-weight-bold">
         Help us grow!
@@ -21,11 +59,17 @@
           Submit a business
         </a>
       </div>
-      <div class="business-list-container">
+      <div class="business-list-container pl-2 pr-2">
         <div
           class="business-list-container__results-header text-white font-weight-bold"
         >
-          <div class="business-list-container__result-count">
+          <div
+            v-if="businesses.length === 0"
+            class="business-list-container__result-count"
+          >
+            Unfortunately, there are currently no results for your search
+          </div>
+          <div v-else class="business-list-container__result-count">
             {{ businesses.length }} results in your area
           </div>
           <div class="share-link">Share TODO</div>
@@ -78,7 +122,6 @@ export default {
     return {
       minZoom: 10,
       maxZoom: 16,
-      center: [51.5074, 0.1278],
       osmtile:
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png',
       attribution:
@@ -87,10 +130,189 @@ export default {
       category: null,
       location: 'London, UK',
       radius: 18,
+      radiusOptions: [
+        {
+          value: 1,
+          text: '1 mile',
+        },
+        {
+          value: 2,
+          text: '2 miles',
+        },
+        {
+          value: 3,
+          text: '3 miles',
+        },
+        {
+          value: 5,
+          text: '5 miles',
+        },
+        {
+          value: 7,
+          text: '7 miles',
+        },
+        {
+          value: 10,
+          text: '10 miles',
+        },
+        {
+          value: 18,
+          text: 'All London',
+        },
+      ],
+      categoryOptions: [
+        {
+          value: null,
+          text: 'Show all product categories',
+        },
+        {
+          value: 'Apple iPhone',
+          text: 'Apple iPhone',
+        },
+        {
+          value: 'Apple iPad',
+          text: 'Apple iPad',
+        },
+        {
+          value: 'Aircon/Dehumidifier',
+          text: 'Aircon/Dehumidifier',
+        },
+        {
+          value: 'Decorative or safety lights',
+          text: 'Decorative or safety lights',
+        },
+        {
+          value: 'Desktop computer',
+          text: 'Desktop computer',
+        },
+        {
+          value: 'Digital Camera',
+          text: 'Digital Camera',
+        },
+        {
+          value: 'Video Camera',
+          text: 'Video Camera',
+        },
+        {
+          value: 'Fan',
+          text: 'Fan',
+        },
+        {
+          value: 'Flat screen',
+          text: 'Flat screen',
+        },
+        {
+          value: 'Hair & Beauty item',
+          text: 'Hair & Beauty item',
+        },
+        {
+          value: 'Handheld entertainment device',
+          text: 'Handheld entertainment device',
+        },
+        {
+          value: 'Headphones',
+          text: 'Headphones',
+        },
+        {
+          value: 'Hi-Fi',
+          text: 'Hi-Fi',
+        },
+        {
+          value: 'Kettle',
+          text: 'Kettle',
+        },
+        {
+          value: 'Lamp',
+          text: 'Lamp',
+        },
+        {
+          value: 'Laptop',
+          text: 'Laptop',
+        },
+        {
+          value: 'Mobile/Smartphone',
+          text: 'Mobile/Smartphone',
+        },
+        {
+          value: 'Musical instrument',
+          text: 'Musical instrument',
+        },
+        {
+          value: 'Nintendo console',
+          text: 'Nintendo console',
+        },
+        {
+          value: 'Paper shredder',
+          text: 'Paper shredder',
+        },
+        {
+          value: 'PC Accessory',
+          text: 'PC Accessory',
+        },
+        {
+          value: 'Playstation console',
+          text: 'Playstation console',
+        },
+        {
+          value: 'Portable radio',
+          text: 'Portable radio',
+        },
+        {
+          value: 'Power tool',
+          text: 'Power tool',
+        },
+        {
+          value: 'Printer/scanner',
+          text: 'Printer/scanner',
+        },
+        {
+          value: 'Projector',
+          text: 'Projector',
+        },
+        {
+          value: 'Sewing machine',
+          text: 'Sewing machine',
+        },
+        {
+          value: 'Small kitchen item',
+          text: 'Small kitchen item',
+        },
+        {
+          value: 'Tablet',
+          text: 'Tablet',
+        },
+        {
+          value: 'Toaster',
+          text: 'Toaster',
+        },
+        {
+          value: 'Toy',
+          text: 'Toy',
+        },
+        {
+          value: 'TV',
+          text: 'TV',
+        },
+        {
+          value: 'Vacuum',
+          text: 'Vacuum',
+        },
+        {
+          value: 'Xbox console',
+          text: 'Xbox console',
+        },
+        {
+          value: 'White goods',
+          text: 'White goods',
+        },
+      ],
     }
   },
   computed: {
-    ...mapGetters({ businesses: 'businesses/list' }),
+    ...mapGetters({
+      businesses: 'businesses/list',
+      center: 'businesses/center',
+    }),
   },
   mounted() {
     this.search()
@@ -109,6 +331,10 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@import 'bootstrap/scss/_functions';
+@import 'bootstrap/scss/_variables';
+@import 'bootstrap/scss/mixins/_breakpoints';
+
 .layout {
   margin: 0 auto;
   min-height: 100vh;
@@ -196,6 +422,8 @@ export default {
   //@include button-variant(#f9a33f, #f9a33f, #958751);
   color: white;
   padding: 9px 25px 10px;
+  border: 0;
+  border-bottom: 3px solid #155e67;
 }
 
 .sidebar__button-label {
@@ -278,5 +506,29 @@ export default {
     width: 100%;
     text-align: center;
   }
+}
+
+.formlayout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+
+.top {
+  grid-row: 1 / 2;
+}
+
+.bottom {
+  grid-row: 2 /3;
+}
+
+.left {
+  grid-column: 1 / 2;
+}
+
+.right {
+  grid-column: 2 / 3;
 }
 </style>
