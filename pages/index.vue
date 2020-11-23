@@ -1,14 +1,14 @@
 <template>
   <div class="layout">
     <div class="sidebar">
-      <div class="d-flex justify-content-around bg-white p-4">
-        <b-img-lazy src="/logo.png" />
+      <div class="d-flex justify-content-around bg-white p-3">
+        <b-img-lazy src="/logo.png" class="logo" />
       </div>
-      <div class="sidebar__content mb-2 p-4">
+      <div class="sidebar__content mb-2 p-2">
         <p class="sidebar__copy font-weight-bold">
           Find a London business to repair your broken devices.
           <span class="more-info"
-            >(More info <v-icon name="question-circle" />)</span
+            >(More info <v-icon name="question-circle" scale="0.75" />)</span
           >
         </p>
         <div class="formlayout">
@@ -33,7 +33,7 @@
           <div class="left">
             <label for="category">What do you need to fix?</label>
             <b-select
-              id="categegory"
+              id="category"
               v-model="category"
               :options="categoryOptions"
               class="sidebar__select"
@@ -41,7 +41,7 @@
           </div>
           <div class="right align-self-end d-flex justify-content-end">
             <b-btn
-              class="sidebar__button"
+              class="sidebar__button font-weight-bold"
               variant="warning"
               squared
               @click="search"
@@ -424,6 +424,9 @@ export default {
   padding: 9px 25px 10px;
   border: 0;
   border-bottom: 3px solid #155e67;
+  background-color: #f9a33f;
+  border-color: #f9a33f;
+  height: calc(1.5em + 0.75rem + 2px);
 }
 
 .sidebar__button-label {
@@ -530,5 +533,9 @@ export default {
 
 .right {
   grid-column: 2 / 3;
+}
+
+.logo {
+  width: 279px;
 }
 </style>
