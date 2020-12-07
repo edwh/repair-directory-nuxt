@@ -295,6 +295,11 @@ export default {
   created() {
     this.search()
   },
+  mounted() {
+    this.$root.$on('bv::modal::hidden', (bvEvent, modalId) => {
+      this.selected = null
+    })
+  },
   methods: {
     async search() {
       await this.$store.dispatch('businesses/search', {
