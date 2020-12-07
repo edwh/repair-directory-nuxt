@@ -10,7 +10,7 @@
         {{ business.name }}
       </l-tooltip>
     </l-marker>
-    <b-modal v-model="show" size="xl" header-class="p-0">
+    <b-modal v-model="show" size="xl" header-class="p-0" hide-backdrop>
       <template slot="modal-header" slot-scope="{ cancel }">
         <div class="large title w-100">
           <b-btn variant="link" class="float-right clickme" @click="cancel">
@@ -177,7 +177,7 @@ export default {
         const dpPerDegree = (256.0 * Math.pow(2, zoomLevel)) / 170.0
         const mapHeight = this.map.$el.clientHeight
         const mapHeightPercent = (50.0 * mapHeight) / 100.0
-        const latOffset = mapHeight < 768 ? mapHeightPercent / dpPerDegree : 0
+        const latOffset = mapHeight > 768 ? mapHeightPercent / dpPerDegree : 0
 
         this.map.mapObject.flyTo([
           this.business.geolocation.latitude + latOffset,
