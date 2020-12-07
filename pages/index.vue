@@ -5,7 +5,7 @@
         <b-img src="/logo.png" class="logo" />
       </div>
       <div class="sidebar__content mb-2 p-2">
-        <p class="sidebar__copy font-weight-bold">
+        <p class="sidebar__copy font-weight-bold m-0 mb-3">
           Find a London business to repair your broken devices.
           <span class="more-info"
             >(More info TODO
