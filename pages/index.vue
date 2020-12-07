@@ -13,5 +13,11 @@ export default {
       radius: 18,
     })
   },
+  head() {
+    return this.buildHead(
+      'Repair Directory',
+      'Find a London business to repair your broken devices.'
+    )
+  },
 }
 </script>

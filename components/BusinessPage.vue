@@ -7,13 +7,13 @@
       <div class="sidebar__content mb-2 p-2">
         <p class="sidebar__copy font-weight-bold m-0 mb-3">
           Find a London business to repair your broken devices.
-          <span class="more-info"
-            >(More info TODO
+          <b-btn variant="link" class="more-info" @click="showMoreInfo">
+            (More Info
             <client-only>
-              <v-icon name="question-circle" scale="0.75" />
-            </client-only>
-            )</span
-          >
+              <v-icon name="question-circle" scale="0.75" /> </client-only
+            >)
+          </b-btn>
+          <MoreInfoModal ref="moreinfomodal" />
         </p>
         <div class="formlayout">
           <div class="left">
@@ -321,6 +321,11 @@ export default {
     select(uid) {
       this.selected = uid
     },
+    showMoreInfo() {
+      this.waitForRef('moreinfomodal', () => {
+        this.$refs.moreinfomodal.show()
+      })
+    },
   },
 }
 </script>
@@ -328,6 +333,7 @@ export default {
 @import 'bootstrap/scss/_functions';
 @import 'bootstrap/scss/_variables';
 @import 'bootstrap/scss/mixins/_breakpoints';
+@import 'assets/css/colours.scss';
 
 .layout {
   margin: 0 auto;
@@ -364,6 +370,7 @@ export default {
       .more-info {
         font-size: 0.8rem;
         cursor: pointer;
+        color: $colour-link;
       }
     }
   }
