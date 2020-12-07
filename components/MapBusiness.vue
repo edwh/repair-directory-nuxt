@@ -2,6 +2,7 @@
   <div>
     <l-marker
       :lat-lng="[business.geolocation.latitude, business.geolocation.longitude]"
+      :icon="getIcon()"
       @click="select"
     >
       <l-tooltip>
@@ -108,6 +109,12 @@
   </div>
 </template>
 <script>
+let L = null
+
+if (process.browser) {
+  L = require('leaflet')
+}
+
 export default {
   props: {
     business: {
@@ -162,6 +169,17 @@ export default {
   methods: {
     select() {
       this.$emit('select', this.business.uid)
+    },
+    getIcon() {
+      const colour = this.show ? 'red' : 'blue'
+      return new L.Icon({
+        iconUrl: require('~/assets/images/marker-icon-2x-' + colour + '.png'),
+        shadowUrl: require('~/assets/images/marker-shadow.png'),
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41],
+      })
     },
   },
 }

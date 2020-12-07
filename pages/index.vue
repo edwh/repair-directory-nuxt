@@ -309,7 +309,6 @@ export default {
       })
     },
     select(uid) {
-      console.log('Select index', uid)
       this.selected = uid
     },
   },

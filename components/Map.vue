@@ -30,11 +30,6 @@ export default {
       type: Array,
       required: true,
     },
-    showModal: {
-      type: Number,
-      required: false,
-      default: null,
-    },
     selected: {
       type: Number,
       required: false,
@@ -43,6 +38,7 @@ export default {
   },
   data() {
     return {
+      showModal: false,
       osmtile:
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png',
       attribution:
@@ -73,15 +69,16 @@ export default {
         }
       },
     },
+    selected(newVal) {
+      // Delay modal as this interferes with list scrolling.
+      setTimeout(() => {
+        this.showModal = newVal
+      }, 1000)
+    },
   },
   methods: {
     select(business) {
       this.$emit('selected', business.uid)
-
-      // Delay modal as this interferes with list scrolling.
-      setTimeout(() => {
-        this.showModal = business.uid
-      }, 1000)
     },
   },
 }
