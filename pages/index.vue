@@ -75,21 +75,12 @@
           </div>
           <div class="share-link">Share TODO</div>
         </div>
-        <div class="business-list">
-          <Business
-            v-for="business in businesses"
-            :key="'business-' + business.uid"
-            class="business-list__item"
-            :business="business"
-          >
-            {{ business.name }}
-          </Business>
-        </div>
+        <BusinessList :businesses="businesses" class="business-list" />
       </div>
     </div>
     <div>
       <client-only>
-        <Map :businesses="businesses" :center="center" />
+        <Map :businesses="businesses" :center="center" @selected="select" />
       </client-only>
     </div>
   </div>
@@ -97,12 +88,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import Map from '@/components/Map'
-import Business from '~/components/Business'
+import BusinessList from '@/components/BusinessList'
 
 export default {
-  components: { Map, Business },
+  components: { BusinessList, Map },
   data() {
     return {
+      selected: null,
       category: null,
       location: 'London, UK',
       radius: 18,
@@ -290,7 +282,7 @@ export default {
       center: 'businesses/center',
     }),
   },
-  mounted() {
+  created() {
     this.search()
   },
   methods: {
@@ -300,6 +292,9 @@ export default {
         category: this.category,
         radius: this.radius,
       })
+    },
+    select(id) {
+      this.selected = id
     },
   },
 }
@@ -422,64 +417,6 @@ export default {
   font-family: 'PatuaOne', serif;
   font-size: 1rem;
   flex: 1;
-}
-
-.business-list {
-  color: black;
-  list-style: none;
-  margin-bottom: 0;
-  padding: 0 0.5rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.business-list__item {
-  margin: 0 1rem 1rem 1rem;
-  padding: 1rem;
-  background-color: white;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #eee;
-  }
-
-  .business__heading > h2 {
-    color: #606060;
-  }
-
-  .business__extra-details {
-    display: none;
-  }
-}
-
-.business-list__item.business-list__item--inactive {
-  background-color: #707070;
-  a,
-  li,
-  .fa {
-    color: black;
-  }
-  h2 {
-    color: #333;
-  }
-}
-
-.business-list__item.business-list__item--active {
-  .business__extra-details {
-    display: block;
-  }
-}
-
-.business-list-cta {
-  background-color: white;
-
-  &__inner {
-    font-family: 'Patua One';
-    color: #606060;
-    padding: 0.5rem;
-    width: 100%;
-    text-align: center;
-  }
 }
 
 .formlayout {

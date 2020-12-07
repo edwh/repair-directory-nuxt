@@ -8,18 +8,16 @@
     @moveend="idle"
   >
     <l-tile-layer :url="osmtile" :attribution="attribution" />
-    <l-marker
+    <MapBusiness
       v-for="business in businesses"
       :key="'marker-' + business.uid"
-      :lat-lng="[business.geolocation.latitude, business.geolocation.longitude]"
-    >
-      <l-tooltip>
-        {{ business.name }}
-      </l-tooltip>
-    </l-marker>
+      :business="business"
+      @selected="selected"
+    />
   </l-map>
 </template>
 <script>
+import MapBusiness from '@/components/MapBusiness'
 let L = null
 
 if (process.browser) {
@@ -27,6 +25,7 @@ if (process.browser) {
 }
 
 export default {
+  components: { MapBusiness },
   props: {
     businesses: {
       type: Array,
@@ -71,6 +70,9 @@ export default {
   methods: {
     ready() {},
     idle() {},
+    selected(business) {
+      this.$emit('selected', this.business.id)
+    },
   },
 }
 </script>
