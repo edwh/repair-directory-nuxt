@@ -63,7 +63,7 @@
           Submit a business
         </a>
       </div>
-      <div class="business-list-container pl-2 pr-2">
+      <div class="business-list-container pl-md-2 pr-md-2">
         <div
           class="business-list-container__results-header text-white font-weight-bold"
         >
@@ -339,7 +339,12 @@ export default {
   margin: 0 auto;
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1.5fr 3fr;
+
+  grid-template-columns: 1fr 0px;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: 1.5fr 3fr;
+  }
 }
 
 .sidebar {

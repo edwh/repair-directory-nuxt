@@ -31,13 +31,21 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@import 'bootstrap/scss/_functions';
+@import 'bootstrap/scss/_variables';
+@import 'bootstrap/scss/mixins/_breakpoints';
+
 .business-list {
   color: black;
   list-style: none;
   margin-bottom: 0;
-  padding: 0 0.5rem;
+  padding: 0;
   width: 100%;
   box-sizing: border-box;
+
+  @include media-breakpoint-up(md) {
+    padding: 0 0.5rem;
+  }
 }
 
 .business-list__item {
