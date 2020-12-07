@@ -172,14 +172,12 @@ export default {
       this.show = newVal === this.business.uid
 
       if (this.map && this.show) {
-        // We want to ensure that the map marker is visible, if possible.
+        // We want to ensure that the map marker is visible, if possible.  This is a bit fragile.
         const zoomLevel = this.map.mapObject.getZoom()
-        console.log('Zoom', zoomLevel)
         const dpPerDegree = (256.0 * Math.pow(2, zoomLevel)) / 170.0
-        console.log('Map', this.map)
         const mapHeight = this.map.$el.clientHeight
         const mapHeightPercent = (50.0 * mapHeight) / 100.0
-        const latOffset = mapHeightPercent / dpPerDegree
+        const latOffset = mapHeight < 768 ? mapHeightPercent / dpPerDegree : 0
 
         this.map.mapObject.flyTo([
           this.business.geolocation.latitude + latOffset,
