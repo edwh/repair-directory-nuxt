@@ -76,11 +76,6 @@ export default {
       },
     },
   },
-  methods: {
-    trackOutboundLink() {
-      // TODO
-    },
-  },
 }
 </script>
 <style scoped lang="scss">

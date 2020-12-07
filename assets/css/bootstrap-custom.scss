@@ -1,0 +1,6 @@
+// Custom Bootstrap variable overrides go first
+$enable-rounded: false;
+
+// Then include the bootstrap Sass
+@import 'bootstrap/scss/bootstrap.scss';
+@import 'bootstrap-vue/src/index.scss';

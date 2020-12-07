@@ -43,7 +43,6 @@ export default {
   margin: 0 1rem 1rem 1rem;
   padding: 1rem;
   background-color: white;
-  border-radius: 5px;
 
   &:hover {
     background-color: #eee;

@@ -59,10 +59,12 @@ export default {
             )
           })
 
-          // eslint-disable-next-line new-cap
-          const fg = new L.featureGroup(markers)
+          if (markers.length) {
+            // eslint-disable-next-line new-cap
+            const fg = new L.featureGroup(markers)
 
-          this.$refs.map.mapObject.fitBounds(fg.getBounds().pad(0.1))
+            this.$refs.map.mapObject.fitBounds(fg.getBounds().pad(0.1))
+          }
         }
       },
     },

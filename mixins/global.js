@@ -14,5 +14,8 @@ Vue.mixin({
         }, 100)
       }
     },
+    trackOutboundLink() {
+      // TODO
+    },
   },
 })
