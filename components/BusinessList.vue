@@ -5,6 +5,7 @@
       :key="'business-' + business.uid"
       class="business-list__item"
       :business="business"
+      :selected="selected"
     >
       {{ business.name }}
     </Business>

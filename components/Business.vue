@@ -1,6 +1,11 @@
 <template>
-  <div class="business">
-    <div class="business__heading">
+  <div
+    :class="{
+      business: true,
+      faded: selected && selected !== business.uid,
+    }"
+  >
+    <div ref="heading" class="business__heading">
       <h2 class="name">{{ business.name }}</h2>
       <div class="business__positive-review-percentage">
         <h2 class="percentage font-weight-bold">100%</h2>
@@ -49,8 +54,28 @@ export default {
       type: Object,
       required: true,
     },
+    selected: {
+      type: Number,
+      required: false,
+      default: null,
+    },
   },
   computed: {},
+  watch: {
+    selected: {
+      immediate: true,
+      handler(newVal) {
+        if (newVal === this.business.uid) {
+          this.waitForRef('heading', () => {
+            this.$refs.heading.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+            })
+          })
+        }
+      },
+    },
+  },
   methods: {
     trackOutboundLink() {
       // TODO
@@ -74,5 +99,9 @@ export default {
 
 .icon {
   color: #0094a7;
+}
+
+.faded {
+  opacity: 50%;
 }
 </style>

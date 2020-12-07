@@ -75,7 +75,11 @@
           </div>
           <div class="share-link">Share TODO</div>
         </div>
-        <BusinessList :businesses="businesses" class="business-list" />
+        <BusinessList
+          :businesses="businesses"
+          class="business-list"
+          :selected="selected"
+        />
       </div>
     </div>
     <div>
@@ -293,8 +297,9 @@ export default {
         radius: this.radius,
       })
     },
-    select(id) {
-      this.selected = id
+    select(uid) {
+      console.log('Select index', uid)
+      this.selected = uid
     },
   },
 }

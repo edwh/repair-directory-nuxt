@@ -12,7 +12,7 @@
       v-for="business in businesses"
       :key="'marker-' + business.uid"
       :business="business"
-      @selected="selected"
+      @selected="selected(business)"
     />
   </l-map>
 </template>
@@ -71,7 +71,8 @@ export default {
     ready() {},
     idle() {},
     selected(business) {
-      this.$emit('selected', this.business.id)
+      console.log('Select', business)
+      this.$emit('selected', business.uid)
     },
   },
 }
