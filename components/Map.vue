@@ -7,6 +7,7 @@
       :business="business"
       :show-modal="showModal === business.uid"
       :selected="selected"
+      :map="map"
       @select="select(business)"
     />
   </l-map>
@@ -44,6 +45,11 @@ export default {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>',
     }
+  },
+  computed: {
+    map() {
+      return this.$refs.map ? this.$refs.map : null
+    },
   },
   watch: {
     businesses: {

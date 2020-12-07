@@ -3,13 +3,14 @@
     <l-marker
       :lat-lng="[business.geolocation.latitude, business.geolocation.longitude]"
       :icon="getIcon()"
+      :z-index-offset="show ? 10000 : null"
       @click="select"
     >
       <l-tooltip>
         {{ business.name }}
       </l-tooltip>
     </l-marker>
-    <b-modal v-model="show" size="lg" header-class="p-0">
+    <b-modal v-model="show" size="xl" header-class="p-0">
       <template slot="modal-header" slot-scope="{ cancel }">
         <div class="large title w-100">
           <b-btn variant="link" class="float-right clickme" @click="cancel">
@@ -126,6 +127,11 @@ export default {
       required: false,
       default: null,
     },
+    map: {
+      type: Object,
+      required: false,
+      default: null,
+    },
   },
   data() {
     return {
@@ -164,6 +170,22 @@ export default {
   watch: {
     selected(newVal) {
       this.show = newVal === this.business.uid
+
+      if (this.map && this.show) {
+        // We want to ensure that the map marker is visible, if possible.
+        const zoomLevel = this.map.mapObject.getZoom()
+        console.log('Zoom', zoomLevel)
+        const dpPerDegree = (256.0 * Math.pow(2, zoomLevel)) / 170.0
+        console.log('Map', this.map)
+        const mapHeight = this.map.$el.clientHeight
+        const mapHeightPercent = (50.0 * mapHeight) / 100.0
+        const latOffset = mapHeightPercent / dpPerDegree
+
+        this.map.mapObject.flyTo([
+          this.business.geolocation.latitude + latOffset,
+          this.business.geolocation.longitude,
+        ])
+      }
     },
   },
   methods: {
