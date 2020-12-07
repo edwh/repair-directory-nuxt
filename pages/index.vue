@@ -105,7 +105,11 @@
               business.geolocation.latitude,
               business.geolocation.longitude,
             ]"
-          />
+          >
+            <l-tooltip>
+              {{ business.name }}
+            </l-tooltip>
+          </l-marker>
         </l-map>
       </client-only>
     </div>
