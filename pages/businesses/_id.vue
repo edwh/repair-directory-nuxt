@@ -1,5 +1,5 @@
 <template>
-  <BusinessPage />
+  <BusinessPage :id="id" />
 </template>
 <script>
 import BusinessPage from '@/components/BusinessPage'
@@ -12,6 +12,14 @@ export default {
       location: 'London, UK',
       radius: 18,
     })
+  },
+  data() {
+    return {
+      id: null,
+    }
+  },
+  created() {
+    this.id = parseInt(this.$route.params.id)
   },
 }
 </script>

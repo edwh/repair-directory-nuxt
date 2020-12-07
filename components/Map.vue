@@ -58,11 +58,14 @@ export default {
         this.fitMarkers(newVal)
       },
     },
-    selected(newVal) {
-      // Delay modal as this interferes with list scrolling.
-      setTimeout(() => {
-        this.showModal = newVal
-      }, 1000)
+    selected: {
+      immediate: true,
+      handler(newVal) {
+        // Delay modal as this interferes with list scrolling.
+        setTimeout(() => {
+          this.showModal = newVal
+        }, 1000)
+      },
     },
   },
   mounted() {

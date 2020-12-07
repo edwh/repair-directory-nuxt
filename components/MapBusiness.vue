@@ -168,22 +168,25 @@ export default {
     },
   },
   watch: {
-    selected(newVal) {
-      this.show = newVal === this.business.uid
+    selected: {
+      immediate: true,
+      handler(newVal) {
+        this.show = newVal === this.business.uid
 
-      if (this.map && this.show) {
-        // We want to ensure that the map marker is visible, if possible.  This is a bit fragile.
-        const zoomLevel = this.map.mapObject.getZoom()
-        const dpPerDegree = (256.0 * Math.pow(2, zoomLevel)) / 170.0
-        const mapHeight = this.map.$el.clientHeight
-        const mapHeightPercent = (50.0 * mapHeight) / 100.0
-        const latOffset = mapHeight > 768 ? mapHeightPercent / dpPerDegree : 0
+        if (this.map && this.show) {
+          // We want to ensure that the map marker is visible, if possible.  This is a bit fragile.
+          const zoomLevel = this.map.mapObject.getZoom()
+          const dpPerDegree = (256.0 * Math.pow(2, zoomLevel)) / 170.0
+          const mapHeight = this.map.$el.clientHeight
+          const mapHeightPercent = (50.0 * mapHeight) / 100.0
+          const latOffset = mapHeight > 768 ? mapHeightPercent / dpPerDegree : 0
 
-        this.map.mapObject.flyTo([
-          this.business.geolocation.latitude + latOffset,
-          this.business.geolocation.longitude,
-        ])
-      }
+          this.map.mapObject.flyTo([
+            this.business.geolocation.latitude + latOffset,
+            this.business.geolocation.longitude,
+          ])
+        }
+      },
     },
   },
   methods: {
