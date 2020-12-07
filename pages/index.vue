@@ -9,7 +9,10 @@
           Find a London business to repair your broken devices.
           <span class="more-info"
             >(More info TODO
-            <v-icon name="question-circle" scale="0.75" />)</span
+            <client-only>
+              <v-icon name="question-circle" scale="0.75" />
+            </client-only>
+            )</span
           >
         </p>
         <div class="formlayout">
@@ -292,8 +295,12 @@ export default {
       center: 'businesses/center',
     }),
   },
-  created() {
-    this.search()
+  async asyncData({ app, params, store }) {
+    await store.dispatch('businesses/search', {
+      category: null,
+      location: 'London, UK',
+      radius: 18,
+    })
   },
   mounted() {
     this.$root.$on('bv::modal::hidden', (bvEvent, modalId) => {
