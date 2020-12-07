@@ -14,8 +14,8 @@ Vue.mixin({
         }, 100)
       }
     },
-    trackOutboundLink() {
-      // TODO
+    trackOutboundLink(url) {
+      this.$ga.event('outbound', 'click', url)
     },
   },
 })

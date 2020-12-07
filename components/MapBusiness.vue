@@ -61,7 +61,7 @@
           target="_blank"
           rel="noopener"
           :href="website"
-          onclick="trackOutboundLink(business.website);"
+          @click="trackOutboundLink(business.website)"
         >
           {{ business.website }}
         </a>
@@ -71,7 +71,7 @@
         <v-icon name="envelope" class="fa-fw" />
         <a
           :href="'mailto:' + business.email"
-          onclick="trackOutboundLink(business.website);"
+          @click="trackOutboundLink(business.website)"
           >{{ business.email }}</a
         >
       </p>
@@ -81,7 +81,7 @@
         <a
           :href="'tel:' + phone"
           rel="noopener"
-          onclick="trackOutboundLink('tel:' + phone);"
+          @click="trackOutboundLink('tel:' + phone)"
         >
           {{ phone }}
         </a>

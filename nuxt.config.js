@@ -23,6 +23,7 @@ export default {
 
   buildModules: [
     '@nuxtjs/eslint-module',
+    '@nuxtjs/google-analytics'
   ],
 
   modules: [
@@ -71,4 +72,14 @@ export default {
       }
     },
   },
+
+  googleAnalytics: {
+    id: 'UA-46050944-3',
+
+    // Enable debug in development mode so that we can see what events are tracked.
+    debug: {
+      enabled: process.env.NODE_ENV !== 'production',
+      sendHitTask: true
+    }
+  }
 }

@@ -22,7 +22,7 @@
               target="_blank"
               rel="noopener"
               :href="business.website"
-              onclick="trackOutboundLink(business.website);"
+              @click="trackOutboundLink(business.website)"
             >
               {{ business.website }}
             </a>
@@ -33,7 +33,7 @@
             <a
               :href="'tel:' + business.landline"
               rel="noopener"
-              onclick="trackOutboundLink('tel:' + business.landline);"
+              @click="trackOutboundLink('tel:' + business.landline)"
             >
               {{ business.landline }}
             </a>
