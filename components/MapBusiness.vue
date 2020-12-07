@@ -114,6 +114,11 @@ export default {
       type: Object,
       required: true,
     },
+    selected: {
+      type: Number,
+      required: false,
+      default: null,
+    },
   },
   data() {
     return {
@@ -149,14 +154,14 @@ export default {
         : ''
     },
   },
+  watch: {
+    selected(newVal) {
+      this.show = newVal === this.business.uid
+    },
+  },
   methods: {
     select() {
-      this.$emit('selected')
-
-      // Delay modal as this interferes with list scrolling.
-      setTimeout(() => {
-        this.show = true
-      }, 1000)
+      this.$emit('select', this.business.uid)
     },
   },
 }

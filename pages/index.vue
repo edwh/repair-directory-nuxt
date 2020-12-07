@@ -79,12 +79,18 @@
           :businesses="businesses"
           class="business-list"
           :selected="selected"
+          @select="select"
         />
       </div>
     </div>
     <div>
       <client-only>
-        <Map :businesses="businesses" :center="center" @selected="select" />
+        <Map
+          :businesses="businesses"
+          :center="center"
+          :selected="selected"
+          @selected="select"
+        />
       </client-only>
     </div>
   </div>

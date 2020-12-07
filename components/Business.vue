@@ -4,6 +4,7 @@
       business: true,
       faded: selected && selected !== business.uid,
     }"
+    @click="select"
   >
     <div ref="heading" class="business__heading">
       <h2 class="name">{{ business.name }}</h2>
@@ -74,6 +75,11 @@ export default {
           })
         }
       },
+    },
+  },
+  methods: {
+    select() {
+      this.$emit('select', this.business.uid)
     },
   },
 }

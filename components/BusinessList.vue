@@ -6,6 +6,7 @@
       class="business-list__item"
       :business="business"
       :selected="selected"
+      @select="$emit('select', business.uid)"
     >
       {{ business.name }}
     </Business>

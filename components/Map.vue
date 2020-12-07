@@ -1,18 +1,13 @@
 <template>
-  <l-map
-    ref="map"
-    style="width: 100%; height: 100vh"
-    :center="center"
-    @ready="ready"
-    @zoomend="idle"
-    @moveend="idle"
-  >
+  <l-map ref="map" style="width: 100%; height: 100vh" :center="center">
     <l-tile-layer :url="osmtile" :attribution="attribution" />
     <MapBusiness
       v-for="business in businesses"
       :key="'marker-' + business.uid"
       :business="business"
-      @selected="selected(business)"
+      :show-modal="showModal === business.uid"
+      :selected="selected"
+      @select="select(business)"
     />
   </l-map>
 </template>
@@ -34,6 +29,16 @@ export default {
     center: {
       type: Array,
       required: true,
+    },
+    showModal: {
+      type: Number,
+      required: false,
+      default: null,
+    },
+    selected: {
+      type: Number,
+      required: false,
+      default: null,
     },
   },
   data() {
@@ -70,11 +75,13 @@ export default {
     },
   },
   methods: {
-    ready() {},
-    idle() {},
-    selected(business) {
-      console.log('Select', business)
+    select(business) {
       this.$emit('selected', business.uid)
+
+      // Delay modal as this interferes with list scrolling.
+      setTimeout(() => {
+        this.showModal = business.uid
+      }, 1000)
     },
   },
 }
