@@ -1,13 +1,18 @@
 <template>
   <div class="layout">
     <div class="sidebar">
-      <div class="d-flex justify-content-around bg-white p-3">
+      <div v-if="!embedded" class="d-flex justify-content-around bg-white p-3">
         <b-img src="/logo.png" class="logo" />
       </div>
       <div class="sidebar__content mb-2 p-2">
         <p class="sidebar__copy font-weight-bold m-0 mb-3">
           Find a London business to repair your broken devices.
-          <b-btn variant="link" class="more-info" @click="showMoreInfo">
+          <b-btn
+            v-if="!embedded"
+            variant="link"
+            class="more-info"
+            @click="showMoreInfo"
+          >
             (More Info
             <client-only>
               <v-icon name="question-circle" scale="0.75" /> </client-only
@@ -301,6 +306,20 @@ export default {
       businesses: 'businesses/list',
       center: 'businesses/center',
     }),
+    embedded() {
+      // We can embed this page elsewhere.
+      let ret = false
+
+      if (process.client) {
+        try {
+          ret = window.self !== window.top
+        } catch (e) {
+          ret = true
+        }
+      }
+
+      return ret
+    },
   },
   created() {
     this.selected = this.id
