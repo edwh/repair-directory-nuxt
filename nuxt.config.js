@@ -1,5 +1,5 @@
 export default {
-  target: 'spa',
+  target: 'universal',
 
   head: {
     title: 'Repair Directory',
@@ -17,7 +17,9 @@ export default {
     { src: '~/mixins/global.js' },
     { src: '@/plugins/vue-google-maps', ssr: false },
     { src: '@/plugins/vue2-leaflet', ssr: false },
-    { src: '~/plugins/vue-awesome.js', ssr: false },
+    { src: '@/plugins/vue-star-rating', ssr: false },
+    { src: '@/plugins/vue-social-sharing', ssr: false },
+    { src: '@/plugins/vue-awesome.js', ssr: false },
   ],
 
   components: true,

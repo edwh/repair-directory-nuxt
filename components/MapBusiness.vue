@@ -25,7 +25,7 @@
           <h1>{{ business.name }}</h1>
           <p v-if="business.positiveReviewPc">
             <client-only>
-              <StarRating
+              <star-rating
                 v-model="business.averageScore"
                 :round-start-rating="false"
                 :show-rating="false"
@@ -50,8 +50,8 @@
       <template slot="modal-footer" slot-scope="{ ok, cancel }">
         <div class="d-flex justify-content-between w-100">
           <b-btn variant="light" @click="cancel"> Close </b-btn>
-          <b-btn variant="link">
-            TODO Share business
+          <b-btn variant="link" @click="share">
+            Share business
             <v-icon name="share" />
           </b-btn>
         </div>
@@ -121,15 +121,18 @@
         <span>Last updated: {{ updated }}</span>
       </p>
     </b-modal>
+    <ShareBusinessModal
+      v-if="showShareModal"
+      ref="shareModal"
+      :business="business"
+    />
   </div>
 </template>
 <script>
-import Vue from 'vue'
-import StarsRatings from 'vue-star-rating'
-
-Vue.component('StarRating', StarsRatings)
+import ShareBusinessModal from '@/components/ShareBusinessModal'
 
 export default {
+  components: { ShareBusinessModal },
   props: {
     business: {
       type: Object,
@@ -149,6 +152,7 @@ export default {
   data() {
     return {
       show: false,
+      showShareModal: false,
     }
   },
   computed: {
@@ -205,6 +209,13 @@ export default {
   methods: {
     select() {
       this.$emit('select', this.business.uid)
+    },
+    share() {
+      this.showShareModal = true
+
+      this.waitForRef('shareModal', () => {
+        this.$refs.shareModal.show()
+      })
     },
   },
 }
