@@ -24,8 +24,16 @@
           </b-btn>
           <h1>{{ business.name }}</h1>
           <p v-if="business.positiveReviewPc">
+            <client-only>
+              <StarRating
+                v-model="business.averageScore"
+                :round-start-rating="false"
+                :show-rating="false"
+                read-only
+              />
+            </client-only>
             {{ business.positiveReviewPc }}%
-            <span class="small">positive reviews TODO Google TOS</span>
+            <span class="small">positive reviews</span>
             <a
               v-if="business.reviewSourceUrl"
               :href="business.reviewSourceUrl"
@@ -116,6 +124,11 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
+import StarsRatings from 'vue-star-rating'
+
+Vue.component('StarRating', StarsRatings)
+
 export default {
   props: {
     business: {
