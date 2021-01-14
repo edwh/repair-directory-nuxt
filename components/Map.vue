@@ -1,6 +1,12 @@
 <template>
-  <l-map ref="map" style="width: 100%; height: 100vh" :center="center">
-    <l-tile-layer :url="osmtile" :attribution="attribution" />
+  <GmapMap
+    ref="map"
+    :center="{ lat: center[0], lng: center[1] }"
+    :zoom="7"
+    map-type-id="roadmap"
+    style="width: 100%; height: 100vh"
+    @idle="idle"
+  >
     <MapBusiness
       v-for="business in businesses"
       :key="'marker-' + business.uid"
@@ -10,15 +16,11 @@
       :map="map"
       @select="select(business)"
     />
-  </l-map>
+  </GmapMap>
 </template>
 <script>
 import MapBusiness from '@/components/MapBusiness'
-let L = null
-
-if (process.browser) {
-  L = require('leaflet')
-}
+import { gmapApi } from 'vue2-google-maps'
 
 export default {
   components: { MapBusiness },
@@ -39,6 +41,8 @@ export default {
   },
   data() {
     return {
+      map: null,
+      fitted: false,
       showModal: false,
       osmtile:
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png',
@@ -47,9 +51,7 @@ export default {
     }
   },
   computed: {
-    map() {
-      return this.$refs.map ? this.$refs.map : null
-    },
+    google: gmapApi,
   },
   watch: {
     businesses: {
@@ -68,29 +70,36 @@ export default {
       },
     },
   },
-  mounted() {
-    this.fitMarkers(this.businesses)
-  },
   methods: {
+    idle() {
+      if (!this.fitted) {
+        this.fitMarkers(this.businesses)
+        this.fitted = true
+      }
+    },
     select(business) {
       this.$emit('selected', business.uid)
     },
     fitMarkers(businesses) {
       if (this.$refs.map) {
+        this.map = this.$refs.map
+
         // We want to fit the map to the new businesses
-        const markers = []
+        const bounds = new this.google.maps.LatLngBounds()
         businesses.forEach((b) => {
-          markers.push(
+          bounds.extend(
             // eslint-disable-next-line new-cap
-            new L.Marker([b.geolocation.latitude, b.geolocation.longitude])
+            new this.google.maps.LatLng(
+              b.geolocation.latitude,
+              b.geolocation.longitude
+            )
           )
         })
 
-        if (markers.length) {
-          // eslint-disable-next-line new-cap
-          const fg = new L.featureGroup(markers)
-
-          this.$refs.map.mapObject.fitBounds(fg.getBounds().pad(0.1))
+        if (businesses.length) {
+          this.$refs.map.$mapPromise.then((map) => {
+            map.fitBounds(bounds)
+          })
         }
       }
     },

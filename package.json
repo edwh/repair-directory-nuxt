@@ -25,6 +25,7 @@
     "scss": "^0.2.4",
     "scss-loader": "0.0.1",
     "vue-awesome": "^4.1.0",
+    "vue2-google-maps": "^0.10.7",
     "vue2-leaflet": "^2.6.0"
   },
   "devDependencies": {

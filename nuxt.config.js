@@ -1,5 +1,5 @@
 export default {
-  target: 'universal',
+  target: 'spa',
 
   head: {
     title: 'Repair Directory',
@@ -15,6 +15,7 @@ export default {
 
   plugins: [
     { src: '~/mixins/global.js' },
+    { src: '@/plugins/vue-google-maps', ssr: false },
     { src: '@/plugins/vue2-leaflet', ssr: false },
     { src: '~/plugins/vue-awesome.js', ssr: false },
   ],
@@ -57,6 +58,8 @@ export default {
   },
 
   build: {
+    transpile: [/^vue2-google-maps($|\/)/],
+
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
