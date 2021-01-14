@@ -4,6 +4,8 @@ import Icon from 'vue-awesome/components/Icon.vue'
 // We list the icons we use explicitly because this reduces our bundle size.
 require('vue-awesome/icons/calendar')
 require('vue-awesome/icons/calendar-check')
+require('vue-awesome/icons/check')
+require('vue-awesome/icons/copy')
 require('vue-awesome/icons/envelope')
 require('vue-awesome/icons/globe')
 require('vue-awesome/icons/graduation-cap')

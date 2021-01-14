@@ -6,7 +6,7 @@
     size="lg"
   >
     <template slot="default">
-      <div v-if="business">
+      <div v-if="business" class="d-flex justify-content-start flex-wrap mt-3">
         <social-sharing
           :url="url"
           :title="'Sharing ' + business.name"
@@ -14,7 +14,7 @@
           inline-template
         >
           <div>
-            <div class="d-flex flex-wrap justify-content-around mt-3">
+            <div class="d-flex flex-wrap justify-content-around">
               <network network="facebook">
                 <b-btn variant="secondary" size="lg" class="facebook m-1">
                   <v-icon name="brands/facebook" /> Facebook
@@ -38,6 +38,12 @@
             </div>
           </div>
         </social-sharing>
+        <div ref="container">
+          <b-btn variant="info" size="lg" class="m-1" @click="doCopy">
+            <v-icon v-if="copied" name="check" />
+            <v-icon v-else name="copy" /> Copy
+          </b-btn>
+        </div>
       </div>
     </template>
     <template slot="modal-footer">
@@ -46,6 +52,12 @@
   </b-modal>
 </template>
 <script>
+import Vue from 'vue'
+import VueClipboard from 'vue-clipboard2'
+
+VueClipboard.config.autoSetContainer = true
+Vue.use(VueClipboard)
+
 export default {
   props: {
     business: {
@@ -56,6 +68,7 @@ export default {
   data() {
     return {
       showModal: false,
+      copied: false,
     }
   },
   computed: {
@@ -75,6 +88,12 @@ export default {
     },
     close() {
       this.showModal = false
+    },
+    async doCopy() {
+      console.log('Do copy')
+      await this.$copyText(this.url, this.$refs.container)
+      console.log('copied')
+      this.copied = true
     },
   },
 }
