@@ -2,14 +2,14 @@
   <b-modal
     id="sharemodal"
     v-model="showModal"
-    :title="'Share ' + business.name"
+    :title="'Share ' + name"
     size="lg"
   >
     <template slot="default">
-      <div v-if="business" class="d-flex justify-content-start flex-wrap mt-3">
+      <div class="d-flex justify-content-start flex-wrap mt-3">
         <social-sharing
           :url="url"
-          :title="'Sharing ' + business.name"
+          :title="'Sharing ' + name"
           hashtags="repair"
           inline-template
         >
@@ -60,8 +60,12 @@ Vue.use(VueClipboard)
 
 export default {
   props: {
-    business: {
-      type: Object,
+    name: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
       required: true,
     },
   },
@@ -71,17 +75,6 @@ export default {
       copied: false,
     }
   },
-  computed: {
-    url() {
-      return (
-        window.location.protocol +
-        '//' +
-        window.location.hostname +
-        '/businesses/' +
-        this.business.uid
-      )
-    },
-  },
   methods: {
     show() {
       this.showModal = true
@@ -90,9 +83,7 @@ export default {
       this.showModal = false
     },
     async doCopy() {
-      console.log('Do copy')
       await this.$copyText(this.url, this.$refs.container)
-      console.log('copied')
       this.copied = true
     },
   },

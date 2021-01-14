@@ -121,18 +121,19 @@
         <span>Last updated: {{ updated }}</span>
       </p>
     </b-modal>
-    <ShareBusinessModal
+    <ShareModal
       v-if="showShareModal"
       ref="shareModal"
-      :business="business"
+      :name="business.name"
+      :url="url"
     />
   </div>
 </template>
 <script>
-import ShareBusinessModal from '@/components/ShareBusinessModal'
+import ShareModal from '@/components/ShareModal'
 
 export default {
-  components: { ShareBusinessModal },
+  components: { ShareModal },
   props: {
     business: {
       type: Object,
@@ -156,6 +157,15 @@ export default {
     }
   },
   computed: {
+    url() {
+      return (
+        window.location.protocol +
+        '//' +
+        window.location.hostname +
+        '/businesses/' +
+        this.business.uid
+      )
+    },
     website() {
       if (this.business && this.business.website) {
         return this.business.website.indexOf('http') === 0

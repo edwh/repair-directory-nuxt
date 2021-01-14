@@ -81,7 +81,10 @@
           <div v-else class="business-list-container__result-count">
             {{ businesses.length }} results in your area
           </div>
-          <div class="share-link">Share TODO</div>
+          <b-btn class="share-link" variant="link" @click="share">
+            Share results
+            <v-icon name="share" />
+          </b-btn>
         </div>
         <BusinessList
           :businesses="businesses"
@@ -101,6 +104,12 @@
         />
       </client-only>
     </div>
+    <ShareModal
+      v-if="showShareModal"
+      ref="shareModal"
+      name="results"
+      :url="shareUrl"
+    />
   </div>
 </template>
 <script>
@@ -119,6 +128,7 @@ export default {
   },
   data() {
     return {
+      showShareModal: false,
       selected: null,
       category: null,
       location: 'London, UK',
@@ -320,6 +330,19 @@ export default {
 
       return ret
     },
+    shareUrl() {
+      return (
+        window.location.protocol +
+        '//' +
+        window.location.hostname +
+        '?location=' +
+        encodeURIComponent(this.location) +
+        '&category=' +
+        encodeURIComponent(this.category) +
+        '&radius=' +
+        this.radius
+      )
+    },
   },
   created() {
     this.selected = this.id
@@ -328,6 +351,20 @@ export default {
     this.$root.$on('bv::modal::hidden', (bvEvent, modalId) => {
       this.selected = null
     })
+
+    if (this.$route.query.location) {
+      this.location = this.$route.query.location
+    }
+
+    if (this.$route.query.category) {
+      this.category = this.$route.query.category
+    }
+
+    if (this.$route.query.radius) {
+      this.radius = this.$route.query.radius
+    }
+
+    this.search()
   },
   methods: {
     async search() {
@@ -343,6 +380,13 @@ export default {
     showMoreInfo() {
       this.waitForRef('moreinfomodal', () => {
         this.$refs.moreinfomodal.show()
+      })
+    },
+    share() {
+      this.showShareModal = true
+
+      this.waitForRef('shareModal', () => {
+        this.$refs.shareModal.show()
       })
     },
   },
@@ -501,5 +545,10 @@ export default {
 
 .logo {
   width: 279px;
+}
+
+.share-link {
+  color: white;
+  box-shadow: none;
 }
 </style>
