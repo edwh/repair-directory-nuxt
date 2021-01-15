@@ -70,6 +70,7 @@
       </div>
       <div class="business-list-container pl-md-2 pr-md-2">
         <div
+          v-if="!busy"
           class="business-list-container__results-header text-white font-weight-bold"
         >
           <div
@@ -83,7 +84,9 @@
           </div>
           <b-btn class="share-link" variant="link" @click="share">
             Share results
-            <v-icon name="share" />
+            <client-only>
+              <v-icon name="share" />
+            </client-only>
           </b-btn>
         </div>
         <BusinessList
@@ -128,6 +131,7 @@ export default {
   },
   data() {
     return {
+      busy: false,
       showShareModal: false,
       selected: null,
       category: null,
@@ -363,16 +367,18 @@ export default {
     if (this.$route.query.radius) {
       this.radius = this.$route.query.radius
     }
-
-    this.search()
   },
   methods: {
     async search() {
+      this.busy = true
+
       await this.$store.dispatch('businesses/search', {
         location: this.location,
         category: this.category,
         radius: this.radius,
       })
+
+      this.busy = false
     },
     select(uid) {
       this.selected = uid
