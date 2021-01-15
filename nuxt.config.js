@@ -1,5 +1,5 @@
 export default {
-  target: 'universal',
+  target: 'server',
 
   head: {
     title: 'Repair Directory',
