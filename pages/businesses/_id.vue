@@ -6,6 +6,15 @@ import BusinessPage from '@/components/BusinessPage'
 
 export default {
   components: { BusinessPage },
+  async asyncData({ store }) {
+    // For SSR we want to have all the businesses loaded.  If we have a specific search filter, that will get
+    // applied on the client when the mounted() call in BusinessPage happens.
+    await store.dispatch('businesses/search', {
+      location: 'London, UK',
+      category: null,
+      radius: 18,
+    })
+  },
   data() {
     return {
       id: null,
