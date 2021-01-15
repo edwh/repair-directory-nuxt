@@ -18,7 +18,9 @@
         <div class="row">
           <div class="col-md-12">
             <p class="business-detail">
-              <v-icon name="globe" class="icon" />
+              <client-only>
+                <v-icon name="globe" class="icon" />
+              </client-only>
               <a
                 target="_blank"
                 rel="noopener"
@@ -30,7 +32,9 @@
             </p>
 
             <p class="business-detail">
-              <v-icon name="phone" class="icon" />
+              <client-only>
+                <v-icon name="phone" class="icon" />
+              </client-only>
               <a
                 :href="'tel:' + business.landline"
                 rel="noopener"
@@ -41,7 +45,9 @@
             </p>
 
             <p class="business-detail">
-              <v-icon name="map-marker" class="icon" />
+              <client-only>
+                <v-icon name="map-marker" class="icon" />
+              </client-only>
               <span>{{ business.address }}</span>
             </p>
           </div>
@@ -51,7 +57,9 @@
     <div class="d-flex justify-content-end">
       <b-btn variant="link" @click="share">
         Share business
-        <v-icon name="share" />
+        <client-only>
+          <v-icon name="share" />
+        </client-only>
       </b-btn>
     </div>
     <ShareModal
