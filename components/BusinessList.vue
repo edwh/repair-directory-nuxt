@@ -1,7 +1,7 @@
 <template>
   <div>
     <Business
-      v-for="business in businesses"
+      v-for="business in sortedBusinesses"
       :key="'business-' + business.uid"
       class="business-list__item"
       :business="business"
@@ -26,6 +26,13 @@ export default {
       type: Number,
       required: false,
       default: null,
+    },
+  },
+  computed: {
+    sortedBusinesses() {
+      return this.businesses.slice().sort((a, b) => {
+        return b.positiveReviewPc - a.positiveReviewPc
+      })
     },
   },
 }

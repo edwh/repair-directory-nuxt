@@ -10,7 +10,9 @@
       <div ref="heading" class="business__heading">
         <h2 class="name">{{ business.name }}</h2>
         <div class="business__positive-review-percentage">
-          <h2 class="percentage font-weight-bold">100%</h2>
+          <h2 class="percentage font-weight-bold">
+            {{ business.positiveReviewPc }}%
+          </h2>
           <span>positive reviews</span>
         </div>
       </div>

@@ -164,16 +164,8 @@ export default {
           text: '2 miles',
         },
         {
-          value: 3,
-          text: '3 miles',
-        },
-        {
           value: 5,
           text: '5 miles',
-        },
-        {
-          value: 7,
-          text: '7 miles',
         },
         {
           value: 10,
