@@ -17,7 +17,7 @@
       <div class="business__details">
         <div class="row">
           <div class="col-md-12">
-            <p class="business-detail">
+            <p v-if="business.website" class="business-detail">
               <client-only>
                 <v-icon name="globe" class="icon" />
               </client-only>
@@ -31,7 +31,7 @@
               </a>
             </p>
 
-            <p class="business-detail">
+            <p v-if="business.landline" class="business-detail">
               <client-only>
                 <v-icon name="phone" class="icon" />
               </client-only>
@@ -44,7 +44,7 @@
               </a>
             </p>
 
-            <p class="business-detail">
+            <p v-if="business.address" class="business-detail">
               <client-only>
                 <v-icon name="map-marker" class="icon" />
               </client-only>
@@ -55,26 +55,12 @@
       </div>
     </div>
     <div class="d-flex justify-content-end">
-      <b-btn variant="link" @click="share">
-        Share business
-        <client-only>
-          <v-icon name="share" />
-        </client-only>
-      </b-btn>
+      <b-btn variant="link"> View more info </b-btn>
     </div>
-    <ShareModal
-      v-if="showShareModal"
-      ref="shareModal"
-      :name="business.name"
-      :url="url"
-    />
   </div>
 </template>
 <script>
-import ShareModal from '@/components/ShareModal'
-
 export default {
-  components: { ShareModal },
   props: {
     business: {
       type: Object,
@@ -120,13 +106,6 @@ export default {
   methods: {
     select() {
       this.$emit('select', this.business.uid)
-    },
-    share() {
-      this.showShareModal = true
-
-      this.waitForRef('shareModal', () => {
-        this.$refs.shareModal.show()
-      })
     },
   },
 }

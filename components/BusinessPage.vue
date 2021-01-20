@@ -77,12 +77,25 @@
             v-if="businesses.length === 0"
             class="business-list-container__result-count"
           >
-            Unfortunately, there are currently no results for your search
+            <p>
+              Unfortunately, there are currently no businesses in the Repair
+              Directory that match your search criteria.
+            </p>
+            <p>Try selecting a wider search radius.</p>
+            <p>
+              If you still don’t obtain results, it means that we don’t know of
+              a repair business for this item that meets our listing criteria.
+            </p>
           </div>
           <div v-else class="business-list-container__result-count">
             {{ businesses.length }} results in your area
           </div>
-          <b-btn class="share-link" variant="link" @click="share">
+          <b-btn
+            v-if="businesses.length"
+            class="share-link"
+            variant="link"
+            @click="share"
+          >
             Share results
             <client-only>
               <v-icon name="share" />
@@ -129,6 +142,10 @@ export default {
       default: null,
     },
   },
+  async fetch() {
+    // We want to fetch the list of categories from the server.
+    // await this.$store.dispatch('categories/list')
+  },
   data() {
     return {
       busy: false,
@@ -167,159 +184,33 @@ export default {
           text: 'All London',
         },
       ],
-      categoryOptions: [
-        {
-          value: null,
-          text: 'Show all product categories',
-        },
-        {
-          value: 'Apple iPhone',
-          text: 'Apple iPhone',
-        },
-        {
-          value: 'Apple iPad',
-          text: 'Apple iPad',
-        },
-        {
-          value: 'Aircon/Dehumidifier',
-          text: 'Aircon/Dehumidifier',
-        },
-        {
-          value: 'Decorative or safety lights',
-          text: 'Decorative or safety lights',
-        },
-        {
-          value: 'Desktop computer',
-          text: 'Desktop computer',
-        },
-        {
-          value: 'Digital Camera',
-          text: 'Digital Camera',
-        },
-        {
-          value: 'Video Camera',
-          text: 'Video Camera',
-        },
-        {
-          value: 'Fan',
-          text: 'Fan',
-        },
-        {
-          value: 'Flat screen',
-          text: 'Flat screen',
-        },
-        {
-          value: 'Hair & Beauty item',
-          text: 'Hair & Beauty item',
-        },
-        {
-          value: 'Handheld entertainment device',
-          text: 'Handheld entertainment device',
-        },
-        {
-          value: 'Headphones',
-          text: 'Headphones',
-        },
-        {
-          value: 'Hi-Fi',
-          text: 'Hi-Fi',
-        },
-        {
-          value: 'Kettle',
-          text: 'Kettle',
-        },
-        {
-          value: 'Lamp',
-          text: 'Lamp',
-        },
-        {
-          value: 'Laptop',
-          text: 'Laptop',
-        },
-        {
-          value: 'Mobile/Smartphone',
-          text: 'Mobile/Smartphone',
-        },
-        {
-          value: 'Musical instrument',
-          text: 'Musical instrument',
-        },
-        {
-          value: 'Nintendo console',
-          text: 'Nintendo console',
-        },
-        {
-          value: 'Paper shredder',
-          text: 'Paper shredder',
-        },
-        {
-          value: 'PC Accessory',
-          text: 'PC Accessory',
-        },
-        {
-          value: 'Playstation console',
-          text: 'Playstation console',
-        },
-        {
-          value: 'Portable radio',
-          text: 'Portable radio',
-        },
-        {
-          value: 'Power tool',
-          text: 'Power tool',
-        },
-        {
-          value: 'Printer/scanner',
-          text: 'Printer/scanner',
-        },
-        {
-          value: 'Projector',
-          text: 'Projector',
-        },
-        {
-          value: 'Sewing machine',
-          text: 'Sewing machine',
-        },
-        {
-          value: 'Small kitchen item',
-          text: 'Small kitchen item',
-        },
-        {
-          value: 'Tablet',
-          text: 'Tablet',
-        },
-        {
-          value: 'Toaster',
-          text: 'Toaster',
-        },
-        {
-          value: 'Toy',
-          text: 'Toy',
-        },
-        {
-          value: 'TV',
-          text: 'TV',
-        },
-        {
-          value: 'Vacuum',
-          text: 'Vacuum',
-        },
-        {
-          value: 'Xbox console',
-          text: 'Xbox console',
-        },
-        {
-          value: 'White goods',
-          text: 'White goods',
-        },
-      ],
     }
   },
   computed: {
     ...mapGetters({
+      categories: 'categories/list',
       businesses: 'businesses/list',
       center: 'businesses/center',
     }),
+    categoryOptions() {
+      const ret = [
+        {
+          value: null,
+          text: 'Show all product categories',
+        },
+      ]
+
+      if (this.categories) {
+        this.categories.forEach((c) => {
+          ret.push({
+            value: c,
+            text: c,
+          })
+        })
+      }
+
+      return ret
+    },
     embedded() {
       // We can embed this page elsewhere.
       let ret = false

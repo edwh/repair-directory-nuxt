@@ -33,7 +33,6 @@ export const actions = {
   },
 
   async search({ commit }, params) {
-    // CORS blocks us
     const ret = await this.$axios.get('/api/business/search', {
       params,
     })

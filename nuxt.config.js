@@ -1,3 +1,13 @@
+const proxyConfig = () => {
+  // Setting the API environment variable allows you to point at a development server if required, e.g.
+  // API=https://map.restarters.dev
+  return {
+    '/api/': process.env.API
+      ? process.env.API
+      : 'https://map.restarters.net/map/',
+  }
+}
+
 export default {
   target: 'server',
 
@@ -24,16 +34,9 @@ export default {
 
   components: true,
 
-  buildModules: [
-    '@nuxtjs/eslint-module',
-    '@nuxtjs/google-analytics'
-  ],
+  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/google-analytics'],
 
-  modules: [
-    'bootstrap-vue/nuxt',
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-  ],
+  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios', '@nuxtjs/pwa'],
 
   axios: {
     proxy: true,
@@ -55,9 +58,7 @@ export default {
   },
 
   // Proxy to avoid CORS restrictions on API in development environment
-  proxy: {
-    '/api/': 'https://map.restarters.net/map/',
-  },
+  proxy: proxyConfig(),
 
   build: {
     transpile: [/^vue2-google-maps($|\/)/],
@@ -84,7 +85,7 @@ export default {
     // Enable debug in development mode so that we can see what events are tracked.
     debug: {
       enabled: process.env.NODE_ENV !== 'production',
-      sendHitTask: true
-    }
-  }
+      sendHitTask: true,
+    },
+  },
 }
