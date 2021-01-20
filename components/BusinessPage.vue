@@ -184,6 +184,152 @@ export default {
           text: 'All London',
         },
       ],
+      categoryOptions: [
+        {
+          value: null,
+          text: 'Show all product categories',
+        },
+        {
+          value: 'Apple iPhone',
+          text: 'Apple iPhone',
+        },
+        {
+          value: 'Apple iPad',
+          text: 'Apple iPad',
+        },
+        {
+          value: 'Aircon/Dehumidifier',
+          text: 'Aircon/Dehumidifier',
+        },
+        {
+          value: 'Decorative or safety lights',
+          text: 'Decorative or safety lights',
+        },
+        {
+          value: 'Desktop computer',
+          text: 'Desktop computer',
+        },
+        {
+          value: 'Digital Camera',
+          text: 'Digital Camera',
+        },
+        {
+          value: 'Video Camera',
+          text: 'Video Camera',
+        },
+        {
+          value: 'Fan',
+          text: 'Fan',
+        },
+        {
+          value: 'Flat screen',
+          text: 'Flat screen',
+        },
+        {
+          value: 'Hair & Beauty item',
+          text: 'Hair & Beauty item',
+        },
+        {
+          value: 'Handheld entertainment device',
+          text: 'Handheld entertainment device',
+        },
+        {
+          value: 'Headphones',
+          text: 'Headphones',
+        },
+        {
+          value: 'Hi-Fi',
+          text: 'Hi-Fi',
+        },
+        {
+          value: 'Kettle',
+          text: 'Kettle',
+        },
+        {
+          value: 'Lamp',
+          text: 'Lamp',
+        },
+        {
+          value: 'Laptop',
+          text: 'Laptop',
+        },
+        {
+          value: 'Mobile/Smartphone',
+          text: 'Mobile/Smartphone',
+        },
+        {
+          value: 'Musical instrument',
+          text: 'Musical instrument',
+        },
+        {
+          value: 'Nintendo console',
+          text: 'Nintendo console',
+        },
+        {
+          value: 'Paper shredder',
+          text: 'Paper shredder',
+        },
+        {
+          value: 'PC Accessory',
+          text: 'PC Accessory',
+        },
+        {
+          value: 'Playstation console',
+          text: 'Playstation console',
+        },
+        {
+          value: 'Portable radio',
+          text: 'Portable radio',
+        },
+        {
+          value: 'Power tool',
+          text: 'Power tool',
+        },
+        {
+          value: 'Printer/scanner',
+          text: 'Printer/scanner',
+        },
+        {
+          value: 'Projector',
+          text: 'Projector',
+        },
+        {
+          value: 'Sewing machine',
+          text: 'Sewing machine',
+        },
+        {
+          value: 'Small kitchen item',
+          text: 'Small kitchen item',
+        },
+        {
+          value: 'Tablet',
+          text: 'Tablet',
+        },
+        {
+          value: 'Toaster',
+          text: 'Toaster',
+        },
+        {
+          value: 'Toy',
+          text: 'Toy',
+        },
+        {
+          value: 'TV',
+          text: 'TV',
+        },
+        {
+          value: 'Vacuum',
+          text: 'Vacuum',
+        },
+        {
+          value: 'Xbox console',
+          text: 'Xbox console',
+        },
+        {
+          value: 'White goods',
+          text: 'White goods',
+        },
+      ],
     }
   },
   computed: {
@@ -192,7 +338,7 @@ export default {
       businesses: 'businesses/list',
       center: 'businesses/center',
     }),
-    categoryOptions() {
+    categoryOptionsWIP() {
       const ret = [
         {
           value: null,

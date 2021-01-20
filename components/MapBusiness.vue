@@ -42,7 +42,7 @@
               >(source)</a
             >
           </p>
-          <p v-if="business.description">
+          <p v-if="business.description" class="m-0">
             {{ business.description }}
           </p>
         </div>
@@ -231,6 +231,9 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@import 'bootstrap/scss/_functions';
+@import 'bootstrap/scss/_variables';
+@import 'bootstrap/scss/mixins/_breakpoints';
 @import 'assets/css/colours.scss';
 
 .title {
@@ -240,11 +243,27 @@ export default {
 }
 
 .large {
-  font-size: 2rem;
+  font-size: 1.5rem;
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 2rem;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
 }
 
 .largish {
-  font-size: 1.5rem;
+  font-size: 1rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.5rem;
+  }
 }
 
 .title a {

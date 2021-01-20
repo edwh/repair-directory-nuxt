@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="d-flex justify-content-end">
-      <b-btn variant="link"> View more info </b-btn>
+      <b-btn variant="link" @click="select"> View more info </b-btn>
     </div>
   </div>
 </template>
