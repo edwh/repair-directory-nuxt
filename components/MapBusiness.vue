@@ -56,70 +56,72 @@
           </b-btn>
         </div>
       </template>
-      <div class="mt-1">
-        <b-badge
-          v-for="category in business.categories"
-          :key="category"
-          size="md"
-          variant="dark"
-          class="mb-2 mr-2 category"
-          pill
-        >
-          {{ category }}
-        </b-badge>
+      <div class="fontfix">
+        <div class="mt-1">
+          <b-badge
+            v-for="category in business.categories"
+            :key="category"
+            size="md"
+            variant="dark"
+            class="mb-2 mr-2 category"
+            pill
+          >
+            {{ category }}
+          </b-badge>
+        </div>
+
+        <p v-if="website" class="mt-3">
+          <v-icon name="globe" class="fa-fw" />
+          <a
+            target="_blank"
+            rel="noopener"
+            :href="website"
+            @click="trackOutboundLink(business.website)"
+          >
+            {{ business.website }}
+          </a>
+        </p>
+
+        <p v-if="business.email">
+          <v-icon name="envelope" class="fa-fw" />
+          <a
+            :href="'mailto:' + business.email"
+            @click="trackOutboundLink(business.website)"
+            >{{ business.email }}</a
+          >
+        </p>
+
+        <p>
+          <v-icon name="phone" class="fa-fw" />
+          <a
+            :href="'tel:' + phone"
+            rel="noopener"
+            @click="trackOutboundLink('tel:' + phone)"
+          >
+            {{ phone }}
+          </a>
+        </p>
+
+        <p>
+          <v-icon name="map-marker" class="fa-fw" />
+          <span>{{ business.address }}</span>
+        </p>
+
+        <p v-if="business.warrantyOffered">
+          <v-icon name="calendar-check" class="fa-fw" />
+          <span>Warranty: {{ business.warranty }}</span>
+        </p>
+
+        <p v-if="business.qualifications">
+          <v-icon name="graduation-cap" class="fa-fw" />
+          <span>Qualifications: {{ business.qualifications }}</span>
+        </p>
+
+        <p>
+          <v-icon name="calendar" class="fa-fw" />
+          <span>Last updated: {{ updated }}</span>
+        </p>
       </div>
-
-      <p v-if="website" class="mt-3">
-        <v-icon name="globe" class="fa-fw" />
-        <a
-          target="_blank"
-          rel="noopener"
-          :href="website"
-          @click="trackOutboundLink(business.website)"
-        >
-          {{ business.website }}
-        </a>
-      </p>
-
-      <p v-if="business.email">
-        <v-icon name="envelope" class="fa-fw" />
-        <a
-          :href="'mailto:' + business.email"
-          @click="trackOutboundLink(business.website)"
-          >{{ business.email }}</a
-        >
-      </p>
-
-      <p>
-        <v-icon name="phone" class="fa-fw" />
-        <a
-          :href="'tel:' + phone"
-          rel="noopener"
-          @click="trackOutboundLink('tel:' + phone)"
-        >
-          {{ phone }}
-        </a>
-      </p>
-
-      <p>
-        <v-icon name="map-marker" class="fa-fw" />
-        <span>{{ business.address }}</span>
-      </p>
-
-      <p v-if="business.warrantyOffered">
-        <v-icon name="calendar-check" class="fa-fw" />
-        <span>Warranty: {{ business.warranty }}</span>
-      </p>
-
-      <p v-if="business.qualifications">
-        <v-icon name="graduation-cap" class="fa-fw" />
-        <span>Qualifications: {{ business.qualifications }}</span>
-      </p>
-
-      <p>
-        <v-icon name="calendar" class="fa-fw" />
-        <span>Last updated: {{ updated }}</span>
-      </p>
     </b-modal>
     <ShareModal
       v-if="showShareModal"
@@ -272,5 +274,9 @@ export default {
 
 p {
   margin-bottom: 0.5rem;
+}
+
+.fontfix {
+  font-family: 'PatuaOne', serif;
 }
 </style>

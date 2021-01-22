@@ -1,12 +1,16 @@
 <template>
-  <div>
-    <div
-      :class="{
-        business: true,
-        faded: selected && selected !== business.uid,
-      }"
-      @click="select"
-    >
+  <div
+    :class="{
+      'business-list__item': true,
+      'business-list__item--active': selected && selected === business.uid,
+      'business-list__item--inactive': selected && selected !== business.uid,
+      'bg-white': !selected,
+      'p-3': true,
+      'mb-3': true,
+      rounded: true,
+    }"
+  >
+    <div class="business" @click="select">
       <div ref="heading" class="business__heading">
         <h2 class="name">{{ business.name }}</h2>
         <div class="business__positive-review-percentage">
@@ -57,7 +61,9 @@
       </div>
     </div>
     <div class="d-flex justify-content-end">
-      <b-btn variant="link" @click="select"> View more info </b-btn>
+      <b-btn variant="link" class="moreinfo" @click="select">
+        View more info
+      </b-btn>
     </div>
   </div>
 </template>
@@ -112,26 +118,62 @@ export default {
   },
 }
 </script>
-<style scoped lang="scss">
-.percentage {
-  display: inline-block;
-  font-family: 'Patua One', serif;
-  color: #f9a543;
-  margin: 0 0.5rem 0 0;
+<style lang="scss">
+.business-list__item {
+  margin: 0 1rem 1rem 1rem;
+  padding: 1rem;
+  background-color: white;
+
+  &:hover {
+    background-color: #eee;
+  }
+
+  .business__heading > h2 {
+    color: #606060;
+  }
+
+  .percentage {
+    display: inline-block;
+    font-family: 'Patua One', serif;
+    color: #f9a543;
+    margin: 0 0.5rem 0 0;
+  }
+
+  .name {
+    color: #606060;
+    font-family: 'Patua One', serif;
+    margin-top: 0;
+    font-size: 1.8rem;
+  }
+
+  .icon {
+    color: #0094a7;
+  }
+
+  &.business-list__item.business-list__item--inactive {
+    background-color: #707070;
+    color: #333 !important;
+
+    .name,
+    a,
+    li,
+    .fa-icon,
+    .percentage,
+    .moreinfo {
+      color: #333 !important;
+    }
+  }
 }
 
-.name {
-  color: #606060;
-  font-family: 'Patua One', serif;
-  margin-top: 0;
-  font-size: 1.8rem;
-}
+.business-list-cta {
+  background-color: white;
 
-.icon {
-  color: #0094a7;
-}
-
-.faded {
-  opacity: 50%;
+  &__inner {
+    font-family: 'Patua One';
+    color: #606060;
+    padding: 0.5rem;
+    width: 100%;
+    text-align: center;
+  }
 }
 </style>
