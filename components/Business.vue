@@ -12,7 +12,9 @@
   >
     <div class="business" @click="select">
       <div ref="heading" class="business__heading">
-        <h2 class="name">{{ business.name }}</h2>
+        <h2 class="name">
+          {{ business.name }}
+        </h2>
         <div class="business__positive-review-percentage">
           <h2 class="percentage font-weight-bold">
             {{ business.positiveReviewPc }}%
@@ -68,6 +70,8 @@
   </div>
 </template>
 <script>
+const VueScrollTo = require('vue-scrollto')
+
 export default {
   props: {
     business: {
@@ -102,9 +106,9 @@ export default {
       handler(newVal) {
         if (newVal === this.business.uid) {
           this.waitForRef('heading', () => {
-            this.$refs.heading.scrollIntoView({
-              behavior: 'smooth',
-              block: 'center',
+            VueScrollTo.scrollTo(this.$refs.heading, 750, {
+              container: '#sidebar',
+              offset: -60,
             })
           })
         }

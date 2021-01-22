@@ -36,7 +36,12 @@ export default {
 
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/google-analytics'],
 
-  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios', '@nuxtjs/pwa'],
+  modules: [
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa',
+    'vue-scrollto/nuxt',
+  ],
 
   axios: {
     proxy: true,

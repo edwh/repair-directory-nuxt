@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <div class="sidebar">
+    <div id="sidebar" class="sidebar">
       <client-only>
         <div
           v-if="!embedded"
