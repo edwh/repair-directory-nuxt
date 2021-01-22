@@ -56,7 +56,7 @@
           </b-btn>
         </div>
       </template>
-      <div class="fontfix">
+      <div>
         <div class="mt-1">
           <b-badge
             v-for="category in business.categories"
@@ -71,7 +71,7 @@
         </div>
 
         <p v-if="website" class="mt-3">
-          <v-icon name="globe" class="fa-fw" />
+          <v-icon name="globe" class="fa-fw icon" />
           <a
             target="_blank"
             rel="noopener"
@@ -83,7 +83,7 @@
         </p>
 
         <p v-if="business.email">
-          <v-icon name="envelope" class="fa-fw" />
+          <v-icon name="envelope" class="fa-fw icon" />
           <a
             :href="'mailto:' + business.email"
             @click="trackOutboundLink(business.website)"
@@ -92,7 +92,7 @@
         </p>
 
         <p>
-          <v-icon name="phone" class="fa-fw" />
+          <v-icon name="phone" class="fa-fw icon" />
           <a
             :href="'tel:' + phone"
             rel="noopener"
@@ -103,22 +103,22 @@
         </p>
 
         <p>
-          <v-icon name="map-marker" class="fa-fw" />
+          <v-icon name="map-marker" class="fa-fw icon" />
           <span>{{ business.address }}</span>
         </p>
 
         <p v-if="business.warrantyOffered">
-          <v-icon name="calendar-check" class="fa-fw" />
+          <v-icon name="calendar-check" class="fa-fw icon" />
           <span>Warranty: {{ business.warranty }}</span>
         </p>
 
         <p v-if="business.qualifications">
-          <v-icon name="graduation-cap" class="fa-fw" />
+          <v-icon name="graduation-cap" class="fa-fw icon" />
           <span>Qualifications: {{ business.qualifications }}</span>
         </p>
 
         <p>
-          <v-icon name="calendar" class="fa-fw" />
+          <v-icon name="calendar" class="fa-fw icon" />
           <span>Last updated: {{ updated }}</span>
         </p>
       </div>
@@ -276,7 +276,11 @@ p {
   margin-bottom: 0.5rem;
 }
 
-.fontfix {
-  font-family: 'PatuaOne', serif;
+.badge {
+  font-weight: 200;
+}
+
+.icon {
+  color: #0094a7;
 }
 </style>
