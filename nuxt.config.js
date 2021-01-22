@@ -34,7 +34,11 @@ export default {
 
   components: true,
 
-  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/google-analytics'],
+  buildModules: [
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/google-fonts',
+  ],
 
   modules: [
     'bootstrap-vue/nuxt',
@@ -91,6 +95,12 @@ export default {
     debug: {
       enabled: process.env.NODE_ENV !== 'production',
       sendHitTask: true,
+    },
+  },
+
+  googleFonts: {
+    families: {
+      'Patua One': [300, 400, 600],
     },
   },
 }
