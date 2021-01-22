@@ -34,7 +34,7 @@ export default {
         if (b.positiveReviewPc !== a.positiveReviewPc) {
           return b.positiveReviewPc - a.positiveReviewPc
         } else {
-          a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+          return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
         }
       })
     },

@@ -115,15 +115,16 @@ export default {
 <style scoped lang="scss">
 .percentage {
   display: inline-block;
-  font-family: PatuaOne, serif;
+  font-family: 'Patua One', serif;
   color: #f9a543;
   margin: 0 0.5rem 0 0;
 }
 
 .name {
   color: #606060;
-  font-family: PatuaOne, serif;
+  font-family: 'Patua One', serif;
   margin-top: 0;
+  font-size: 1.8rem;
 }
 
 .icon {

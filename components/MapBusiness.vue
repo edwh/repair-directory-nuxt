@@ -42,7 +42,7 @@
               >(source)</a
             >
           </p>
-          <p v-if="business.description" class="m-0">
+          <p v-if="business.description" class="m-0 small">
             {{ business.description }}
           </p>
         </div>
@@ -56,13 +56,13 @@
           </b-btn>
         </div>
       </template>
-      <div class="mt-3">
+      <div class="mt-1">
         <b-badge
           v-for="category in business.categories"
           :key="category"
-          size="lg"
+          size="md"
           variant="dark"
-          class="mb-2 mr-2 largish"
+          class="mb-2 mr-2 category"
           pill
         >
           {{ category }}
@@ -113,7 +113,7 @@
 
       <p v-if="business.qualifications">
         <v-icon name="graduation-cap" class="fa-fw" />
-        <span>Warranty: {{ business.qualifications }}</span>
+        <span>Qualifications: {{ business.qualifications }}</span>
       </p>
 
       <p>
@@ -258,15 +258,19 @@ export default {
   }
 }
 
-.largish {
-  font-size: 1rem;
+.category {
+  font-size: 0.8rem;
 
   @include media-breakpoint-up(md) {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 }
 
 .title a {
   color: $colour-link;
+}
+
+p {
+  margin-bottom: 0.5rem;
 }
 </style>

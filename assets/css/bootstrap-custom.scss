@@ -1,7 +1,8 @@
 // Custom Bootstrap variable overrides go first
 $enable-rounded: false;
 
-$font-family-sans-serif: 'PatuaOne,serif';
+@import url("https://fonts.googleapis.com/css?family=Patua+One:300,400,600");
+$font-family-sans-serif: 'Patua One';
 
 // Then include the bootstrap Sass
 @import 'bootstrap/scss/bootstrap.scss';

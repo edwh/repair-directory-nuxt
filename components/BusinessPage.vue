@@ -10,7 +10,7 @@
         </div>
       </client-only>
       <div class="sidebar__content mb-2 p-2">
-        <p class="sidebar__copy font-weight-bold m-0 mb-3">
+        <p class="sidebar__copy m-0 mb-3">
           Find a London business to repair your broken devices.
           <client-only>
             <b-btn
@@ -76,7 +76,7 @@
       <div class="business-list-container pl-md-2 pr-md-2">
         <div
           v-if="!busy"
-          class="business-list-container__results-header text-white font-weight-bold"
+          class="business-list-container__results-header text-white"
         >
           <div
             v-if="businesses.length === 0"
@@ -471,7 +471,7 @@ export default {
 
     .sidebar__copy {
       margin: 1rem; //0 1rem 1rem 10px;
-      font-family: 'PatuaOne', serif;
+      font-family: 'Patua One', serif;
       font-size: 1.1rem;
       letter-spacing: 0.5px;
 
@@ -554,7 +554,7 @@ export default {
 }
 
 .business-list-container__result-count {
-  font-family: 'PatuaOne', serif;
+  font-family: 'Patua One', serif;
   font-size: 1rem;
   flex: 1;
 }
@@ -590,5 +590,6 @@ export default {
 .share-link {
   color: white;
   box-shadow: none;
+  font-weight: bold;
 }
 </style>
