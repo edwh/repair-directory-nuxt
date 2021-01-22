@@ -3,7 +3,7 @@
     id="sharemodal"
     v-model="showModal"
     :title="'Share ' + name"
-    size="lg"
+    size="md"
   >
     <template slot="default">
       <div class="d-flex justify-content-start flex-wrap mt-3">

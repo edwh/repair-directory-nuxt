@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="moreinfo" v-model="showModal" size="lg" no-stacking>
+  <b-modal id="moreinfo" v-model="showModal" size="md" no-stacking>
     <h4>Broken gadget?</h4>
     <p>
       <strong

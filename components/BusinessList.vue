@@ -31,7 +31,11 @@ export default {
   computed: {
     sortedBusinesses() {
       return this.businesses.slice().sort((a, b) => {
-        return b.positiveReviewPc - a.positiveReviewPc
+        if (b.positiveReviewPc !== a.positiveReviewPc) {
+          return b.positiveReviewPc - a.positiveReviewPc
+        } else {
+          a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+        }
       })
     },
   },

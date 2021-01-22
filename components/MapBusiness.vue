@@ -16,7 +16,7 @@
       :title="business.name"
       @click="select"
     />
-    <b-modal v-model="show" size="xl" header-class="p-0" hide-backdrop>
+    <b-modal v-model="show" size="md" header-class="p-0" hide-backdrop>
       <template slot="modal-header" slot-scope="{ cancel }">
         <div class="large title w-100">
           <b-btn variant="link" class="float-right clickme" @click="cancel">
