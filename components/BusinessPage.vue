@@ -381,16 +381,11 @@ export default {
   border-radius: 0;
   //@include button-variant(#f9a33f, #f9a33f, #958751);
   color: white;
-  padding: 9px 25px 10px;
   border: 0;
   border-bottom: 3px solid #155e67;
   background-color: #f9a33f;
   border-color: #f9a33f;
   height: calc(1.5em + 0.75rem + 2px);
-}
-
-.sidebar__button-label {
-  visibility: hidden;
 }
 
 .business-list-container {
@@ -438,7 +433,7 @@ export default {
 }
 
 .logo {
-  width: 279px;
+  width: 200px;
 }
 
 .share-link {

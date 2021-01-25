@@ -30,6 +30,7 @@
                 :round-start-rating="false"
                 :show-rating="false"
                 read-only
+                active-color="#eebd01"
               />
             </client-only>
             {{ business.positiveReviewPc }}%
@@ -50,7 +51,7 @@
       <template slot="modal-footer" slot-scope="{ ok, cancel }">
         <div class="d-flex justify-content-between w-100">
           <b-btn variant="light" @click="cancel"> Close </b-btn>
-          <b-btn variant="link" @click="share">
+          <b-btn variant="link" class="share" @click="share">
             Share business
             <v-icon name="share" />
           </b-btn>
@@ -220,7 +221,10 @@ export default {
   },
   methods: {
     select() {
-      this.$emit('select', this.business.uid)
+      this.show = true
+      setTimeout(() => {
+        this.$emit('select', this.business.uid)
+      }, 100)
     },
     share() {
       this.showShareModal = true
@@ -282,5 +286,13 @@ p {
 
 .icon {
   color: #0094a7;
+}
+
+.share {
+  color: $colour-share;
+}
+
+a {
+  color: $colour-link2;
 }
 </style>
