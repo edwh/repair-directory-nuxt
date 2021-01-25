@@ -11,7 +11,7 @@
       </client-only>
       <div class="sidebar__content mb-2 p-2">
         <p class="sidebar__copy m-0 mb-3">
-          Find a London business to repair your broken devices.
+          {{ tagline }}
           <client-only>
             <b-btn
               v-if="!embedded"
@@ -79,7 +79,7 @@
           class="business-list-container__results-header text-white"
         >
           <div
-            v-if="businesses.length === 0"
+            v-if="businessesInBounds.length === 0"
             class="business-list-container__result-count"
           >
             <p>
@@ -93,10 +93,10 @@
             </p>
           </div>
           <div v-else class="business-list-container__result-count">
-            {{ businesses.length }} results in your area
+            {{ businessesInBounds.length }} results in your area
           </div>
           <b-btn
-            v-if="businesses.length"
+            v-if="businessesInBounds.length"
             class="share-link"
             variant="link"
             @click="share"
@@ -108,7 +108,7 @@
           </b-btn>
         </div>
         <BusinessList
-          :businesses="businesses"
+          :businesses="businessesInBounds"
           class="business-list"
           :selected="selected"
           @select="select"
@@ -118,9 +118,10 @@
     <div>
       <client-only>
         <Map
-          :businesses="businesses"
+          :businesses="businessesInBounds"
           :center="center"
           :selected="selected"
+          :region="region"
           @selected="select"
         />
       </client-only>
@@ -137,6 +138,12 @@
 import { mapGetters } from 'vuex'
 import Map from '@/components/Map'
 import BusinessList from '@/components/BusinessList'
+import {
+  BOUNDS_LONDON,
+  BOUNDS_WALES,
+  REGION_LONDON,
+  REGION_WALES,
+} from '@/regions'
 
 export default {
   components: { BusinessList, Map },
@@ -145,6 +152,11 @@ export default {
       type: Number,
       required: false,
       default: null,
+    },
+    region: {
+      type: String,
+      required: false,
+      default: REGION_LONDON,
     },
   },
   async fetch() {
@@ -189,6 +201,36 @@ export default {
       businesses: 'businesses/list',
       center: 'businesses/center',
     }),
+    businessesInBounds() {
+      // We want the businesses which are in the bounds for the region.
+      let bounds = null
+
+      switch (this.region) {
+        case REGION_WALES: {
+          bounds = BOUNDS_WALES
+          break
+        }
+        default: {
+          bounds = BOUNDS_LONDON
+          break
+        }
+      }
+
+      const ret = []
+
+      this.businesses.forEach((b) => {
+        if (
+          b.geolocation.latitude >= bounds.sw.lat &&
+          b.geolocation.latitude <= bounds.ne.lat &&
+          b.geolocation.longitude >= bounds.sw.lng &&
+          b.geolocation.longitude <= bounds.ne.lng
+        ) {
+          ret.push(b)
+        }
+      })
+
+      return ret
+    },
     categoryOptions() {
       const ret = [
         {
@@ -232,7 +274,9 @@ export default {
         '&category=' +
         encodeURIComponent(this.category) +
         '&radius=' +
-        this.radius
+        this.radius +
+        '&region=' +
+        this.region
       )
     },
   },
