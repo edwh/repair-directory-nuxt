@@ -1,8 +1,9 @@
 <template>
-  <BusinessPage />
+  <BusinessPage :region="region" />
 </template>
 <script>
 import BusinessPage from '@/components/BusinessPage'
+import { REGION_LONDON } from '@/regions'
 
 export default {
   components: { BusinessPage },
@@ -29,12 +30,13 @@ export default {
       location,
       radius,
     })
+
+    return {
+      region: route.query.region || REGION_LONDON,
+    }
   },
   head() {
-    return this.buildHead(
-      'Repair Directory',
-      'Find a London business to repair your broken devices.'
-    )
+    return this.buildHead('Repair Directory', this.tagline)
   },
 }
 </script>
