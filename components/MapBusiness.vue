@@ -299,7 +299,7 @@ a {
 }
 
 .opensans {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', sans-serif;
 }
 
 .patua {
