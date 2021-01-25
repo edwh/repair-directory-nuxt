@@ -1,8 +1,9 @@
 <template>
-  <BusinessPage />
+  <BusinessPage :region="region" />
 </template>
 <script>
 import BusinessPage from '@/components/BusinessPage'
+import { REGION_LONDON } from '@/utils'
 
 export default {
   components: { BusinessPage },
@@ -29,6 +30,10 @@ export default {
       location,
       radius,
     })
+
+    return {
+      region: route.query.region || REGION_LONDON,
+    }
   },
   head() {
     return this.buildHead(

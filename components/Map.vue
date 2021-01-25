@@ -2,7 +2,6 @@
   <GmapMap
     ref="map"
     :center="{ lat: center[0], lng: center[1] }"
-    :zoom="7"
     map-type-id="roadmap"
     style="width: 100%; height: 100vh"
     @idle="idle"
@@ -14,6 +13,7 @@
       :show-modal="showModal === business.uid"
       :selected="selected"
       :map="map"
+      :region="region"
       @select="select(business)"
     />
   </GmapMap>
@@ -21,6 +21,12 @@
 <script>
 import MapBusiness from '@/components/MapBusiness'
 import { gmapApi } from 'vue2-google-maps'
+import {
+  BOUNDS_LONDON,
+  BOUNDS_WALES,
+  REGION_LONDON,
+  REGION_WALES,
+} from '@/utils'
 
 export default {
   components: { MapBusiness },
@@ -37,6 +43,11 @@ export default {
       type: Number,
       required: false,
       default: null,
+    },
+    region: {
+      type: String,
+      required: false,
+      default: REGION_LONDON,
     },
   },
   data() {
@@ -85,7 +96,24 @@ export default {
         this.map = this.$refs.map
 
         // We want to fit the map to the new businesses
-        const bounds = new this.google.maps.LatLngBounds()
+        let bounds = null
+
+        switch (this.region) {
+          case REGION_WALES: {
+            bounds = BOUNDS_WALES
+            break
+          }
+          default: {
+            bounds = BOUNDS_LONDON
+            break
+          }
+        }
+
+        bounds = new this.google.maps.LatLngBounds(
+          new this.google.maps.LatLng(bounds.sw),
+          new this.google.maps.LatLng(bounds.ne)
+        )
+
         businesses.forEach((b) => {
           bounds.extend(
             // eslint-disable-next-line new-cap
@@ -96,11 +124,9 @@ export default {
           )
         })
 
-        if (businesses.length) {
-          this.$refs.map.$mapPromise.then((map) => {
-            map.fitBounds(bounds)
-          })
-        }
+        this.$refs.map.$mapPromise.then((map) => {
+          map.fitBounds(bounds)
+        })
       }
     },
   },
