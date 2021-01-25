@@ -73,7 +73,7 @@
           Submit a business
         </a>
       </div>
-      <div class="business-list-container pl-md-2 pr-md-2">
+      <div class="business-list-container pl-md-2 pr-md-2 d-flex flex-wrap">
         <div
           v-if="!busy"
           class="business-list-container__results-header text-white"
@@ -410,10 +410,17 @@ export default {
 
 .formlayout {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: auto auto;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto auto;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
+
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto;
+    grid-row-gap: 10px;
+  }
 }
 
 .top {
@@ -429,7 +436,11 @@ export default {
 }
 
 .right {
-  grid-column: 2 / 3;
+  grid-column: 1 / 2;
+
+  @include media-breakpoint-up(xl) {
+    grid-column: 2 / 3;
+  }
 }
 
 .logo {
