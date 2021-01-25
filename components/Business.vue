@@ -7,6 +7,7 @@
       'bg-white': !selected,
       'p-3': true,
       'mb-3': true,
+      'm-0': true,
       rounded: true,
     }"
   >
@@ -123,13 +124,15 @@ export default {
 }
 </script>
 <style lang="scss">
+@import 'assets/css/colours.scss';
+
 .business-list__item {
   margin: 0 1rem 1rem 1rem;
   padding: 1rem;
   background-color: white;
 
   &:hover {
-    background-color: #eee;
+    background-color: #eee !important;
   }
 
   .business__heading > h2 {
@@ -179,5 +182,9 @@ export default {
     width: 100%;
     text-align: center;
   }
+}
+
+a {
+  color: $colour-link2;
 }
 </style>
