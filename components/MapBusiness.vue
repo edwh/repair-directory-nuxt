@@ -133,7 +133,7 @@
 </template>
 <script>
 import ShareModal from '@/components/ShareModal'
-import { REGION_LONDON } from '@/utils'
+import { REGION_LONDON } from '@/regions'
 
 export default {
   components: { ShareModal },

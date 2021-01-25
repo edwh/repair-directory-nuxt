@@ -26,7 +26,7 @@ import {
   BOUNDS_WALES,
   REGION_LONDON,
   REGION_WALES,
-} from '@/utils'
+} from '@/regions'
 
 export default {
   components: { MapBusiness },

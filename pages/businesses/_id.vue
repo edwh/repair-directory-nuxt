@@ -3,6 +3,7 @@
 </template>
 <script>
 import BusinessPage from '@/components/BusinessPage'
+import { TAGLINE_GENERIC } from '@/regions'
 
 export default {
   components: { BusinessPage },
@@ -31,10 +32,7 @@ export default {
     if (this.business) {
       return this.buildHead(this.business.name, this.business.description)
     } else {
-      return this.buildHead(
-        'Repair Directory',
-        'Find a London business to repair your broken devices.'
-      )
+      return this.buildHead('Repair Directory', TAGLINE_GENERIC)
     }
   },
 }

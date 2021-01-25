@@ -11,7 +11,7 @@
       </client-only>
       <div class="sidebar__content mb-2 p-2">
         <p class="sidebar__copy m-0 mb-3">
-          Find a London business to repair your broken devices.
+          {{ tagline }}
           <client-only>
             <b-btn
               v-if="!embedded"
@@ -143,7 +143,7 @@ import {
   BOUNDS_WALES,
   REGION_LONDON,
   REGION_WALES,
-} from '@/utils'
+} from '@/regions'
 
 export default {
   components: { BusinessList, Map },
