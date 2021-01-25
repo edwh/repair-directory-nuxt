@@ -18,12 +18,12 @@
     />
     <b-modal v-model="show" size="md" header-class="p-0" hide-backdrop>
       <template slot="modal-header" slot-scope="{ cancel }">
-        <div class="large title w-100">
+        <div class="large title w-100 opensans">
           <b-btn variant="link" class="float-right clickme" @click="cancel">
             <v-icon name="times" class="text-white" scale="2" />
           </b-btn>
-          <h1>{{ business.name }}</h1>
-          <p v-if="business.positiveReviewPc">
+          <h1 class="patua m-0">{{ business.name }}</h1>
+          <p v-if="business.positiveReviewPc" class="patua">
             <client-only>
               <star-rating
                 v-model="business.averageScore"
@@ -31,6 +31,7 @@
                 :show-rating="false"
                 read-only
                 active-color="#eebd01"
+                :star-size="30"
               />
             </client-only>
             {{ business.positiveReviewPc }}%
@@ -40,10 +41,11 @@
               :href="business.reviewSourceUrl"
               target="_blank"
               rel="noopener"
+              class="small"
               >(source)</a
             >
           </p>
-          <p v-if="business.description" class="m-0 small">
+          <p v-if="business.description" class="m-0 description">
             {{ business.description }}
           </p>
         </div>
@@ -57,7 +59,7 @@
           </b-btn>
         </div>
       </template>
-      <div>
+      <div class="opensans">
         <div class="mt-1">
           <b-badge
             v-for="category in business.categories"
@@ -92,7 +94,7 @@
           >
         </p>
 
-        <p>
+        <p v-if="phone">
           <v-icon name="phone" class="fa-fw icon" />
           <a
             :href="'tel:' + phone"
@@ -103,7 +105,7 @@
           </a>
         </p>
 
-        <p>
+        <p v-if="business.address">
           <v-icon name="map-marker" class="fa-fw icon" />
           <span>{{ business.address }}</span>
         </p>
@@ -294,5 +296,18 @@ p {
 
 a {
   color: $colour-link2;
+}
+
+.opensans {
+  font-family: 'Open Sans';
+}
+
+.patua {
+  font-family: 'Patua One';
+}
+
+.description {
+  font-size: 14pt;
+  line-height: 1;
 }
 </style>
