@@ -1,4 +1,11 @@
-# repair-directory-nuxt
+## Restart Repair Directory
+
+The Restart Repair Directory is a tool for encouraging repair through local businesses.  
+It allows for the recording of local repair businesses in a directory and the searching of this directory by 
+the public.  [Find out more](https://therestartproject.org/repairdirectory/about).
+
+This repository contains the public front end; the server and admin are in a separate repository
+[here](https://github.com/TheRestartProject/RepairDirectory).
 
 ## Build Setup
 
@@ -12,9 +19,9 @@ $ npm run dev
 # build for production and launch server
 $ npm run build
 $ npm run start
-
-# generate static project
-$ npm run generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## Deployment
+
+See the [Wiki](https://github.com/TheRestartProject/repair-directory-nuxt/wiki/Branching-and-Deployment) page.
+
