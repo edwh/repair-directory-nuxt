@@ -5,7 +5,7 @@ It allows for the recording of local repair businesses in a directory and the se
 the public.  [Find out more](https://therestartproject.org/repairdirectory/about).
 
 This repository contains the public front end; the server and admin are in a separate repository
-[here](https://github.com/TheRestartProject/RepairDirectory). 
+[here](https://github.com/TheRestartProject/RepairDirectory).  
 
 ## Build Setup
 
