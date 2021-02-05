@@ -165,7 +165,9 @@ export default {
   },
   async fetch() {
     // We want to fetch the list of categories from the server.
-    await this.$store.dispatch('categories/list')
+    await this.$store.dispatch('categories/list', {
+      region: this.region,
+    })
   },
   data() {
     return {
