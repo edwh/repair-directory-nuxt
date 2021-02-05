@@ -109,20 +109,24 @@ export default {
           }
         }
 
-        bounds = new this.google.maps.LatLngBounds(
-          new this.google.maps.LatLng(bounds.sw),
-          new this.google.maps.LatLng(bounds.ne)
-        )
-
-        businesses.forEach((b) => {
-          bounds.extend(
-            // eslint-disable-next-line new-cap
-            new this.google.maps.LatLng(
-              b.geolocation.latitude,
-              b.geolocation.longitude
-            )
+        if (!businesses.length) {
+          bounds = new this.google.maps.LatLngBounds(
+            new this.google.maps.LatLng(bounds.sw),
+            new this.google.maps.LatLng(bounds.ne)
           )
-        })
+        } else {
+          bounds = new this.google.maps.LatLngBounds()
+
+          businesses.forEach((b) => {
+            bounds.extend(
+              // eslint-disable-next-line new-cap
+              new this.google.maps.LatLng(
+                b.geolocation.latitude,
+                b.geolocation.longitude
+              )
+            )
+          })
+        }
 
         this.$refs.map.$mapPromise.then((map) => {
           map.fitBounds(bounds)
