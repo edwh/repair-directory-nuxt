@@ -1,7 +1,25 @@
 // Global mixin so that every component can access the logged in state and user.
 import Vue from 'vue'
+import { REGION_WALES, TAGLINE_LONDON, TAGLINE_WALES } from '@/regions'
 
 Vue.mixin({
+  computed: {
+    tagline() {
+      let ret
+
+      switch (this.region) {
+        case REGION_WALES: {
+          ret = TAGLINE_WALES
+          break
+        }
+        default: {
+          ret = TAGLINE_LONDON
+        }
+      }
+
+      return ret
+    },
+  },
   methods: {
     waitForRef(name, callback) {
       // When a component is conditional using a v-if, it sometimes takes more than one tick for it to appear.  So
