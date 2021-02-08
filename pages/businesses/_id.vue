@@ -9,10 +9,12 @@ export default {
   components: { BusinessPage },
   async asyncData({ store }) {
     // For SSR we want to have all the businesses loaded.  The business selected will pop up in a modal.
+    //
+    // Until the server has a concept of regions, we'll just search with a big radius.
     await store.dispatch('businesses/search', {
       location: 'London, UK',
       category: null,
-      radius: 18,
+      radius: 2000,
     })
   },
   data() {

@@ -141,8 +141,12 @@ import BusinessList from '@/components/BusinessList'
 import {
   BOUNDS_LONDON,
   BOUNDS_WALES,
+  DISTANCES_LONDON,
+  DISTANCES_WALES,
   REGION_LONDON,
   REGION_WALES,
+  SEARCH_HINT_LONDON,
+  SEARCH_HINT_WALES,
 } from '@/regions'
 
 export default {
@@ -169,30 +173,7 @@ export default {
       showShareModal: false,
       selected: null,
       category: null,
-      location: 'London, UK',
-      radius: 18,
-      radiusOptions: [
-        {
-          value: 1,
-          text: '1 mile',
-        },
-        {
-          value: 2,
-          text: '2 miles',
-        },
-        {
-          value: 5,
-          text: '5 miles',
-        },
-        {
-          value: 10,
-          text: '10 miles',
-        },
-        {
-          value: 18,
-          text: 'All London',
-        },
-      ],
+      radius: null,
     }
   },
   computed: {
@@ -250,6 +231,38 @@ export default {
 
       return ret
     },
+    radiusOptions() {
+      let ret = null
+
+      switch (this.region) {
+        case REGION_WALES: {
+          ret = DISTANCES_WALES
+          break
+        }
+        default: {
+          ret = DISTANCES_LONDON
+          break
+        }
+      }
+
+      return ret
+    },
+    location() {
+      let ret = null
+
+      switch (this.region) {
+        case REGION_WALES: {
+          ret = SEARCH_HINT_WALES
+          break
+        }
+        default: {
+          ret = SEARCH_HINT_LONDON
+          break
+        }
+      }
+
+      return ret
+    },
     embedded() {
       // We can embed this page elsewhere.
       let ret = false
@@ -297,7 +310,11 @@ export default {
     }
 
     if (this.$route.query.radius) {
+      // Specified
       this.radius = this.$route.query.radius
+    } else {
+      // Set to the maximum for this region.
+      this.radius = this.radiusOptions.slice(-1)[0].value
     }
   },
   methods: {

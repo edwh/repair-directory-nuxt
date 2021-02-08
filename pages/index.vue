@@ -10,8 +10,10 @@ export default {
   async asyncData({ route, store }) {
     // For SSR we want to have all the businesses loaded, unless we have a specific search filter.
     let category = null
+
+    // Until the server has a concept of regions, we'll just search with a big radius.
     let location = 'London, UK'
-    let radius = 18
+    let radius = 2000
 
     if (route.query.location) {
       location = route.query.location
