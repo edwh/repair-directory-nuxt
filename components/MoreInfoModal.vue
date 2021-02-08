@@ -38,6 +38,7 @@
         software with the source code
         <a
           target="_blank"
+          rel="noopener"
           href="https://github.com/TheRestartProject/repair-directory-nuxt"
           >available on Github</a
         >. If you’re a coder, a designer, a UX person, or a tester, you can get

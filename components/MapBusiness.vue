@@ -303,7 +303,7 @@ a {
 }
 
 .patua {
-  font-family: 'Patua One';
+  font-family: 'Patua One', 'serif';
 }
 
 .description {
