@@ -11,9 +11,9 @@ export default {
     // For SSR we want to have all the businesses loaded, unless we have a specific search filter.
     let category = null
 
-    // Until the server has a concept of regions, we'll just search with a big radius.
-    let location = 'London, UK'
+    // We'll just search with a big radius, which will include anything in this region.
     let radius = 2000
+    let location = null
 
     if (route.query.location) {
       location = route.query.location
@@ -27,14 +27,17 @@ export default {
       radius = route.query.radius
     }
 
+    const region = route.query.region || REGION_LONDON
+
     await store.dispatch('businesses/search', {
       category,
       location,
       radius,
+      region,
     })
 
     return {
-      region: route.query.region || REGION_LONDON,
+      region,
     }
   },
   head() {

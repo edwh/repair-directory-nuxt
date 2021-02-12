@@ -57,7 +57,7 @@
               <client-only>
                 <v-icon name="map-marker" class="icon" />
               </client-only>
-              <span>{{ business.address }}</span>
+              <span>{{ business.address }}, {{ business.city }}</span>
             </p>
           </div>
         </div>
