@@ -16,15 +16,9 @@
       :title="business.name"
       @click="select"
     />
-    <b-modal
-      v-model="show"
-      size="md"
-      header-class="p-0"
-      body-class="p-2 p-sm-4"
-      hide-backdrop
-    >
+    <b-modal v-model="show" size="md" header-class="p-0" hide-backdrop>
       <template slot="modal-header" slot-scope="{ cancel }">
-        <div class="large title w-100 opensans p-2 p-sm-4">
+        <div class="large title w-100 opensans">
           <b-btn variant="link" class="float-right clickme" @click="cancel">
             <v-icon name="times" class="text-white" scale="2" />
           </b-btn>
@@ -79,7 +73,7 @@
           </b-badge>
         </div>
 
-        <p v-if="website" class="mt-1 mt-sm-3">
+        <p v-if="website" class="mt-3">
           <v-icon name="globe" class="fa-fw icon" />
           <a
             target="_blank"
@@ -265,14 +259,10 @@ export default {
 }
 
 .large {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 
   h1 {
     font-size: 2rem;
-  }
-
-  @include media-breakpoint-up(sm) {
-    font-size: 1.5rem;
   }
 
   @include media-breakpoint-up(md) {
@@ -285,11 +275,7 @@ export default {
 }
 
 .category {
-  font-size: 0.75rem;
-
-  @include media-breakpoint-up(sm) {
-    font-size: 0.8rem;
-  }
+  font-size: 0.8rem;
 
   @include media-breakpoint-up(md) {
     font-size: 1.25rem;
@@ -302,11 +288,6 @@ export default {
 
 p {
   margin-bottom: 0.5rem;
-  font-size: 0.8rem;
-
-  @include media-breakpoint-up(sm) {
-    font-size: 1rem;
-  }
 }
 
 .badge {
@@ -334,12 +315,7 @@ a {
 }
 
 .description {
-  font-size: 1rem;
-
-  @include media-breakpoint-up(sm) {
-    font-size: 1.25rem;
-  }
-
+  font-size: 14pt;
   line-height: 1;
 }
 </style>
