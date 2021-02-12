@@ -265,7 +265,7 @@ export default {
     font-size: 2rem;
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(xl) {
     font-size: 2rem;
 
     h1 {
@@ -278,6 +278,10 @@ export default {
   font-size: 0.8rem;
 
   @include media-breakpoint-up(md) {
+    font-size: 1rem;
+  }
+
+  @include media-breakpoint-up(xl) {
     font-size: 1.25rem;
   }
 }
@@ -287,7 +291,11 @@ export default {
 }
 
 p {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+
+  @include media-breakpoint-up(xl) {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .badge {
