@@ -1,6 +1,6 @@
 const proxyConfig = () => {
   // Setting the API environment variable allows you to point at a development server if required, e.g.
-  // API=https://map.restarters.dev
+  // API=https://map.restarters.dev/map
   return {
     '/api/': process.env.API
       ? process.env.API
