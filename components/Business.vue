@@ -9,6 +9,7 @@
       'mb-3': true,
       'm-0': true,
       rounded: true,
+      forcebreak: true,
     }"
   >
     <div class="business" @click="select">
