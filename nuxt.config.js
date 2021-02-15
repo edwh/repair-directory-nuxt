@@ -27,6 +27,7 @@ export default {
 
   plugins: [
     { src: '~/mixins/global.js' },
+    { src: '~/plugins/axios-baseurl' },
     { src: '@/plugins/vue-google-maps', ssr: false },
     { src: '@/plugins/vue2-leaflet', ssr: false },
     { src: '@/plugins/vue-star-rating', ssr: false },
@@ -70,6 +71,12 @@ export default {
 
   // Proxy to avoid CORS restrictions on API in development environment
   proxy: proxyConfig(),
+
+  env: {
+    // This will be used on the client in axios-baseurl to send requests to the same API endpoing that the server-side
+    // code uses.
+    API: process.env.API || 'https://map.restarters.net/map/'
+  },
 
   build: {
     transpile: [/^vue2-google-maps($|\/)/],
