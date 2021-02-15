@@ -177,7 +177,7 @@ export default {
   background-color: white;
 
   &__inner {
-    font-family: 'Patua One';
+    font-family: 'Patua One', 'serif';
     color: #606060;
     padding: 0.5rem;
     width: 100%;
