@@ -2,7 +2,7 @@
   <div>
     <Business
       v-for="business in sortedBusinesses"
-      :key="'business-' + business.uid + '-' + selected"
+      :key="'business-' + business.uid"
       :business="business"
       :selected="selected"
       @select="$emit('select', business.uid)"

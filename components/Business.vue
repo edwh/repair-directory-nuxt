@@ -9,6 +9,7 @@
       'mb-3': true,
       'm-0': true,
       rounded: true,
+      forcebreak: true,
     }"
   >
     <div class="business" @click="select">
@@ -57,7 +58,7 @@
               <client-only>
                 <v-icon name="map-marker" class="icon" />
               </client-only>
-              <span>{{ business.address }}</span>
+              <span>{{ business.address }}, {{ business.city }}</span>
             </p>
           </div>
         </div>

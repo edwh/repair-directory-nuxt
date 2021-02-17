@@ -16,7 +16,7 @@
       :title="business.name"
       @click="select"
     />
-    <b-modal v-model="show" size="md" header-class="p-0" hide-backdrop>
+    <b-modal v-model="show" size="lg" header-class="p-0" hide-backdrop>
       <template slot="modal-header" slot-scope="{ cancel }">
         <div class="large title w-100 opensans">
           <b-btn variant="link" class="float-right clickme" @click="cancel">
@@ -265,7 +265,7 @@ export default {
     font-size: 2rem;
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(xl) {
     font-size: 2rem;
 
     h1 {
@@ -278,6 +278,10 @@ export default {
   font-size: 0.8rem;
 
   @include media-breakpoint-up(md) {
+    font-size: 1rem;
+  }
+
+  @include media-breakpoint-up(xl) {
     font-size: 1.25rem;
   }
 }
@@ -287,7 +291,11 @@ export default {
 }
 
 p {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+
+  @include media-breakpoint-up(xl) {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .badge {
