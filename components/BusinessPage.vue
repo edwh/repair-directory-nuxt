@@ -327,6 +327,7 @@ export default {
         location: this.location,
         category: this.category,
         radius: this.radius,
+        region: this.region,
       })
 
       this.busy = false
