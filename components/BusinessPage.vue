@@ -131,6 +131,7 @@
       name="results"
       :url="shareUrl"
     />
+    <BusinessModal :id="selected" ref="businessModal" />
   </div>
 </template>
 <script>
@@ -146,9 +147,11 @@ import {
   SEARCH_HINT_LONDON,
   SEARCH_HINT_WALES,
 } from '@/regions'
+import BusinessModal from '@/components/BusinessModal'
+import ShareModal from '@/components/ShareModal'
 
 export default {
-  components: { BusinessList, Map },
+  components: { ShareModal, BusinessModal, BusinessList, Map },
   props: {
     id: {
       type: Number,
@@ -274,9 +277,7 @@ export default {
     },
     shareUrl() {
       return (
-        window.location.protocol +
-        '//' +
-        window.location.hostname +
+        this.domain +
         '?location=' +
         encodeURIComponent(this.location) +
         '&category=' +
@@ -284,12 +285,11 @@ export default {
         '&radius=' +
         this.radius +
         '&region=' +
-        this.region
+        this.region +
+        '&domain=' +
+        encodeURIComponent(this.domain)
       )
     },
-  },
-  created() {
-    this.selected = this.id
   },
   mounted() {
     this.$root.$on('bv::modal::hidden', (bvEvent, modalId) => {
@@ -311,6 +311,8 @@ export default {
       // Set to the maximum for this region.
       this.radius = this.radiusOptions.slice(-1)[0].value
     }
+
+    this.selected = this.id
   },
   methods: {
     async search() {

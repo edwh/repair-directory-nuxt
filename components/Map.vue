@@ -10,7 +10,6 @@
       v-for="business in businesses"
       :key="'marker-' + business.uid"
       :business="business"
-      :show-modal="showModal === business.uid"
       :selected="selected"
       :map="map"
       :region="region"
@@ -44,7 +43,6 @@ export default {
     return {
       map: null,
       fitted: false,
-      showModal: false,
       osmtile:
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png',
       attribution:
@@ -59,15 +57,6 @@ export default {
       immediate: true,
       handler(newVal) {
         this.fitMarkers(newVal)
-      },
-    },
-    selected: {
-      immediate: true,
-      handler(newVal) {
-        // Delay modal as this interferes with list scrolling.
-        setTimeout(() => {
-          this.showModal = newVal
-        }, 1000)
       },
     },
   },

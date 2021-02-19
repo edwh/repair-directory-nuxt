@@ -91,17 +91,6 @@ export default {
       showShareModal: false,
     }
   },
-  computed: {
-    url() {
-      return (
-        window.location.protocol +
-        '//' +
-        window.location.hostname +
-        '/businesses/' +
-        this.business.uid
-      )
-    },
-  },
   watch: {
     selected: {
       immediate: true,

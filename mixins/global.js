@@ -1,6 +1,11 @@
 // Global mixin so that every component can access the logged in state and user.
 import Vue from 'vue'
-import { REGION_WALES, TAGLINE_LONDON, TAGLINE_WALES } from '@/regions'
+import {
+  REGION_LONDON,
+  REGION_WALES,
+  TAGLINE_LONDON,
+  TAGLINE_WALES,
+} from '@/regions'
 
 Vue.mixin({
   computed: {
@@ -20,11 +25,28 @@ Vue.mixin({
       return ret
     },
     region() {
-      console.log('Get region', this.$store.getters['config/get']('region'))
       return this.$store.getters['config/get']('region')
+    },
+    domain() {
+      return this.$store.getters['config/get']('domain')
     },
   },
   methods: {
+    async setConfig() {
+      // Check if we've been passed some key info in URL parameters.  If so, record that in the store so that
+      // it's accessible everywhere.
+      //
+      // This method is called by the fetch method in the page mixin, or manually if that's overriden.
+      await this.$store.dispatch('config/set', {
+        key: 'region',
+        value: this.$route.query.region || REGION_LONDON,
+      })
+
+      await this.$store.dispatch('config/set', {
+        key: 'domain',
+        value: this.$route.query.domain || 'https://map.restarters.net',
+      })
+    },
     waitForRef(name, callback) {
       // When a component is conditional using a v-if, it sometimes takes more than one tick for it to appear.  So
       // we have a bit of a timer.
