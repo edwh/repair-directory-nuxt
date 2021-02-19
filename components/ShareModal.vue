@@ -6,43 +6,118 @@
     size="lg"
   >
     <template slot="default">
-      <div class="d-flex justify-content-start flex-wrap mt-3">
-        <social-sharing
-          :url="url"
-          :title="'Sharing ' + name"
-          hashtags="repair"
-          inline-template
-        >
-          <div>
-            <div class="d-flex flex-wrap justify-content-around">
-              <network network="facebook">
-                <b-btn variant="secondary" size="lg" class="facebook m-1">
-                  <v-icon name="brands/facebook" /> Facebook
-                </b-btn>
-              </network>
-              <network network="whatsapp">
-                <b-btn variant="primary" size="lg" class="whatsapp m-1">
-                  <v-icon name="brands/whatsapp" /> Whatsapp
-                </b-btn>
-              </network>
-              <network network="twitter">
-                <b-btn variant="secondary" size="lg" class="twitter m-1">
-                  <v-icon name="brands/twitter" /> Twitter
-                </b-btn>
-              </network>
-              <network network="email">
-                <b-btn variant="primary" size="lg" class="gmail m-1">
-                  <v-icon name="envelope" /> Email
-                </b-btn>
-              </network>
-            </div>
+      <div>
+        <div class="d-none d-md-flex justify-content-between flex-wrap mt-3">
+          <social-sharing
+            :url="url"
+            :title="'Sharing ' + name"
+            hashtags="repair"
+            inline-template
+          >
+            <network network="facebook">
+              <b-btn variant="secondary" size="lg" class="facebook m-1">
+                <v-icon name="brands/facebook" /> Facebook
+              </b-btn>
+            </network>
+          </social-sharing>
+          <social-sharing
+            :url="url"
+            :title="'Sharing ' + name"
+            hashtags="repair"
+            inline-template
+          >
+            <network network="whatsapp">
+              <b-btn variant="primary" size="lg" class="whatsapp m-1">
+                <v-icon name="brands/whatsapp" /> Whatsapp
+              </b-btn>
+            </network>
+          </social-sharing>
+          <social-sharing
+            :url="url"
+            :title="'Sharing ' + name"
+            hashtags="repair"
+            inline-template
+          >
+            <network network="twitter">
+              <b-btn variant="secondary" size="lg" class="twitter m-1">
+                <v-icon name="brands/twitter" /> Twitter
+              </b-btn>
+            </network>
+          </social-sharing>
+          <social-sharing
+            :url="url"
+            :title="'Sharing ' + name"
+            hashtags="repair"
+            inline-template
+          >
+            <network network="email">
+              <b-btn variant="primary" size="lg" class="gmail m-1">
+                <v-icon name="envelope" /> Email
+              </b-btn>
+            </network>
+          </social-sharing>
+          <div ref="container">
+            <b-btn variant="info" size="lg" class="m-1" @click="doCopy">
+              <v-icon v-if="copied" name="check" />
+              <v-icon v-else name="copy" /> Copy
+            </b-btn>
           </div>
-        </social-sharing>
-        <div ref="container">
-          <b-btn variant="info" size="lg" class="m-1" @click="doCopy">
-            <v-icon v-if="copied" name="check" />
-            <v-icon v-else name="copy" /> Copy
-          </b-btn>
+        </div>
+        <div class="d-flex d-md-none justify-content-between flex-wrap mt-3">
+          <social-sharing
+            :url="url"
+            :title="'Sharing ' + name"
+            hashtags="repair"
+            inline-template
+          >
+            <network network="facebook">
+              <b-btn variant="secondary" size="sm" class="facebook m-1">
+                <v-icon name="brands/facebook" /> Facebook
+              </b-btn>
+            </network>
+          </social-sharing>
+          <social-sharing
+            :url="url"
+            :title="'Sharing ' + name"
+            hashtags="repair"
+            inline-template
+          >
+            <network network="whatsapp">
+              <b-btn variant="primary" size="sm" class="whatsapp m-1">
+                <v-icon name="brands/whatsapp" /> Whatsapp
+              </b-btn>
+            </network>
+          </social-sharing>
+          <social-sharing
+            :url="url"
+            :title="'Sharing ' + name"
+            hashtags="repair"
+            inline-template
+          >
+            <network network="twitter">
+              <b-btn variant="secondary" size="sm" class="twitter m-1">
+                <v-icon name="brands/twitter" /> Twitter
+              </b-btn>
+            </network>
+          </social-sharing>
+          <social-sharing
+            :url="url"
+            :title="'Sharing ' + name"
+            hashtags="repair"
+            inline-template
+          >
+            <network network="email">
+              <b-btn variant="primary" size="sm" class="gmail m-1">
+                <v-icon name="envelope" /> Email
+              </b-btn>
+            </network>
+          </social-sharing>
+          <div ref="container">
+            <b-btn variant="info" size="sm" class="m-1" @click="doCopy">
+              <v-icon v-if="copied" name="check" />
+              <v-icon v-else name="copy" /> Copy
+            </b-btn>
+          </div>
         </div>
       </div>
     </template>
