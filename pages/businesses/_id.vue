@@ -10,21 +10,17 @@ export default {
   components: { BusinessPage },
   mixins: [page],
   async fetch() {
-    console.log('Business page ')
     this.setConfig()
 
     // For SSR we want to have all the businesses loaded.  The business selected will pop up in a modal.
     //
     // Until the server has a concept of regions, we'll just search with a big radius, which will include anything in
     // this region.
-    console.log('Fetch businesses')
     await this.$store.dispatch('businesses/search', {
       location: null,
       category: null,
       radius: 2000,
     })
-
-    console.log('Fetched')
   },
   data() {
     return {

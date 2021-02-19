@@ -16,7 +16,6 @@ export default {
     this.id = this.$route.query.business
       ? parseInt(this.$route.query.business)
       : null
-    console.log('Index page, business', this.id)
 
     // For SSR we want to have all the businesses loaded, unless we have a specific search filter.
     let category = null

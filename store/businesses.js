@@ -21,7 +21,6 @@ export const mutations = {
 export const getters = {
   get: (state) => (id) => {
     id = parseInt(id)
-    console.log('Get business', id, state.list[id], state.list)
     return state.list[id] ? state.list[id] : null
   },
   list: (state) => Object.values(state.list),

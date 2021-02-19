@@ -144,7 +144,6 @@ export default {
   },
   computed: {
     business() {
-      console.log('BusinessModal get business', this.id)
       return this.id ? this.$store.getters['businesses/get'](this.id) : null
     },
     website() {
