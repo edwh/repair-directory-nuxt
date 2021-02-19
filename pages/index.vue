@@ -1,5 +1,5 @@
 <template>
-  <BusinessPage :region="region" />
+  <BusinessPage />
 </template>
 <script>
 import BusinessPage from '@/components/BusinessPage'
@@ -29,16 +29,16 @@ export default {
 
     const region = route.query.region || REGION_LONDON
 
+    await store.dispatch('config/set', {
+      key: 'region',
+      value: region,
+    })
+
     await store.dispatch('businesses/search', {
       category,
       location,
       radius,
-      region,
     })
-
-    return {
-      region,
-    }
   },
   head() {
     return this.buildHead('Repair Directory', this.tagline)

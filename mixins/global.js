@@ -19,6 +19,10 @@ Vue.mixin({
 
       return ret
     },
+    region() {
+      console.log('Get region', this.$store.getters['config/get']('region'))
+      return this.$store.getters['config/get']('region')
+    },
   },
   methods: {
     waitForRef(name, callback) {

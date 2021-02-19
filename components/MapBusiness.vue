@@ -136,7 +136,6 @@
 </template>
 <script>
 import ShareModal from '@/components/ShareModal'
-import { REGION_LONDON } from '@/regions'
 
 export default {
   components: { ShareModal },
@@ -154,11 +153,6 @@ export default {
       type: Object,
       required: false,
       default: null,
-    },
-    region: {
-      type: String,
-      required: false,
-      default: REGION_LONDON,
     },
   },
   data() {

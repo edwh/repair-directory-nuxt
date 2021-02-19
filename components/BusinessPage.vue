@@ -121,7 +121,6 @@
           :businesses="businessesInBounds"
           :center="center"
           :selected="selected"
-          :region="region"
           @selected="select"
         />
       </client-only>
@@ -143,7 +142,6 @@ import {
   BOUNDS_WALES,
   DISTANCES_LONDON,
   DISTANCES_WALES,
-  REGION_LONDON,
   REGION_WALES,
   SEARCH_HINT_LONDON,
   SEARCH_HINT_WALES,
@@ -156,11 +154,6 @@ export default {
       type: Number,
       required: false,
       default: null,
-    },
-    region: {
-      type: String,
-      required: false,
-      default: REGION_LONDON,
     },
   },
   async fetch() {
