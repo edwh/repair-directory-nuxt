@@ -288,6 +288,17 @@ export default {
       this.selected = null
     })
 
+    switch (this.region) {
+      case REGION_WALES: {
+        this.location = SEARCH_HINT_WALES
+        break
+      }
+      default: {
+        this.location = SEARCH_HINT_LONDON
+        break
+      }
+    }
+
     if (this.$route.query.location) {
       this.location = this.$route.query.location
     }
@@ -302,17 +313,6 @@ export default {
     } else {
       // Set to the maximum for this region.
       this.radius = this.radiusOptions.slice(-1)[0].value
-    }
-
-    switch (this.region) {
-      case REGION_WALES: {
-        this.location = SEARCH_HINT_WALES
-        break
-      }
-      default: {
-        this.location = SEARCH_HINT_LONDON
-        break
-      }
     }
   },
   methods: {
