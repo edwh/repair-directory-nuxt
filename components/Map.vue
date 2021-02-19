@@ -132,8 +132,13 @@ export default {
           map.fitBounds(bounds)
 
           if (businesses.length === 1) {
-            // Ensure we're not too zoomed in.
+            // Ensure we're not too zoomed in - set a decent zoom and centre.
             map.setZoom(14)
+
+            map.setCenter({
+              lat: businesses[0].geolocation.latitude,
+              lng: businesses[0].geolocation.longitude,
+            })
           }
         })
       }
