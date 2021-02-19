@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       map: null,
+      fitted: false,
       zoom: null,
       showModal: false,
       osmtile:
@@ -84,7 +85,10 @@ export default {
   },
   methods: {
     idle() {
-      this.fitMarkers(this.businesses)
+      if (!this.fitted) {
+        this.fitMarkers(this.businesses)
+        this.fitted = true
+      }
     },
     select(business) {
       this.$emit('selected', business.uid)
@@ -129,10 +133,11 @@ export default {
         this.$refs.map.$mapPromise.then((map) => {
           if (businesses.length === 1) {
             // Ensure we're not too zoomed in - set a decent zoom and centre.
-            this.center = [
-              businesses[0].geolocation.latitude,
-              businesses[0].geolocation.longitude,
-            ]
+            this.$store.dispatch('businesses/setCenter', {
+              lat: businesses[0].geolocation.latitude,
+              lng: businesses[0].geolocation.longitude,
+            })
+
             this.zoom = 14
           } else {
             map.fitBounds(bounds)
