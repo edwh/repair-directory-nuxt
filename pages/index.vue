@@ -13,8 +13,8 @@ export default {
 
     // We have been asked to show a business page.  This is passed via a query parameter so that we can do this
     // when embedded.  The url is created inside MapBusiness.
-    this.id = this.$route.query.business
-      ? parseInt(this.$route.query.business)
+    this.id = this.$route.query.rd_business
+      ? parseInt(this.$route.query.rd_business)
       : null
 
     // For SSR we want to have all the businesses loaded, unless we have a specific search filter.
@@ -24,16 +24,16 @@ export default {
     let radius = 2000
     let location = null
 
-    if (this.$route.query.location) {
-      location = this.$route.query.location
+    if (this.$route.query.rd_location) {
+      location = this.$route.query.rd_location
     }
 
-    if (this.$route.query.category) {
-      category = this.$route.query.category
+    if (this.$route.query.rd_category) {
+      category = this.$route.query.rd_category
     }
 
-    if (this.$route.query.radius) {
-      radius = this.$route.query.radius
+    if (this.$route.query.rd_radius) {
+      radius = this.$route.query.rd_radius
     }
 
     await this.$store.dispatch('businesses/search', {

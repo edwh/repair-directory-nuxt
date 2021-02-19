@@ -245,7 +245,7 @@ export default {
 
       return ret
     },
-    location() {
+    searchHint() {
       let ret = null
 
       switch (this.region) {
@@ -278,15 +278,18 @@ export default {
     shareUrl() {
       return (
         this.domain +
-        '?location=' +
-        encodeURIComponent(this.location) +
-        '&category=' +
-        encodeURIComponent(this.category) +
-        '&radius=' +
+        '?' +
+        (this.location
+          ? '&rd_location=' + encodeURIComponent(this.location)
+          : '') +
+        (this.category
+          ? '&rd_category=' + encodeURIComponent(this.category)
+          : '') +
+        '&rd_radius=' +
         this.radius +
-        '&region=' +
+        '&rd_region=' +
         this.region +
-        '&domain=' +
+        '&rd_domain=' +
         encodeURIComponent(this.domain)
       )
     },
@@ -296,17 +299,17 @@ export default {
       this.selected = null
     })
 
-    if (this.$route.query.location) {
-      this.location = this.$route.query.location
+    if (this.$route.query.rd_location) {
+      this.location = this.$route.query.rd_location
     }
 
-    if (this.$route.query.category) {
-      this.category = this.$route.query.category
+    if (this.$route.query.rd_category) {
+      this.category = this.$route.query.rd_category
     }
 
-    if (this.$route.query.radius) {
+    if (this.$route.query.rd_radius) {
       // Specified
-      this.radius = this.$route.query.radius
+      this.radius = this.$route.query.rd_radius
     } else {
       // Set to the maximum for this region.
       this.radius = this.radiusOptions.slice(-1)[0].value
@@ -319,9 +322,10 @@ export default {
       this.busy = true
 
       await this.$store.dispatch('businesses/search', {
-        location: this.location,
+        location: this.location + ', ' + this.searchHint,
         category: this.category,
         radius: this.radius,
+        region: this.region,
       })
 
       this.busy = false

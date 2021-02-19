@@ -39,12 +39,12 @@ Vue.mixin({
       // This method is called by the fetch method in the page mixin, or manually if that's overriden.
       await this.$store.dispatch('config/set', {
         key: 'region',
-        value: this.$route.query.region || REGION_LONDON,
+        value: this.$route.query.rd_region || REGION_LONDON,
       })
 
       await this.$store.dispatch('config/set', {
         key: 'domain',
-        value: this.$route.query.domain || 'https://map.restarters.net',
+        value: this.$route.query.rd_domain || 'https://map.restarters.net',
       })
     },
     waitForRef(name, callback) {

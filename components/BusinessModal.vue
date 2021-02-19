@@ -56,7 +56,7 @@
             :key="category"
             size="md"
             variant="dark"
-            class="mb-2 mr-2 category"
+            class="mb-2 mr-2 category text-wrap"
             pill
           >
             {{ category }}
@@ -169,11 +169,11 @@ export default {
     url() {
       return (
         this.domain +
-        '?business=' +
+        '?rd_business=' +
         this.business.uid +
-        '&region=' +
+        '&rd_region=' +
         encodeURIComponent(this.region) +
-        '&domain=' +
+        '&rd_domain=' +
         encodeURIComponent(this.domain)
       )
     },
