@@ -130,6 +130,11 @@ export default {
 
         this.$refs.map.$mapPromise.then((map) => {
           map.fitBounds(bounds)
+
+          if (businesses.length === 1) {
+            // Ensure we're not too zoomed in.
+            map.setZoom(10)
+          }
         })
       }
     },
