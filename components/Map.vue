@@ -133,7 +133,7 @@ export default {
 
           if (businesses.length === 1) {
             // Ensure we're not too zoomed in.
-            map.setZoom(10)
+            map.setZoom(14)
           }
         })
       }
