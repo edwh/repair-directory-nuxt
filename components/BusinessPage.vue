@@ -165,7 +165,9 @@ export default {
   },
   async fetch() {
     // We want to fetch the list of categories from the server.
-    await this.$store.dispatch('categories/list')
+    await this.$store.dispatch('categories/list', {
+      region: this.region,
+    })
   },
   data() {
     return {
@@ -174,6 +176,7 @@ export default {
       selected: null,
       category: null,
       radius: null,
+      location: null,
     }
   },
   computed: {
@@ -247,22 +250,6 @@ export default {
 
       return ret
     },
-    location() {
-      let ret = null
-
-      switch (this.region) {
-        case REGION_WALES: {
-          ret = SEARCH_HINT_WALES
-          break
-        }
-        default: {
-          ret = SEARCH_HINT_LONDON
-          break
-        }
-      }
-
-      return ret
-    },
     embedded() {
       // We can embed this page elsewhere.
       let ret = false
@@ -301,6 +288,17 @@ export default {
       this.selected = null
     })
 
+    switch (this.region) {
+      case REGION_WALES: {
+        this.location = SEARCH_HINT_WALES
+        break
+      }
+      default: {
+        this.location = SEARCH_HINT_LONDON
+        break
+      }
+    }
+
     if (this.$route.query.location) {
       this.location = this.$route.query.location
     }
@@ -325,6 +323,7 @@ export default {
         location: this.location,
         category: this.category,
         radius: this.radius,
+        region: this.region,
       })
 
       this.busy = false
@@ -410,7 +409,6 @@ export default {
   -webkit-border-radius: 0; /* Safari 3-4, iOS 1-3.2, Android 1.6- */
   -moz-border-radius: 0; /* Firefox 1-3.6 */
   border-radius: 0; /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
-  border-radius: 0;
   color: white;
   background: #22737d; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(

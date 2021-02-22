@@ -13,6 +13,9 @@ This repository contains the public front end; the server and admin are in a sep
 # install dependencies
 $ npm install
 
+# If you have a dev version of the server set the API environment variable, e.g.
+export API=http://restarters.test:8000/map/
+
 # serve with hot reload at localhost:3000
 $ npm run dev
 

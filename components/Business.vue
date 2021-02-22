@@ -9,6 +9,7 @@
       'mb-3': true,
       'm-0': true,
       rounded: true,
+      forcebreak: true,
     }"
   >
     <div class="business" @click="select">
@@ -57,7 +58,7 @@
               <client-only>
                 <v-icon name="map-marker" class="icon" />
               </client-only>
-              <span>{{ business.address }}</span>
+              <span>{{ business.address }}, {{ business.city }}</span>
             </p>
           </div>
         </div>
@@ -176,7 +177,7 @@ export default {
   background-color: white;
 
   &__inner {
-    font-family: 'Patua One';
+    font-family: 'Patua One', 'serif';
     color: #606060;
     padding: 0.5rem;
     width: 100%;

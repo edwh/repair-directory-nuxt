@@ -13,8 +13,10 @@ export const getters = {
 }
 
 export const actions = {
-  async list({ commit }) {
-    const ret = await this.$axios.get('/api/category/list')
+  async list({ commit }, params) {
+    const ret = await this.$axios.get(
+      '/api/category/list?region=' + encodeURIComponent(params.region)
+    )
 
     if (ret && ret.data && ret.data.categories) {
       commit('setList', ret.data.categories)
