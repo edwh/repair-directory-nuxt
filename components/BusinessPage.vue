@@ -172,6 +172,7 @@ export default {
       selected: null,
       category: null,
       radius: null,
+      location: null,
     }
   },
   computed: {

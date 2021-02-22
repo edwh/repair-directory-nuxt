@@ -15,6 +15,123 @@
     :title="business.name"
     @click="select"
   />
+    <b-modal v-model="show" size="lg" header-class="p-0" hide-backdrop>
+      <template slot="modal-header" slot-scope="{ cancel }">
+        <div class="large title w-100 opensans">
+          <b-btn variant="link" class="float-right clickme" @click="cancel">
+            <v-icon name="times" class="text-white" scale="2" />
+          </b-btn>
+          <h1 class="patua m-0">{{ business.name }}</h1>
+          <p v-if="business.positiveReviewPc" class="patua">
+            <client-only>
+              <star-rating
+                v-model="business.averageScore"
+                :round-start-rating="false"
+                :show-rating="false"
+                read-only
+                active-color="#eebd01"
+                :star-size="30"
+              />
+            </client-only>
+            {{ business.positiveReviewPc }}%
+            <span class="small">positive reviews</span>
+            <a
+              v-if="business.reviewSourceUrl"
+              :href="business.reviewSourceUrl"
+              target="_blank"
+              rel="noopener"
+              class="small"
+              >(source)</a
+            >
+          </p>
+          <p v-if="business.description" class="m-0 description">
+            {{ business.description }}
+          </p>
+        </div>
+      </template>
+      <template slot="modal-footer" slot-scope="{ ok, cancel }">
+        <div class="d-flex justify-content-between w-100">
+          <b-btn variant="light" @click="cancel"> Close </b-btn>
+          <b-btn variant="link" class="share" @click="share">
+            Share business
+            <v-icon name="share" />
+          </b-btn>
+        </div>
+      </template>
+      <div class="opensans">
+        <div class="mt-1">
+          <b-badge
+            v-for="category in business.categories"
+            :key="category"
+            size="md"
+            variant="dark"
+            class="mb-2 mr-2 category"
+            pill
+          >
+            {{ category }}
+          </b-badge>
+        </div>
+
+        <p v-if="website" class="mt-3">
+          <v-icon name="globe" class="fa-fw icon" />
+          <a
+            target="_blank"
+            rel="noopener"
+            :href="website"
+            @click="trackOutboundLink(business.website)"
+          >
+            {{ business.website }}
+          </a>
+        </p>
+
+        <p v-if="business.email">
+          <v-icon name="envelope" class="fa-fw icon" />
+          <a
+            :href="'mailto:' + business.email"
+            @click="trackOutboundLink(business.website)"
+            >{{ business.email }}</a
+          >
+        </p>
+
+        <p v-if="phone">
+          <v-icon name="phone" class="fa-fw icon" />
+          <a
+            :href="'tel:' + phone"
+            rel="noopener"
+            @click="trackOutboundLink('tel:' + phone)"
+          >
+            {{ phone }}
+          </a>
+        </p>
+
+        <p v-if="business.address">
+          <v-icon name="map-marker" class="fa-fw icon" />
+          <span>{{ business.address }}, {{ business.city }}</span>
+        </p>
+
+        <p v-if="business.warrantyOffered">
+          <v-icon name="calendar-check" class="fa-fw icon" />
+          <span>Warranty: {{ business.warranty }}</span>
+        </p>
+
+        <p v-if="business.qualifications">
+          <v-icon name="graduation-cap" class="fa-fw icon" />
+          <span>Qualifications: {{ business.qualifications }}</span>
+        </p>
+
+        <p>
+          <v-icon name="calendar" class="fa-fw icon" />
+          <span>Last updated: {{ updated }}</span>
+        </p>
+      </div>
+    </b-modal>
+    <ShareModal
+      v-if="showShareModal"
+      ref="shareModal"
+      :name="business.name"
+      :url="url"
+    />
+  </div>
 </template>
 <script>
 export default {
