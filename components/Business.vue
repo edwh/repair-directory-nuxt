@@ -17,7 +17,10 @@
         <h2 class="name">
           {{ business.name }}
         </h2>
-        <div class="business__positive-review-percentage">
+        <div
+          v-if="business.positiveReviewPc"
+          class="business__positive-review-percentage"
+        >
           <h2 class="percentage font-weight-bold">
             {{ business.positiveReviewPc }}%
           </h2>
