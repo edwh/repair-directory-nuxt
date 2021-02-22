@@ -327,9 +327,19 @@ export default {
       })
 
       this.busy = false
+
+      // Track the search.
+      this.$ga.event('search', 'submit', this.category || 'All Categories')
     },
     select(uid) {
       this.selected = uid
+
+      // Track the select.
+      const business = this.$store.getters['businesses/get'](uid)
+      const value = [business.name, business.address, business.postcode].join(
+        ', '
+      )
+      this.$ga.event('map', 'select', value)
     },
     showMoreInfo() {
       this.waitForRef('moreinfomodal', () => {
