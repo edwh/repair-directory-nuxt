@@ -16,19 +16,10 @@
       :title="business.name"
       @click="select"
     />
-    <ShareModal
-      v-if="showShareModal"
-      ref="shareModal"
-      :name="business.name"
-      :url="url"
-    />
   </div>
 </template>
 <script>
-import ShareModal from '@/components/ShareModal'
-
 export default {
-  components: { ShareModal },
   props: {
     business: {
       type: Object,
