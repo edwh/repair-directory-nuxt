@@ -121,7 +121,6 @@
           :businesses="businessesInBounds"
           :center="center"
           :selected="selected"
-          :region="region"
           @selected="select"
         />
       </client-only>
@@ -132,6 +131,7 @@
       name="results"
       :url="shareUrl"
     />
+    <BusinessModal :id="selected" ref="businessModal" />
   </div>
 </template>
 <script>
@@ -143,24 +143,20 @@ import {
   BOUNDS_WALES,
   DISTANCES_LONDON,
   DISTANCES_WALES,
-  REGION_LONDON,
   REGION_WALES,
   SEARCH_HINT_LONDON,
   SEARCH_HINT_WALES,
 } from '@/regions'
+import BusinessModal from '@/components/BusinessModal'
+import ShareModal from '@/components/ShareModal'
 
 export default {
-  components: { BusinessList, Map },
+  components: { ShareModal, BusinessModal, BusinessList, Map },
   props: {
     id: {
       type: Number,
       required: false,
       default: null,
-    },
-    region: {
-      type: String,
-      required: false,
-      default: REGION_LONDON,
     },
   },
   async fetch() {
@@ -250,6 +246,22 @@ export default {
 
       return ret
     },
+    searchHint() {
+      let ret = null
+
+      switch (this.region) {
+        case REGION_WALES: {
+          ret = SEARCH_HINT_WALES
+          break
+        }
+        default: {
+          ret = SEARCH_HINT_LONDON
+          break
+        }
+      }
+
+      return ret
+    },
     embedded() {
       // We can embed this page elsewhere.
       let ret = false
@@ -266,61 +278,52 @@ export default {
     },
     shareUrl() {
       return (
-        window.location.protocol +
-        '//' +
-        window.location.hostname +
-        '?location=' +
-        encodeURIComponent(this.location) +
-        '&category=' +
-        encodeURIComponent(this.category) +
-        '&radius=' +
+        this.domain +
+        '?' +
+        (this.location
+          ? '&rd_location=' + encodeURIComponent(this.location)
+          : '') +
+        (this.category
+          ? '&rd_category=' + encodeURIComponent(this.category)
+          : '') +
+        '&rd_radius=' +
         this.radius +
-        '&region=' +
-        this.region
+        '&rd_region=' +
+        this.region +
+        '&rd_domain=' +
+        encodeURIComponent(this.domain)
       )
     },
-  },
-  created() {
-    this.selected = this.id
   },
   mounted() {
     this.$root.$on('bv::modal::hidden', (bvEvent, modalId) => {
       this.selected = null
     })
 
-    switch (this.region) {
-      case REGION_WALES: {
-        this.location = SEARCH_HINT_WALES
-        break
-      }
-      default: {
-        this.location = SEARCH_HINT_LONDON
-        break
-      }
+    if (this.$route.query.rd_location) {
+      this.location = this.$route.query.rd_location
     }
 
-    if (this.$route.query.location) {
-      this.location = this.$route.query.location
+    if (this.$route.query.rd_category) {
+      this.category = this.$route.query.rd_category
     }
 
-    if (this.$route.query.category) {
-      this.category = this.$route.query.category
-    }
-
-    if (this.$route.query.radius) {
+    if (this.$route.query.rd_radius) {
       // Specified
-      this.radius = this.$route.query.radius
+      this.radius = this.$route.query.rd_radius
     } else {
       // Set to the maximum for this region.
       this.radius = this.radiusOptions.slice(-1)[0].value
     }
+
+    this.selected = this.id
   },
   methods: {
     async search() {
       this.busy = true
 
       await this.$store.dispatch('businesses/search', {
-        location: this.location,
+        location: this.location + ', ' + this.searchHint,
         category: this.category,
         radius: this.radius,
         region: this.region,

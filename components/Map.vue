@@ -11,7 +11,6 @@
       v-for="business in businesses"
       :key="'marker-' + business.uid"
       :business="business"
-      :show-modal="showModal === business.uid"
       :selected="selected"
       :map="map"
       :region="region"
@@ -22,12 +21,7 @@
 <script>
 import MapBusiness from '@/components/MapBusiness'
 import { gmapApi } from 'vue2-google-maps'
-import {
-  BOUNDS_LONDON,
-  BOUNDS_WALES,
-  REGION_LONDON,
-  REGION_WALES,
-} from '@/regions'
+import { BOUNDS_LONDON, BOUNDS_WALES, REGION_WALES } from '@/regions'
 
 export default {
   components: { MapBusiness },
@@ -44,11 +38,6 @@ export default {
       type: Number,
       required: false,
       default: null,
-    },
-    region: {
-      type: String,
-      required: false,
-      default: REGION_LONDON,
     },
   },
   data() {
@@ -71,15 +60,6 @@ export default {
       immediate: true,
       handler(newVal) {
         this.fitMarkers(newVal)
-      },
-    },
-    selected: {
-      immediate: true,
-      handler(newVal) {
-        // Delay modal as this interferes with list scrolling.
-        setTimeout(() => {
-          this.showModal = newVal
-        }, 1000)
       },
     },
   },
