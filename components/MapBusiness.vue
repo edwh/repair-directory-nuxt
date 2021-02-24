@@ -1,22 +1,20 @@
 <template>
-  <div>
-    <GmapMarker
-      ref="marker"
-      :icon="
-        selected === business.uid
-          ? 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
-          : 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-      "
-      :position="{
-        lat: business.geolocation.latitude,
-        lng: business.geolocation.longitude,
-      }"
-      :clickable="true"
-      :draggable="false"
-      :title="business.name"
-      @click="select"
-    />
-  </div>
+  <GmapMarker
+    ref="marker"
+    :icon="
+      selected === business.uid
+        ? 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
+        : 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+    "
+    :position="{
+      lat: business.geolocation.latitude,
+      lng: business.geolocation.longitude,
+    }"
+    :clickable="true"
+    :draggable="false"
+    :title="business.name"
+    @click="select"
+  />
 </template>
 <script>
 export default {
