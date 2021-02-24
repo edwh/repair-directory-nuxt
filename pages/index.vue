@@ -1,13 +1,22 @@
 <template>
-  <BusinessPage :region="region" />
+  <BusinessPage :id="id" />
 </template>
 <script>
 import BusinessPage from '@/components/BusinessPage'
-import { REGION_LONDON } from '@/regions'
+import page from '@/mixins/page'
 
 export default {
   components: { BusinessPage },
-  async asyncData({ route, store }) {
+  mixins: [page],
+  async fetch() {
+    this.setConfig()
+
+    // We have been asked to show a business page.  This is passed via a query parameter so that we can do this
+    // when embedded.  The url is created inside MapBusiness.
+    this.id = this.$route.query.rd_business
+      ? parseInt(this.$route.query.rd_business)
+      : null
+
     // For SSR we want to have all the businesses loaded, unless we have a specific search filter.
     let category = null
 
@@ -15,29 +24,28 @@ export default {
     let radius = 2000
     let location = null
 
-    if (route.query.location) {
-      location = route.query.location
+    if (this.$route.query.rd_location) {
+      location = this.$route.query.rd_location
     }
 
-    if (route.query.category) {
-      category = route.query.category
+    if (this.$route.query.rd_category) {
+      category = this.$route.query.rd_category
     }
 
-    if (route.query.radius) {
-      radius = route.query.radius
+    if (this.$route.query.rd_radius) {
+      radius = this.$route.query.rd_radius
     }
 
-    const region = route.query.region || REGION_LONDON
-
-    await store.dispatch('businesses/search', {
+    await this.$store.dispatch('businesses/search', {
       category,
       location,
       radius,
-      region,
+      region: this.region,
     })
-
+  },
+  data() {
     return {
-      region,
+      id: null,
     }
   },
   head() {
