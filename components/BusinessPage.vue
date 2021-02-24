@@ -297,7 +297,9 @@ export default {
   },
   mounted() {
     this.$root.$on('bv::modal::hidden', (bvEvent, modalId) => {
-      this.selected = null
+      if (modalId === 'businessModal') {
+        this.selected = null
+      }
     })
 
     if (this.$route.query.rd_location) {

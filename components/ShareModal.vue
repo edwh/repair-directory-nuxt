@@ -1,6 +1,6 @@
 <template>
   <b-modal
-    id="sharemodal"
+    id="shareModal"
     v-model="showModal"
     :title="'Share ' + name"
     size="lg"

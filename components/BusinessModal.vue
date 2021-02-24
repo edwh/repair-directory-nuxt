@@ -2,6 +2,7 @@
   <div>
     <b-modal
       v-if="business"
+      id="businessModal"
       v-model="showModal"
       size="lg"
       header-class="p-0"
@@ -120,7 +121,7 @@
     <ShareModal
       v-if="showShareModal"
       ref="shareModal"
-      :name="business.name"
+      :name="business ? business.name : null"
       :url="url"
     />
   </div>
@@ -167,15 +168,15 @@ export default {
         : ''
     },
     url() {
-      return (
-        this.domain +
-        '?rd_business=' +
-        this.business.uid +
-        '&rd_region=' +
-        encodeURIComponent(this.region) +
-        '&rd_domain=' +
-        encodeURIComponent(this.domain)
-      )
+      return this.business
+        ? this.domain +
+            '?rd_business=' +
+            this.business.uid +
+            '&rd_region=' +
+            encodeURIComponent(this.region) +
+            '&rd_domain=' +
+            encodeURIComponent(this.domain)
+        : null
     },
     completeAddress() {
       return this.business
