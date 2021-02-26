@@ -44,7 +44,7 @@ Vue.mixin({
 
       await this.$store.dispatch('config/set', {
         key: 'domain',
-        value: this.$route.query.rd_domain || 'https://map.restarters.net',
+        value: this.$route.query.rd_parenturl || 'https://map.restarters.net',
       })
     },
     waitForRef(name, callback) {
