@@ -14,12 +14,12 @@ export const TAGLINE_WALES =
 // are sufficiently far apart that we can distinguish between them using a box rather than a polygon.
 export const BOUNDS_LONDON = {
   sw: {
-    lat: 51.378795,
-    lng: -0.302531,
+    lat: 51.2,
+    lng: -0.78,
   },
   ne: {
-    lat: 51.674441,
-    lng: 0.266182,
+    lat: 54.5,
+    lng: 0.6,
   },
 }
 
