@@ -290,7 +290,7 @@ export default {
         this.radius +
         '&rd_region=' +
         this.region +
-        '&rd_domain=' +
+        '&rd_parenturl=' +
         encodeURIComponent(this.domain)
       )
     },
