@@ -339,6 +339,11 @@ export default {
 
       // Track the search.
       this.$ga.event('search', 'submit', this.category || 'All Categories')
+      this.$ga.event(
+        'search_' + this.region,
+        'submit',
+        this.category || 'All Categories'
+      )
     },
     select(uid) {
       this.selected = uid
@@ -349,6 +354,7 @@ export default {
         ', '
       )
       this.$ga.event('map', 'select', value)
+      this.$ga.event('map_' + this.region, 'select', value)
     },
     showMoreInfo() {
       this.waitForRef('moreinfomodal', () => {
