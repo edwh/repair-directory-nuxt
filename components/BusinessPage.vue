@@ -452,6 +452,22 @@ export default {
   ::v-deep option {
     color: black;
   }
+
+  &::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $colour-placeholder;
+    opacity: 1; /* Firefox */
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $colour-placeholder;
+  }
+
+  &::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $colour-placeholder;
+  }
 }
 
 .sidebar__button {
