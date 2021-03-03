@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-      <div class="text-center bg-white p-2 font-weight-bold">
+      <div v-if="showSubmit" class="text-center bg-white p-2 font-weight-bold">
         Help us grow!
         <a
           href="https://therestartproject.org/suggest-a-business-for-the-repair-directory/"
@@ -146,6 +146,7 @@ import {
   REGION_WALES,
   SEARCH_HINT_LONDON,
   SEARCH_HINT_WALES,
+  showSubmitBusiness,
 } from '@/regions'
 import BusinessModal from '@/components/BusinessModal'
 import ShareModal from '@/components/ShareModal'
@@ -293,6 +294,9 @@ export default {
         '&rd_parenturl=' +
         encodeURIComponent(this.domain)
       )
+    },
+    showSubmit() {
+      return showSubmitBusiness(this.region)
     },
   },
   mounted() {

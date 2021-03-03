@@ -1,3 +1,6 @@
+// This file is just a placeholder of region-specific configuration until we introduce a proper concept of regions
+// into the server.
+
 export const REGION_LONDON = 'London'
 export const REGION_WALES = 'Wales'
 
@@ -84,3 +87,7 @@ export const DISTANCES_WALES = [
     text: 'All Wales',
   },
 ]
+
+export function showSubmitBusiness(region) {
+  return region === REGION_LONDON
+}
