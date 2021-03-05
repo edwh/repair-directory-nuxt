@@ -91,36 +91,34 @@ export default {
           }
         }
 
-        if (!businesses.length) {
-          bounds = new this.google.maps.LatLngBounds(
-            new this.google.maps.LatLng(bounds.sw),
-            new this.google.maps.LatLng(bounds.ne)
-          )
-        } else {
-          bounds = new this.google.maps.LatLngBounds()
-
-          businesses.forEach((b) => {
-            bounds.extend(
-              // eslint-disable-next-line new-cap
-              new this.google.maps.LatLng(
-                b.geolocation.latitude,
-                b.geolocation.longitude
-              )
-            )
-          })
-        }
-
         this.$refs.map.$mapPromise.then((map) => {
-          if (businesses.length === 1) {
-            // Ensure we're not too zoomed in - set a decent zoom and centre.
-            this.$store.dispatch('businesses/setCenter', {
-              lat: businesses[0].geolocation.latitude,
-              lng: businesses[0].geolocation.longitude,
-            })
-
+          if (!businesses.length) {
+            // Nothing to show, but zoom to the location to at least indicate that we searched.
             this.zoom = 14
           } else {
-            map.fitBounds(bounds)
+            bounds = new this.google.maps.LatLngBounds()
+
+            businesses.forEach((b) => {
+              bounds.extend(
+                // eslint-disable-next-line new-cap
+                new this.google.maps.LatLng(
+                  b.geolocation.latitude,
+                  b.geolocation.longitude
+                )
+              )
+            })
+
+            if (businesses.length === 1) {
+              // Ensure we're not too zoomed in - set a decent zoom and centre.
+              this.$store.dispatch('businesses/setCenter', {
+                lat: businesses[0].geolocation.latitude,
+                lng: businesses[0].geolocation.longitude,
+              })
+
+              this.zoom = 14
+            } else {
+              map.fitBounds(bounds)
+            }
           }
         })
       }
