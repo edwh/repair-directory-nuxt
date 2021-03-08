@@ -55,6 +55,7 @@ export default {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>',
       bounds: null,
+      lastBusinessesFitted: null,
     }
   },
   computed: {
@@ -70,23 +71,40 @@ export default {
   },
   methods: {
     idle() {
-      this.fitMarkers(this.businesses)
+      console.log('Idle, fit markers')
+
+      // We only want to fit the map to the markers if the businesses have changed since last time we did this.
+      if (
+        !this.lastBusinessesFitted ||
+        JSON.stringify(this.businesses) !== this.lastBusinessesFitted
+      ) {
+        this.lastBusinessesFitted = JSON.stringify(this.businesses)
+        this.fitMarkers(this.businesses)
+      } else {
+        console.log('No change to businesses')
+      }
     },
     select(business) {
       this.$emit('selected', business.uid)
     },
     fitMarkers(businesses) {
+      console.log('fitMarkers')
       if (this.$refs.map) {
+        console.log('Got ref')
         this.map = this.$refs.map
 
         this.$refs.map.$mapPromise.then((map) => {
+          console.log('Got promise')
           if (!businesses.length) {
             // Nothing to show.
+            console.log('Nothing to show')
             if (this.location) {
               // ...but zoom to the location to at least indicate that we searched.
+              console.log('Got location')
               this.zoom = 14
             } else {
               // ...and no location specified - show the whole region.
+              console.log('No location')
               let bounds = null
 
               switch (this.region) {
@@ -112,6 +130,7 @@ export default {
             }
           } else {
             // Got some businesses.
+            console.log('Got some businesses')
             const bounds = new this.google.maps.LatLngBounds()
 
             if (this.location && this.center) {
@@ -137,6 +156,7 @@ export default {
 
             if (businesses.length === 1) {
               // Ensure we're not too zoomed in - set a decent zoom and centre.
+              console.log('...only 1')
               this.$store.dispatch('businesses/setCenter', {
                 lat: businesses[0].geolocation.latitude,
                 lng: businesses[0].geolocation.longitude,
@@ -145,6 +165,7 @@ export default {
               this.zoom = 14
             } else {
               // Pad the map so the markers will show if they're at the edge.
+              console.log('...multiple', bounds.toString())
               map.fitBounds(bounds, {
                 padding: [30, 30],
               })
