@@ -59,8 +59,7 @@ Vue.mixin({
       }
     },
     trackOutboundLink(url) {
-      this.$ga.event('outbound', 'click', url)
-      this.$ga.event('outbound_' + this.region, 'click', url)
+      this.$ga.event('outbound', 'click_' + this.region, url)
     },
     buildHead(title, description, image) {
       const meta = [
