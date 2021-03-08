@@ -48,13 +48,13 @@ export default {
   data() {
     return {
       map: null,
-      fitted: false,
       zoom: null,
       showModal: false,
       osmtile:
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png',
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>',
+      bounds: null,
     }
   },
   computed: {
@@ -70,10 +70,7 @@ export default {
   },
   methods: {
     idle() {
-      if (!this.fitted) {
-        this.fitMarkers(this.businesses)
-        this.fitted = true
-      }
+      this.fitMarkers(this.businesses)
     },
     select(business) {
       this.$emit('selected', business.uid)
@@ -119,6 +116,7 @@ export default {
 
             if (this.location && this.center) {
               // Ensure we show the location we searched on.
+              console.log('Extend to center', this.center)
               bounds.extend(
                 new this.google.maps.LatLng({
                   lat: this.center[0],
@@ -129,6 +127,7 @@ export default {
 
             // Ensure we show all the businesses.
             businesses.forEach((b) => {
+              console.log('EXtend to business', b)
               bounds.extend(
                 // eslint-disable-next-line new-cap
                 new this.google.maps.LatLng(
@@ -147,7 +146,11 @@ export default {
 
               this.zoom = 14
             } else {
-              map.fitBounds(bounds)
+              // Pad the map so the markers will show if they're at the edge.
+              map.fitBounds(bounds, {
+                padding: [30, 30],
+              })
+              console.log('Fitter', bounds)
             }
           }
         })
