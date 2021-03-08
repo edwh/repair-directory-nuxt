@@ -121,6 +121,7 @@
           :businesses="businessesInBounds"
           :center="center"
           :selected="selected"
+          :location="location"
           @selected="select"
         />
       </client-only>

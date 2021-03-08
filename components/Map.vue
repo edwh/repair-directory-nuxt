@@ -39,6 +39,11 @@ export default {
       required: false,
       default: null,
     },
+    location: {
+      type: String,
+      required: false,
+      default: null,
+    },
   },
   data() {
     return {
@@ -77,27 +82,52 @@ export default {
       if (this.$refs.map) {
         this.map = this.$refs.map
 
-        // We want to fit the map to the new businesses
-        let bounds = null
-
-        switch (this.region) {
-          case REGION_WALES: {
-            bounds = BOUNDS_WALES
-            break
-          }
-          default: {
-            bounds = BOUNDS_LONDON
-            break
-          }
-        }
-
         this.$refs.map.$mapPromise.then((map) => {
           if (!businesses.length) {
-            // Nothing to show, but zoom to the location to at least indicate that we searched.
-            this.zoom = 14
-          } else {
-            bounds = new this.google.maps.LatLngBounds()
+            // Nothing to show.
+            if (this.location) {
+              // ...but zoom to the location to at least indicate that we searched.
+              this.zoom = 14
+            } else {
+              // ...and no location specified - show the whole region.
+              let bounds = null
 
+              switch (this.region) {
+                case REGION_WALES: {
+                  bounds = BOUNDS_WALES
+                  break
+                }
+                default: {
+                  bounds = BOUNDS_LONDON
+                  break
+                }
+              }
+
+              const mapbounds = new this.google.maps.LatLngBounds()
+              mapbounds.extend(
+                new this.google.maps.LatLng(bounds.sw.lat, bounds.sw.lng)
+              )
+              mapbounds.extend(
+                new this.google.maps.LatLng(bounds.ne.lat, bounds.ne.lng)
+              )
+
+              map.fitBounds(mapbounds)
+            }
+          } else {
+            // Got some businesses.
+            const bounds = new this.google.maps.LatLngBounds()
+
+            if (this.location && this.center) {
+              // Ensure we show the location we searched on.
+              bounds.extend(
+                new this.google.maps.LatLng({
+                  lat: this.center[0],
+                  lng: this.center[1],
+                })
+              )
+            }
+
+            // Ensure we show all the businesses.
             businesses.forEach((b) => {
               bounds.extend(
                 // eslint-disable-next-line new-cap
