@@ -116,7 +116,6 @@ export default {
 
             if (this.location && this.center) {
               // Ensure we show the location we searched on.
-              console.log('Extend to center', this.center)
               bounds.extend(
                 new this.google.maps.LatLng({
                   lat: this.center[0],
@@ -127,7 +126,6 @@ export default {
 
             // Ensure we show all the businesses.
             businesses.forEach((b) => {
-              console.log('EXtend to business', b)
               bounds.extend(
                 // eslint-disable-next-line new-cap
                 new this.google.maps.LatLng(
@@ -150,7 +148,6 @@ export default {
               map.fitBounds(bounds, {
                 padding: [30, 30],
               })
-              console.log('Fitter', bounds)
             }
           }
         })
