@@ -121,6 +121,7 @@
           :businesses="businessesInBounds"
           :center="center"
           :selected="selected"
+          :location="location"
           @selected="select"
         />
       </client-only>
@@ -338,7 +339,11 @@ export default {
       this.busy = false
 
       // Track the search.
-      this.$ga.event('search', 'submit', this.category || 'All Categories')
+      this.$ga.event(
+        'search',
+        'submit_' + this.region,
+        this.category || 'All Categories'
+      )
     },
     select(uid) {
       this.selected = uid
@@ -348,7 +353,7 @@ export default {
       const value = [business.name, business.address, business.postcode].join(
         ', '
       )
-      this.$ga.event('map', 'select', value)
+      this.$ga.event('map', 'select_' + this.region, value)
     },
     showMoreInfo() {
       this.waitForRef('moreinfomodal', () => {
