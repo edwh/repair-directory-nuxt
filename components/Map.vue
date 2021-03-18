@@ -99,6 +99,11 @@ export default {
         } else {
           bounds = new this.google.maps.LatLngBounds()
 
+          bounds.extend(
+            // eslint-disable-next-line new-cap
+            new this.google.maps.LatLng(this.center[0], this.center[1])
+          )
+
           businesses.forEach((b) => {
             bounds.extend(
               // eslint-disable-next-line new-cap

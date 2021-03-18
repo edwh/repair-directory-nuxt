@@ -21,7 +21,7 @@ export const BOUNDS_LONDON = {
     lng: -0.78,
   },
   ne: {
-    lat: 54.5,
+    lat: 51.8,
     lng: 0.6,
   },
 }
