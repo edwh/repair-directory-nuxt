@@ -293,6 +293,8 @@ export default {
         this.radius +
         '&rd_region=' +
         this.region +
+        '&rd_language=' +
+        encodeURIComponent(this.language) +
         '&rd_parenturl=' +
         encodeURIComponent(this.domain)
       )

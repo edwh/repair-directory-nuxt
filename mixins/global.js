@@ -30,6 +30,9 @@ Vue.mixin({
     domain() {
       return this.$store.getters['config/get']('domain')
     },
+    language() {
+      return this.$store.getters['config/get']('language')
+    },
   },
   methods: {
     async setConfig() {
@@ -51,6 +54,11 @@ Vue.mixin({
         // Set the requested language.
         await this.$i18n.setLocale(this.$route.query.rd_language)
       }
+
+      await this.$store.dispatch('config/set', {
+        key: 'language',
+        value: this.$route.query.rd_language || null,
+      })
     },
     waitForRef(name, callback) {
       // When a component is conditional using a v-if, it sometimes takes more than one tick for it to appear.  So

@@ -174,6 +174,8 @@ export default {
             this.business.uid +
             '&rd_region=' +
             encodeURIComponent(this.region) +
+            '&rd_language=' +
+            encodeURIComponent(this.language) +
             '&rd_parenturl=' +
             encodeURIComponent(this.domain)
         : null
