@@ -223,6 +223,7 @@ export default {
 
       if (this.categories) {
         this.categories.forEach((c) => {
+          // We want to translate the category text.
           ret.push({
             value: c,
             text: this.$t(c),
