@@ -27,7 +27,7 @@
         </p>
         <div class="formlayout">
           <div class="left">
-            <label for="location">Where are you looking?</label>
+            <label for="location">{{ $t('whereAreYouLooking') }}</label>
             <b-input
               id="location"
               v-model="location"
@@ -101,7 +101,7 @@
             variant="link"
             @click="share"
           >
-            Share results
+            {{ $t('shareResults') }}
             <client-only>
               <v-icon name="share" />
             </client-only>
@@ -225,7 +225,7 @@ export default {
         this.categories.forEach((c) => {
           ret.push({
             value: c,
-            text: c,
+            text: this.$t(c),
           })
         })
       }

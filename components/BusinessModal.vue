@@ -26,7 +26,7 @@
               />
             </client-only>
             {{ business.positiveReviewPc }}%
-            <span class="small">positive reviews</span>
+            <span class="small">{{ $t('positiveReviews') }}</span>
             <a
               v-if="business.reviewSourceUrl"
               :href="business.reviewSourceUrl"

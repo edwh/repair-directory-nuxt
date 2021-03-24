@@ -24,7 +24,7 @@
           <h2 class="percentage font-weight-bold">
             {{ business.positiveReviewPc }}%
           </h2>
-          <span>positive reviews</span>
+          <span>{{ $t('positiveReviews') }}</span>
         </div>
       </div>
       <div class="business__details">
