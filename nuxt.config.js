@@ -52,7 +52,6 @@ export default {
   ],
 
   i18n: {
-    locales: ['en', 'cy'],
     defaultLocale: 'en',
     fallbackLocale: 'en',
 
@@ -65,33 +64,24 @@ export default {
     // Recommended for SEO.
     onlyOnRoot: true,
 
+    // Lazy load translations from files in lang folder.
+    lazy: true,
+    langDir: 'lang/',
+    locales: [
+      {
+        code: 'en',
+        file: 'en.js',
+      },
+      {
+        code: 'cy',
+        file: 'cy.js',
+      },
+    ],
+
     vuex: {
       // When doing SSR, the language will be set from an URL parameter.  We want to sync the locale with the i18n
-      // store so that when the client initialises, it picks up the locale.
+      // store so that when the client initialises, it picks up the locale used on the server to generate the page.
       syncLocale: true,
-    },
-
-    beforeLanguageSwitch: function(oldLocale, newLocale) {
-      console.log("Language switch", oldLocale, newLocale)
-    },
-
-    vueI18n: {
-      messages: {
-        en: {
-          shareResults: 'Share results',
-          whereAreYouLooking: 'Where are you looking?',
-          positiveReviews: 'positive reviews',
-        },
-        cy: {
-          shareResults: 'Rhannu canlyniadau',
-          whereAreYouLooking: 'Ble ydych chi’n edrych?',
-          positiveReviews: 'adolygiadau cadarnhaol',
-
-          // Categories are returned from the server.  If translations appear here, they will be used, otherwise
-          // the server text will be used instead.
-          'Bicycle / bike / cycle': 'Beiciau',
-        },
-      },
     },
   },
 
