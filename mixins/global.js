@@ -1,11 +1,6 @@
 // Global mixin so that every component can access the logged in state and user.
 import Vue from 'vue'
-import {
-  REGION_LONDON,
-  REGION_WALES,
-  TAGLINE_LONDON,
-  TAGLINE_WALES,
-} from '@/regions'
+import { REGION_LONDON, REGION_WALES } from '@/regions'
 
 Vue.mixin({
   computed: {
@@ -14,11 +9,11 @@ Vue.mixin({
 
       switch (this.region) {
         case REGION_WALES: {
-          ret = TAGLINE_WALES
+          ret = this.$t('findBusinessWales')
           break
         }
         default: {
-          ret = TAGLINE_LONDON
+          ret = this.$t('findBusinessLondon')
         }
       }
 
