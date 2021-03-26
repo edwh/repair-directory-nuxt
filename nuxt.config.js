@@ -48,7 +48,42 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     'vue-scrollto/nuxt',
+    'nuxt-i18n',
   ],
+
+  i18n: {
+    defaultLocale: 'en',
+    fallbackLocale: 'en',
+
+    // We are not translating the URLs themselves, e.g. '/business'
+    strategy: 'no_prefix',
+
+    // We don't want to guess at the language - it's passed in to us via a parameter.
+    detectBrowserLanguage: false,
+
+    // Recommended for SEO.
+    onlyOnRoot: true,
+
+    // Lazy load translations from files in lang folder.
+    lazy: true,
+    langDir: 'lang/',
+    locales: [
+      {
+        code: 'en',
+        file: 'en.js',
+      },
+      {
+        code: 'cy',
+        file: 'cy.js',
+      },
+    ],
+
+    vuex: {
+      // When doing SSR, the language will be set from an URL parameter.  We want to sync the locale with the i18n
+      // store so that when the client initialises, it picks up the locale used on the server to generate the page.
+      syncLocale: true,
+    },
+  },
 
   axios: {
     proxy: true,
@@ -75,7 +110,7 @@ export default {
   env: {
     // This will be used on the client in axios-baseurl to send requests to the same API endpoing that the server-side
     // code uses.
-    API: process.env.API || 'https://map.restarters.net/map/'
+    API: process.env.API || 'https://map.restarters.net/map/',
   },
 
   build: {

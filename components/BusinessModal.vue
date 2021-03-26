@@ -26,7 +26,7 @@
               />
             </client-only>
             {{ business.positiveReviewPc }}%
-            <span class="small">positive reviews</span>
+            <span class="small">{{ $t('positiveReviews') }}</span>
             <a
               v-if="business.reviewSourceUrl"
               :href="business.reviewSourceUrl"
@@ -174,6 +174,8 @@ export default {
             this.business.uid +
             '&rd_region=' +
             encodeURIComponent(this.region) +
+            '&rd_language=' +
+            encodeURIComponent(this.language) +
             '&rd_parenturl=' +
             encodeURIComponent(this.domain)
         : null

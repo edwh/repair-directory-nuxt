@@ -30,6 +30,9 @@ Vue.mixin({
     domain() {
       return this.$store.getters['config/get']('domain')
     },
+    language() {
+      return this.$store.getters['config/get']('language')
+    },
   },
   methods: {
     async setConfig() {
@@ -45,6 +48,16 @@ Vue.mixin({
       await this.$store.dispatch('config/set', {
         key: 'domain',
         value: this.$route.query.rd_parenturl || 'https://map.restarters.net',
+      })
+
+      if (this.$route.query.rd_language) {
+        // Set the requested language.
+        await this.$i18n.setLocale(this.$route.query.rd_language)
+      }
+
+      await this.$store.dispatch('config/set', {
+        key: 'language',
+        value: this.$route.query.rd_language || null,
       })
     },
     waitForRef(name, callback) {

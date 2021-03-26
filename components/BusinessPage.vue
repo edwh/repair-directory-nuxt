@@ -27,7 +27,7 @@
         </p>
         <div class="formlayout">
           <div class="left">
-            <label for="location">Where are you looking?</label>
+            <label for="location">{{ $t('whereAreYouLooking') }}</label>
             <b-input
               id="location"
               v-model="location"
@@ -101,7 +101,7 @@
             variant="link"
             @click="share"
           >
-            Share results
+            {{ $t('shareResults') }}
             <client-only>
               <v-icon name="share" />
             </client-only>
@@ -223,9 +223,10 @@ export default {
 
       if (this.categories) {
         this.categories.forEach((c) => {
+          // We want to translate the category text.
           ret.push({
             value: c,
-            text: c,
+            text: this.$t(c),
           })
         })
       }
@@ -292,6 +293,8 @@ export default {
         this.radius +
         '&rd_region=' +
         this.region +
+        '&rd_language=' +
+        encodeURIComponent(this.language) +
         '&rd_parenturl=' +
         encodeURIComponent(this.domain)
       )
