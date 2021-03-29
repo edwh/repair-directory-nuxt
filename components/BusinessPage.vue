@@ -231,7 +231,9 @@ export default {
         })
       }
 
-      return ret
+      return ret.sort((a, b) => {
+        return a.text.localeCompare(b.text)
+      })
     },
     radiusOptions() {
       let ret = null
