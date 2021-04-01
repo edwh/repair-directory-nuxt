@@ -59,6 +59,14 @@ Vue.mixin({
         key: 'language',
         value: this.$route.query.rd_language || null,
       })
+
+      // We allow customisation of certain styles by passing in an rd_style query parameter which contains some
+      // known fields.  We put these in the store here; the default layout will pick them up and construct
+      // CSS from the result.
+      await this.$store.dispatch('config/set', {
+        key: 'styles',
+        value: this.$route.query.rd_style || null,
+      })
     },
     waitForRef(name, callback) {
       // When a component is conditional using a v-if, it sometimes takes more than one tick for it to appear.  So

@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <div id="sidebar" class="sidebar">
+    <div id="sidebar" class="sidebar rd-sidebar rd-secondary-font">
       <client-only>
         <div
           v-if="!embedded"
@@ -9,9 +9,11 @@
           <b-img src="/logo.png" class="logo" />
         </div>
       </client-only>
-      <div class="sidebar__content mb-2 p-2">
+      <div class="sidebar__content mb-2 p-2 rd-sidebar-background">
         <p class="sidebar__copy m-0 mb-3">
-          {{ tagline }}
+          <span class="rd-primary-font">
+            {{ tagline }}
+          </span>
           <client-only>
             <b-btn
               v-if="!embedded"
@@ -25,7 +27,7 @@
           </client-only>
           <MoreInfoModal ref="moreinfomodal" />
         </p>
-        <div class="formlayout">
+        <div class="formlayout rd-secondary-font">
           <div class="left">
             <label for="location">{{ $t('whereAreYouLooking') }}</label>
             <b-input
@@ -55,7 +57,7 @@
           </div>
           <div class="right align-self-end d-flex justify-content-end">
             <b-btn
-              class="sidebar__button font-weight-bold"
+              class="sidebar__button font-weight-bold rd-sidebar-button mb-2"
               variant="warning"
               squared
               @click="search"
@@ -92,7 +94,10 @@
               a repair business for this item that meets our listing criteria.
             </p>
           </div>
-          <div v-else class="business-list-container__result-count">
+          <div
+            v-else
+            class="business-list-container__result-count rd-primary-font"
+          >
             {{ businessesInBounds.length }} results in your area
           </div>
           <b-btn
@@ -394,25 +399,12 @@ export default {
 .sidebar {
   height: 100vh;
   overflow-y: scroll;
-  font-family: 'Open Sans', sans-serif;
-  background: #1e8694; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(
-    #1e8694,
-    #064d57
-  ); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#1e8694, #064d57); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(
-    #1e8694,
-    #064d57
-  ); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#1e8694, #064d57); /* Standard syntax */
 
   .sidebar__content {
     color: white;
 
     .sidebar__copy {
       margin: 1rem; //0 1rem 1rem 10px;
-      font-family: 'Patua One', serif;
       font-size: 1.1rem;
       letter-spacing: 0.5px;
 
@@ -436,45 +428,13 @@ export default {
   -webkit-border-radius: 0; /* Safari 3-4, iOS 1-3.2, Android 1.6- */
   -moz-border-radius: 0; /* Firefox 1-3.6 */
   border-radius: 0; /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
-  color: white;
-  background: #22737d; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(
-    #22737d,
-    #0e5f69
-  ); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#22737d, #0e5f69); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(
-    #22737d,
-    #0e5f69
-  ); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#22737d, #0e5f69); /* Standard syntax */
-
-  &:active {
-    color: white;
-  }
-
-  &:focus {
-    color: white;
-  }
 
   ::v-deep option {
     color: black;
   }
 
   &::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: $colour-placeholder;
     opacity: 1; /* Firefox */
-  }
-
-  &:-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: $colour-placeholder;
-  }
-
-  &::-ms-input-placeholder {
-    /* Microsoft Edge */
-    color: $colour-placeholder;
   }
 }
 
@@ -482,11 +442,7 @@ export default {
   width: 100%;
   border-radius: 0;
   //@include button-variant(#f9a33f, #f9a33f, #958751);
-  color: white;
   border: 0;
-  border-bottom: 3px solid #155e67;
-  background-color: #f9a33f;
-  border-color: #f9a33f;
   height: calc(1.5em + 0.75rem + 2px);
 }
 
@@ -505,7 +461,6 @@ export default {
 }
 
 .business-list-container__result-count {
-  font-family: 'Patua One', serif;
   font-size: 1rem;
   flex: 1;
 }
