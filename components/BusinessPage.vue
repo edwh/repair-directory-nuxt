@@ -10,23 +10,21 @@
         </div>
       </client-only>
       <div class="sidebar__content mb-2 p-2 rd-sidebar-background">
-        <p class="sidebar__copy m-0 mb-3">
-          <span class="rd-primary-font">
-            {{ tagline }}
-          </span>
-          <client-only>
-            <b-btn
-              v-if="!embedded"
-              variant="link"
-              class="more-info"
-              @click="showMoreInfo"
-            >
-              (More Info
-              <v-icon name="question-circle" scale="0.75" />)
-            </b-btn>
-          </client-only>
+        <div class="sidebar__copy m-0 mb-3 d-flex">
+          <div class="d-flex flex-column justify-content-center">
+            <span class="rd-primary-font">
+              {{ tagline }}
+            </span>
+          </div>
+          <div class="d-flex flex-column justify-content-center">
+            <client-only>
+              <!--            eslint-disable-->
+              <b-btn v-if="!embedded" variant="link" class="more-info rd-more-info" @click="showMoreInfo">(More Info <v-icon name="question-circle" scale="0.75" />)</b-btn>
+              <!--            eslint-enable-->
+            </client-only>
+          </div>
           <MoreInfoModal ref="moreinfomodal" />
-        </p>
+        </div>
         <div class="formlayout rd-secondary-font">
           <div class="left">
             <label for="location">{{ $t('whereAreYouLooking') }}</label>
@@ -57,7 +55,7 @@
           </div>
           <div class="right align-self-end d-flex justify-content-end">
             <b-btn
-              class="sidebar__button font-weight-bold rd-sidebar-button mb-2"
+              class="sidebar__button font-weight-bold rd-sidebar-button"
               variant="warning"
               squared
               @click="search"
@@ -108,7 +106,7 @@
           >
             {{ $t('shareResults') }}
             <client-only>
-              <v-icon name="share" />
+              <v-icon name="share" class="rd-icon-white" />
             </client-only>
           </b-btn>
         </div>

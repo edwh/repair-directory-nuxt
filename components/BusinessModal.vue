@@ -9,7 +9,9 @@
       hide-backdrop
     >
       <template slot="modal-header" slot-scope="{ cancel }">
-        <div class="large title w-100 rd-secondary-font">
+        <div
+          class="large title w-100 rd-secondary-font rd-more-info-modal-header"
+        >
           <b-btn variant="link" class="float-right clickme" @click="cancel">
             <v-icon name="times" class="text-white" scale="2" />
           </b-btn>

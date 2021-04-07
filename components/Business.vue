@@ -14,7 +14,7 @@
   >
     <div class="business" @click="select">
       <div ref="heading" class="business__heading">
-        <h2 class="name">
+        <h2 class="name rd-business-heading-color">
           {{ business.name }}
         </h2>
         <div
@@ -70,7 +70,7 @@
       </div>
     </div>
     <div class="d-flex justify-content-end">
-      <b-btn variant="link" class="moreinfo" @click="select">
+      <b-btn variant="link" class="moreinfo rd-view-more-info" @click="select">
         View more info
       </b-btn>
     </div>

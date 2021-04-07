@@ -2,6 +2,10 @@
   <div>
     <component :is="'style'" v-if="styles">
       <!--      eslint-disable-->
+      body {
+        color: {{ styles.bodyColor }} !important;
+      }
+
       .rd-primary-font {
         font-family: {{ styles.primaryFont }} !important;
       }
@@ -32,6 +36,30 @@
       .rd-sidebar input::placeholder, .rd-sidebar select::placeholder {
         color: {{ styles.sidebarInputPlaceholderColor }};
       }
+
+      .fa-icon:not(.rd-icon-white) {
+        color: {{ styles.iconColor }} !important;
+      }
+
+      .rd-more-info, .rd-more-info .fa-icon {
+        color: {{ styles.moreInfoColor }} !important;
+      }
+
+      .rd-view-more-info {
+        color: {{ styles.viewMoreInfoColor }} !important;
+      }
+
+      .rd-more-info-modal-header {
+        background-color: {{ styles.moreInfoModalHeader }} !important;
+      }
+
+      .rd-more-info-modal-header .fa-icon {
+        color: white !important;
+      }
+
+      .rd-business-heading-color {
+        color: {{ styles.businessHeadingColor }} !important;
+      }
       <!--      eslint-enable-->
     </component>
     <Nuxt />
@@ -52,6 +80,7 @@ export default {
         ret = Object.assign(
           // Default values
           {
+            bodyColor: 'black',
             primaryFont: 'Patua One',
             secondaryFont: '"Open Sans", sans-serif',
             listPercentageColor: '#f9a543',
@@ -65,13 +94,20 @@ export default {
             sidebarInputActiveColor: 'white',
             sidebarInputFocusColor: 'white',
             sidebarInputPlaceholderColor: 'lightgrey',
+            businessHeadingColor: '#606060',
+            iconColor: '#0094a7',
+            moreInfoColor: '#f9a543',
+            viewMoreInfoColor: '#007bff',
+            moreInfoModalHeader: '#0094a7',
           },
           styles ? JSON.parse(styles) : {}
-          // REW values
+          // ,
+          // // REW values
           // {
+          //   bodyColor: '#15181d',
           //   primaryFont: 'Poppins',
           //   secondaryFont: 'Poppins',
-          //   listPercentageColor: '#01D66D',
+          //   listPercentageColor: '#027602',
           //   sidebarBackground: '',
           //   sidebarBackgroundColor: '#017602',
           //   sidebarButtonColor: '#15181D',
@@ -81,10 +117,13 @@ export default {
           //   sidebarInputActiveColor: 'black',
           //   sidebarInputFocusColor: 'black',
           //   sidebarInputPlaceholderColor: 'black',
+          //   businessHeadingColor: '#15181d',
+          //   iconColor: '#027602',
+          //   moreInfoColor: '#ffffff',
+          //   viewMoreInfoColor: '#027602',
+          //   moreInfoModalHeader: '#027602',
           // }
         )
-
-        console.log('Styles ', JSON.stringify(ret))
       } catch (e) {
         console.error('Styles parse error', e, styles)
       }
