@@ -100,7 +100,7 @@ Vue.mixin({
         },
       ]
 
-      const retImage = image || require('~/static/logo.png')
+      const retImage = image || require('~/static/share.png')
 
       meta.push({
         hid: 'og:image',
