@@ -10,6 +10,10 @@
         font-family: {{ styles.primaryFont }} !important;
       }
 
+      .modal-footer {
+        font-family: {{ styles.primaryFont }} !important;
+      }
+
       .rd-secondary-font {
         font-family: {{ styles.secondaryFont }} !important;
       }
