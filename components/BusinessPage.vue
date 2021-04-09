@@ -66,9 +66,7 @@
       </div>
       <div v-if="addbusiness" class="text-center bg-white p-2 font-weight-bold">
         Help us grow!
-        <a v-if="addbusiness" :href="addbusiness" target="_blank">
-          Submit a business
-        </a>
+        <a :href="addbusiness" target="_blank"> Submit a business </a>
       </div>
       <div class="business-list-container pl-md-2 pr-md-2 d-flex flex-wrap">
         <div
