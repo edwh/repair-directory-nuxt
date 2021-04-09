@@ -97,7 +97,7 @@
           </div>
           <b-btn
             v-if="businessesInBounds.length"
-            class="share-link"
+            class="share-link rd-primary-font"
             variant="link"
             @click="share"
           >
