@@ -410,6 +410,7 @@ export default {
         font-size: 0.8rem;
         cursor: pointer;
         color: $colour-link;
+        white-space: nowrap;
       }
     }
   }
