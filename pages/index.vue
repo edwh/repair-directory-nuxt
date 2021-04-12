@@ -4,13 +4,12 @@
 <script>
 import BusinessPage from '@/components/BusinessPage'
 import page from '@/mixins/page'
+import { TAGLINE_GENERIC } from '@/regions'
 
 export default {
   components: { BusinessPage },
   mixins: [page],
   async fetch() {
-    this.setConfig()
-
     // We have been asked to show a business page.  This is passed via a query parameter so that we can do this
     // when embedded.  The url is created inside MapBusiness.
     this.id = this.$route.query.rd_business
@@ -49,7 +48,15 @@ export default {
     }
   },
   head() {
-    return this.buildHead('Repair Directory', this.tagline)
+    const business = this.id
+      ? this.$store.getters['businesses/get'](this.id)
+      : null
+
+    if (business) {
+      return this.buildHead(business.name, business.description)
+    } else {
+      return this.buildHead('Repair Directory', TAGLINE_GENERIC)
+    }
   },
 }
 </script>

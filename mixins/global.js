@@ -1,11 +1,6 @@
 // Global mixin so that every component can access the logged in state and user.
 import Vue from 'vue'
-import {
-  REGION_LONDON,
-  REGION_WALES,
-  TAGLINE_LONDON,
-  TAGLINE_WALES,
-} from '@/regions'
+import { REGION_WALES, TAGLINE_LONDON, TAGLINE_WALES } from '@/regions'
 
 Vue.mixin({
   computed: {
@@ -105,7 +100,7 @@ Vue.mixin({
         },
       ]
 
-      const retImage = image || require('~/static/logo.png')
+      const retImage = image || require('~/static/share.png')
 
       meta.push({
         hid: 'og:image',

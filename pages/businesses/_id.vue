@@ -10,8 +10,6 @@ export default {
   components: { BusinessPage },
   mixins: [page],
   async fetch() {
-    this.setConfig()
-
     // For SSR we want to have all the businesses loaded.  The business selected will pop up in a modal.
     //
     // Until the server has a concept of regions, we'll just search with a big radius, which will include anything in

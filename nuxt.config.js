@@ -20,7 +20,12 @@ export default {
       { name: 'apple-mobile-web-app-title', content: 'Repair Directory' },
       { name: 'og:site_name', content: 'Repair Directory' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+
+      // We need to load this font as it is used by REW via the rd_style configuration.
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins' }]
+    ,
   },
 
   css: ['@/assets/css/global.scss'],

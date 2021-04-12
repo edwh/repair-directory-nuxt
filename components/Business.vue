@@ -14,14 +14,16 @@
   >
     <div class="business" @click="select">
       <div ref="heading" class="business__heading">
-        <h2 class="name">
+        <h2 class="name rd-business-heading-color">
           {{ business.name }}
         </h2>
         <div
           v-if="business.positiveReviewPc"
           class="business__positive-review-percentage"
         >
-          <h2 class="percentage font-weight-bold">
+          <h2
+            class="percentage font-weight-bold rd-primary-font rd-list-percentage-color"
+          >
             {{ business.positiveReviewPc }}%
           </h2>
           <span>{{ $t('positiveReviews') }}</span>
@@ -68,7 +70,7 @@
       </div>
     </div>
     <div class="d-flex justify-content-end">
-      <b-btn variant="link" class="moreinfo" @click="select">
+      <b-btn variant="link" class="moreinfo rd-view-more-info" @click="select">
         View more info
       </b-btn>
     </div>
@@ -134,14 +136,11 @@ export default {
 
   .percentage {
     display: inline-block;
-    font-family: 'Patua One', serif;
-    color: #f9a543;
     margin: 0 0.5rem 0 0;
   }
 
   .name {
     color: #606060;
-    font-family: 'Patua One', serif;
     margin-top: 0;
     font-size: 1.8rem;
   }
@@ -169,7 +168,6 @@ export default {
   background-color: white;
 
   &__inner {
-    font-family: 'Patua One', 'serif';
     color: #606060;
     padding: 0.5rem;
     width: 100%;
