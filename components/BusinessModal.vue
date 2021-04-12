@@ -179,7 +179,9 @@ export default {
             '&rd_language=' +
             encodeURIComponent(this.language) +
             '&rd_parenturl=' +
-            encodeURIComponent(this.domain)
+            encodeURIComponent(this.domain) +
+            '&rd_name=' +
+            encodeURIComponent(this.business.name)
         : null
     },
     completeAddress() {
