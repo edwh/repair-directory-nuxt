@@ -64,14 +64,9 @@
           </div>
         </div>
       </div>
-      <div v-if="showSubmit" class="text-center bg-white p-2 font-weight-bold">
+      <div v-if="addbusiness" class="text-center bg-white p-2 font-weight-bold">
         Help us grow!
-        <a
-          href="https://therestartproject.org/suggest-a-business-for-the-repair-directory/"
-          target="_blank"
-        >
-          Submit a business
-        </a>
+        <a :href="addbusiness" target="_blank"> Submit a business </a>
       </div>
       <div class="business-list-container pl-md-2 pr-md-2 d-flex flex-wrap">
         <div
@@ -147,7 +142,6 @@ import {
   REGION_WALES,
   SEARCH_HINT_LONDON,
   SEARCH_HINT_WALES,
-  showSubmitBusiness,
 } from '@/regions'
 import BusinessModal from '@/components/BusinessModal'
 import ShareModal from '@/components/ShareModal'
@@ -299,8 +293,8 @@ export default {
         encodeURIComponent(this.domain)
       )
     },
-    showSubmit() {
-      return showSubmitBusiness(this.region)
+    addbusiness() {
+      return this.$store.getters['config/get']('addbusiness')
     },
   },
   mounted() {

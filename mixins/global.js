@@ -59,6 +59,11 @@ Vue.mixin({
         key: 'language',
         value: this.$route.query.rd_language || null,
       })
+
+      await this.$store.dispatch('config/set', {
+        key: 'addbusiness',
+        value: this.$route.query.rd_addbusiness || null,
+      })
     },
     waitForRef(name, callback) {
       // When a component is conditional using a v-if, it sometimes takes more than one tick for it to appear.  So
