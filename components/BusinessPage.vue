@@ -500,6 +500,5 @@ export default {
 .share-link {
   color: white;
   box-shadow: none;
-  font-weight: bold;
 }
 </style>

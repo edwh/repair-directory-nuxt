@@ -1,6 +1,11 @@
 // Global mixin so that every component can access the logged in state and user.
 import Vue from 'vue'
-import { REGION_WALES, TAGLINE_LONDON, TAGLINE_WALES } from '@/regions'
+import {
+  REGION_LONDON,
+  REGION_WALES,
+  TAGLINE_LONDON,
+  TAGLINE_WALES,
+} from '@/regions'
 
 Vue.mixin({
   computed: {
