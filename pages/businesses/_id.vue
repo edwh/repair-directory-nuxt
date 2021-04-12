@@ -30,6 +30,9 @@ export default {
       return this.id ? this.$store.getters['businesses/get'](this.id) : null
     },
   },
+  created() {
+    this.id = this.$route.params.id
+  },
   head() {
     if (this.business) {
       return this.buildHead(this.business.name, this.business.description)
