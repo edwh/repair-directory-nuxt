@@ -3,10 +3,11 @@
     id="shareModal"
     v-model="showModal"
     :title="'Share ' + name"
+    title-class="rd-primary-font"
     size="lg"
   >
     <template slot="default">
-      <div class="buttons">
+      <div class="buttons rd-primary-font">
         <div class="d-flex justify-content-between flex-wrap mt-3">
           <social-sharing
             :url="url"
@@ -15,8 +16,12 @@
             inline-template
           >
             <network network="facebook">
-              <b-btn variant="secondary" size="lg" class="facebook mt-1 mb-1">
-                <v-icon name="brands/facebook" /> Facebook
+              <b-btn
+                variant="secondary"
+                size="lg"
+                class="facebook mt-1 mb-1 text-nowrap"
+              >
+                <v-icon name="brands/facebook" class="rd-icon-white" /> Facebook
               </b-btn>
             </network>
           </social-sharing>
@@ -27,8 +32,12 @@
             inline-template
           >
             <network network="twitter">
-              <b-btn variant="secondary" size="lg" class="twitter mt-1 mb-1">
-                <v-icon name="brands/twitter" /> Twitter
+              <b-btn
+                variant="secondary"
+                size="lg"
+                class="twitter mt-1 mb-1 text-nowrap"
+              >
+                <v-icon name="brands/twitter" class="rd-icon-white" /> Twitter
               </b-btn>
             </network>
           </social-sharing>
@@ -39,8 +48,12 @@
             inline-template
           >
             <network network="email">
-              <b-btn variant="primary" size="lg" class="gmail mt-1 mb-1">
-                <v-icon name="envelope" /> Email
+              <b-btn
+                variant="primary"
+                size="lg"
+                class="gmail mt-1 mb-1 text-nowrap"
+              >
+                <v-icon name="envelope" class="rd-icon-white" /> Email
               </b-btn>
             </network>
           </social-sharing>
@@ -51,15 +64,24 @@
             inline-template
           >
             <network network="whatsapp">
-              <b-btn variant="primary" size="lg" class="whatsapp mt-1 mb-1">
-                <v-icon name="brands/whatsapp" /> Whatsapp
+              <b-btn
+                variant="primary"
+                size="lg"
+                class="whatsapp mt-1 mb-1 text-nowrap"
+              >
+                <v-icon name="brands/whatsapp" class="rd-icon-white" /> Whatsapp
               </b-btn>
             </network>
           </social-sharing>
           <div ref="container">
-            <b-btn variant="info" size="lg" class="mt-1 mb-1" @click="doCopy">
-              <v-icon v-if="copied" name="check" />
-              <v-icon v-else name="copy" /> Copy
+            <b-btn
+              variant="info"
+              size="lg"
+              class="mt-1 mb-1 text-nowrap"
+              @click="doCopy"
+            >
+              <v-icon v-if="copied" name="check" class="rd-icon-white" />
+              <v-icon v-else name="copy" class="rd-icon-white" /> Copy
             </b-btn>
           </div>
         </div>

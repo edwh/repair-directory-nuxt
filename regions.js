@@ -30,7 +30,3 @@ export const BOUNDS_WALES = {
     lng: -2.6032384951585485,
   },
 }
-
-export function showSubmitBusiness(region) {
-  return region === REGION_LONDON
-}

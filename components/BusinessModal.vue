@@ -9,12 +9,14 @@
       hide-backdrop
     >
       <template slot="modal-header" slot-scope="{ cancel }">
-        <div class="large title w-100 opensans">
+        <div
+          class="large title w-100 rd-secondary-font rd-more-info-modal-header"
+        >
           <b-btn variant="link" class="float-right clickme" @click="cancel">
             <v-icon name="times" class="text-white" scale="2" />
           </b-btn>
-          <h1 class="patua m-0">{{ business.name }}</h1>
-          <p v-if="business.positiveReviewPc" class="patua">
+          <h1 class="m-0 rd-primary-font">{{ business.name }}</h1>
+          <p v-if="business.positiveReviewPc" class="rd-primary-font">
             <client-only>
               <star-rating
                 v-model="business.averageScore"
@@ -50,7 +52,7 @@
           </b-btn>
         </div>
       </template>
-      <div class="opensans">
+      <div class="rd-secondary-font">
         <div class="mt-1">
           <b-badge
             v-for="category in business.categories"
@@ -177,7 +179,9 @@ export default {
             '&rd_language=' +
             encodeURIComponent(this.language) +
             '&rd_parenturl=' +
-            encodeURIComponent(this.domain)
+            encodeURIComponent(this.domain) +
+            '&rd_name=' +
+            encodeURIComponent(this.business.name)
         : null
     },
     completeAddress() {
@@ -283,14 +287,6 @@ p {
 
 a {
   color: $colour-link2;
-}
-
-.opensans {
-  font-family: 'Open Sans', sans-serif;
-}
-
-.patua {
-  font-family: 'Patua One', serif;
 }
 
 .description {
