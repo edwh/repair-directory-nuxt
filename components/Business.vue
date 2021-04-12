@@ -14,7 +14,7 @@
   >
     <div class="business" @click="select">
       <div ref="heading" class="business__heading">
-        <h2 class="name rd-business-heading-color">
+        <h2 class="name rd-business-heading-color rd-primary-font">
           {{ business.name }}
         </h2>
         <div

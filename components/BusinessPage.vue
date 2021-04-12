@@ -9,7 +9,7 @@
           <b-img src="/logo.png" class="logo" />
         </div>
       </client-only>
-      <div class="sidebar__content mb-2 p-2 rd-sidebar-background">
+      <div class="sidebar__content p-2 rd-sidebar-background">
         <div class="sidebar__copy m-0 mb-3 d-flex">
           <div class="d-flex flex-column justify-content-center">
             <span class="rd-primary-font">
@@ -432,7 +432,7 @@ export default {
   grid-template-columns: 1fr 0px;
 
   @include media-breakpoint-up(md) {
-    grid-template-columns: 1.5fr 3fr;
+    grid-template-columns: 1.8fr 3fr;
   }
 }
 
