@@ -88,7 +88,9 @@
       </div>
     </template>
     <template slot="modal-footer">
-      <b-button variant="secondary" @click="close"> $t('close') }} </b-button>
+      <b-button variant="secondary" @click="close">
+        {{ $t('close') }}
+      </b-button>
     </template>
   </b-modal>
 </template>

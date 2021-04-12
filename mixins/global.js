@@ -25,7 +25,7 @@ Vue.mixin({
       return this.$store.getters['config/get']('domain')
     },
     language() {
-      return this.$store.getters['config/get']('language')
+      return this.$store.getters['config/get']('language') || 'en'
     },
   },
   methods: {
