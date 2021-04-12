@@ -38,5 +38,10 @@ export const actions = {
       key: 'styles',
       value: route.query.rd_style,
     })
+
+    await store.dispatch('config/set', {
+      key: 'addbusiness',
+      value: route.query.rd_addbusiness || null,
+    })
   },
 }

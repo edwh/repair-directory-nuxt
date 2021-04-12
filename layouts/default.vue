@@ -78,7 +78,6 @@ export default {
       // An example:
       // http://localhost:3000/?rd_style=%7B%22primaryFont%22%3A%22Poppins%22,%22secondaryFont%22%3A%22Poppins%22,%22listPercentageColor%22%3A%22%2301D66D%22,%22sidebarBackgroundColor%22%3A%22%23017602%22,%22sidebarBackground%22%3A%22%22,%22sidebarButtonColor%22%3A%22%2315181D%22,%22sidebarButtonBackgroundColor%22%3A%22%2301D66D%22,%22sidebarInputColor%22%3A%22black%22,%22sidebarInputBackgroundColor%22%3A%22white%22,%22sidebarInputActiveColor%22%3A%22black%22,%22sidebarInputFocusColor%22%3A%22black%22,%22sidebarInputPlaceholderColor%22%3A%22black%22%7D
       const styles = this.$store.getters['config/get']('styles')
-      console.log('Got styles', styles)
       let ret = null
 
       try {
