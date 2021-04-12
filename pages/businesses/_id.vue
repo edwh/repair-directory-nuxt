@@ -3,13 +3,14 @@
 </template>
 <script>
 import BusinessPage from '@/components/BusinessPage'
-import { TAGLINE_GENERIC } from '@/regions'
 import page from '@/mixins/page'
 
 export default {
   components: { BusinessPage },
   mixins: [page],
   async fetch() {
+    this.setConfig()
+
     // For SSR we want to have all the businesses loaded.  The business selected will pop up in a modal.
     //
     // Until the server has a concept of regions, we'll just search with a big radius, which will include anything in
@@ -30,14 +31,11 @@ export default {
       return this.id ? this.$store.getters['businesses/get'](this.id) : null
     },
   },
-  created() {
-    this.id = this.$route.params.id
-  },
   head() {
     if (this.business) {
       return this.buildHead(this.business.name, this.business.description)
     } else {
-      return this.buildHead('Repair Directory', TAGLINE_GENERIC)
+      return this.buildHead('Repair Directory', this.$t('findBusinessGeneric'))
     }
   },
 }

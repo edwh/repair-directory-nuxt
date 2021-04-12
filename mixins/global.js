@@ -1,19 +1,18 @@
 // Global mixin so that every component can access the logged in state and user.
 import Vue from 'vue'
-import { REGION_WALES, TAGLINE_LONDON, TAGLINE_WALES } from '@/regions'
+import { REGION_WALES } from '@/regions'
 
 Vue.mixin({
   computed: {
     tagline() {
       let ret
-
       switch (this.region) {
         case REGION_WALES: {
-          ret = TAGLINE_WALES
+          ret = this.$t('findBusinessWales')
           break
         }
         default: {
-          ret = TAGLINE_LONDON
+          ret = this.$t('findBusinessLondon')
         }
       }
 
@@ -26,7 +25,8 @@ Vue.mixin({
       return this.$store.getters['config/get']('domain')
     },
     language() {
-      return this.$store.getters['config/get']('language')
+      // Need to set a default as we will use this in the share links.
+      return this.$store.getters['config/get']('language') || 'en'
     },
   },
   methods: {

@@ -19,7 +19,7 @@
           <div class="d-flex flex-column justify-content-center">
             <client-only>
               <!--            eslint-disable-->
-              <b-btn v-if="!embedded" variant="link" class="more-info rd-more-info" @click="showMoreInfo">(More Info <v-icon name="question-circle" scale="0.75" />)</b-btn>
+              <b-btn v-if="!embedded" variant="link" class="more-info rd-more-info" @click="showMoreInfo">({{ $t('moreInfo') }} <v-icon name="question-circle" scale="0.75" />)</b-btn>
               <!--            eslint-enable-->
             </client-only>
           </div>
@@ -31,12 +31,12 @@
             <b-input
               id="location"
               v-model="location"
-              placeholder="Enter a postcode or area"
+              :placeholder="$t('enterAPostcodeOrArea')"
               class="sidebar__input"
             />
           </div>
           <div class="right">
-            <label for="radius">Search radius?</label>
+            <label for="radius">{{ $t('searchRadius') }}</label>
             <b-select
               id="radius"
               v-model="radius"
@@ -45,7 +45,7 @@
             />
           </div>
           <div class="left">
-            <label for="category">What do you need to fix?</label>
+            <label for="category">{{ $t('whatDoYouNeedToFix') }}</label>
             <b-select
               id="category"
               v-model="category"
@@ -59,7 +59,7 @@
               variant="warning"
               squared
               @click="search"
-              >Search</b-btn
+              >{{ $t('search') }}</b-btn
             >
           </div>
         </div>
@@ -91,7 +91,7 @@
             v-else
             class="business-list-container__result-count rd-primary-font"
           >
-            {{ businessesInBounds.length }} results in your area
+            {{ businessesInBounds.length }} {{ $t('resultsInYourArea') }}
           </div>
           <b-btn
             v-if="businessesInBounds.length"
@@ -140,8 +140,6 @@ import BusinessList from '@/components/BusinessList'
 import {
   BOUNDS_LONDON,
   BOUNDS_WALES,
-  DISTANCES_LONDON,
-  DISTANCES_WALES,
   REGION_WALES,
   SEARCH_HINT_LONDON,
   SEARCH_HINT_WALES,
@@ -211,16 +209,16 @@ export default {
       return ret
     },
     categoryOptions() {
+      // We want to translate the category text.
       const ret = [
         {
           value: null,
-          text: 'Show all product categories',
+          text: this.$t('showAllProductCategories'),
         },
       ]
 
       if (this.categories) {
         this.categories.forEach((c) => {
-          // We want to translate the category text.
           ret.push({
             value: c,
             text: this.$t(c),
@@ -228,18 +226,68 @@ export default {
         })
       }
 
-      return ret
+      return ret.sort((a, b) => {
+        return a.text.localeCompare(b.text)
+      })
     },
     radiusOptions() {
       let ret = null
 
+      // We need to translate what is returned.  We're hardcoding the singular/plural translation - we could do better
+      // than that but we don't have many occurrences of that problem.
       switch (this.region) {
         case REGION_WALES: {
-          ret = DISTANCES_WALES
+          ret = [
+            {
+              value: 3,
+              text: '3 ' + this.$t('miles'),
+            },
+            {
+              value: 5,
+              text: '5 ' + this.$t('miles'),
+            },
+            {
+              value: 10,
+              text: '10 ' + this.$t('miles'),
+            },
+            {
+              value: 20,
+              text: '20 ' + this.$t('miles'),
+            },
+            {
+              value: 30,
+              text: '30 ' + this.$t('miles'),
+            },
+            {
+              value: 200,
+              text: this.$t('allWales'),
+            },
+          ]
           break
         }
         default: {
-          ret = DISTANCES_LONDON
+          ret = [
+            {
+              value: 1,
+              text: '1 ' + this.$t('mile'),
+            },
+            {
+              value: 2,
+              text: '2 ' + this.$t('miles'),
+            },
+            {
+              value: 5,
+              text: '5 ' + this.$t('miles'),
+            },
+            {
+              value: 10,
+              text: '10 ' + this.$t('miles'),
+            },
+            {
+              value: 18,
+              text: this.$t('allLondon'),
+            },
+          ]
           break
         }
       }
@@ -467,7 +515,7 @@ export default {
   grid-row-gap: 10px;
 
   @include media-breakpoint-up(xl) {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 2fr;
     grid-template-rows: auto auto;
     grid-row-gap: 10px;
   }

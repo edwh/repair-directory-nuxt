@@ -71,7 +71,7 @@
     </div>
     <div class="d-flex justify-content-end">
       <b-btn variant="link" class="moreinfo rd-view-more-info" @click="select">
-        View more info
+        {{ $t('viewMoreInfo') }}
       </b-btn>
     </div>
   </div>

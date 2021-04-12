@@ -63,6 +63,14 @@ export default {
     defaultLocale: 'en',
     fallbackLocale: 'en',
 
+    vueI18n: {
+      fallbackLocale: 'en',
+
+      // Suppress translation warnings because we translate categories from the server, which are in English and
+      // therefore may not appear in our translation file.
+      silentTranslationWarn: true,
+    },
+
     // We are not translating the URLs themselves, e.g. '/business'
     strategy: 'no_prefix',
 
