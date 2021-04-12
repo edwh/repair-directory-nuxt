@@ -70,13 +70,9 @@ Vue.mixin({
         },
       ]
 
-      const retImage =
-        image ||
-        location.protocol +
-          '//' +
-          location.hostname +
-          (location.port ? ':' + location.port : '') +
-          '/share.png'
+      // On the server we need to return a full URL for Twitter preview to work.
+      const host = this.$store.getters['config/get']('hostname')
+      const retImage = image || 'https://' + host + '/share.png'
 
       meta.push({
         hid: 'og:image',

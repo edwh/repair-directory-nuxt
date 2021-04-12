@@ -4,7 +4,7 @@ import { REGION_LONDON } from '@/regions'
 export const strict = false
 
 export const actions = {
-  async nuxtServerInit({ commit }, { store, route, app }) {
+  async nuxtServerInit({ commit }, { store, route, app, req }) {
     // We need to use this hook to set parameters in the store before SSR occurs.
     //
     // Check if we've been passed some key info in URL parameters.  If so, record that in the store so that
@@ -43,5 +43,14 @@ export const actions = {
       key: 'addbusiness',
       value: route.query.rd_addbusiness || null,
     })
+
+    if (req) {
+      // Save the hostname - we need it to construct some full URLs.
+      console.log('Save host', req.headers.host)
+      await store.dispatch('config/set', {
+        key: 'hostname',
+        value: req.headers.host,
+      })
+    }
   },
 }
