@@ -87,7 +87,3 @@ export const DISTANCES_WALES = [
     text: 'All Wales',
   },
 ]
-
-export function showSubmitBusiness(region) {
-  return region === REGION_LONDON
-}
