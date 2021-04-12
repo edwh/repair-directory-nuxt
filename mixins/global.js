@@ -25,6 +25,7 @@ Vue.mixin({
       return this.$store.getters['config/get']('domain')
     },
     language() {
+      // Need to set a default as we will use this in the share links.
       return this.$store.getters['config/get']('language') || 'en'
     },
   },
