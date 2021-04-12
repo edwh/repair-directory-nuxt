@@ -26,7 +26,7 @@
           <MoreInfoModal ref="moreinfomodal" />
         </div>
         <div class="formlayout rd-secondary-font">
-          <div class="left">
+          <div class="left d-flex flex-column justify-content-between">
             <label for="location">{{ $t('whereAreYouLooking') }}</label>
             <b-input
               id="location"
@@ -35,7 +35,7 @@
               class="sidebar__input"
             />
           </div>
-          <div class="right">
+          <div class="right d-flex flex-column justify-content-between">
             <label for="radius">{{ $t('searchRadius') }}</label>
             <b-select
               id="radius"
