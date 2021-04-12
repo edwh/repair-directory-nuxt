@@ -87,7 +87,7 @@ export default {
           {
             bodyColor: 'black',
             primaryFont: 'Patua One',
-            secondaryFont: '"Open Sans", sans-serif',
+            secondaryFont: "'Open Sans', sans-serif",
             listPercentageColor: '#f9a543',
             sidebarBackgroundColor: 'transparent',
             sidebarBackground:
