@@ -35,7 +35,7 @@
               target="_blank"
               rel="noopener"
               class="small"
-              >(source)</a
+              >({{ $t('source') }})</a
             >
           </p>
           <p v-if="business.description" class="m-0 description">
@@ -45,9 +45,9 @@
       </template>
       <template slot="modal-footer" slot-scope="{ ok, cancel }">
         <div class="d-flex justify-content-between w-100">
-          <b-btn variant="light" @click="cancel"> Close </b-btn>
+          <b-btn variant="light" @click="cancel"> {{ $t('close') }} </b-btn>
           <b-btn variant="link" class="share" @click="share">
-            Share business
+            {{ $t('shareBusiness') }}
             <v-icon name="share" />
           </b-btn>
         </div>
@@ -62,7 +62,7 @@
             class="mb-2 mr-2 category text-wrap"
             pill
           >
-            {{ category }}
+            {{ $t(category) }}
           </b-badge>
         </div>
 
@@ -106,7 +106,7 @@
 
         <p v-if="business.warrantyOffered">
           <v-icon name="calendar-check" class="fa-fw icon" />
-          <span>Warranty: {{ business.warranty }}</span>
+          <span>{{ $t('warranty') }}: {{ business.warranty }}</span>
         </p>
 
         <p v-if="business.qualifications">
@@ -116,7 +116,7 @@
 
         <p>
           <v-icon name="calendar" class="fa-fw icon" />
-          <span>Last updated: {{ updated }}</span>
+          <span>{{ $t('lastUpdated') }}: {{ updated }}</span>
         </p>
       </div>
     </b-modal>
