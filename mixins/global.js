@@ -70,9 +70,8 @@ Vue.mixin({
         },
       ]
 
-      // On the server we need to return a full URL for Twitter preview to work.
-      const host = this.$store.getters['config/get']('hostname')
-      const retImage = image || 'https://' + host + '/share.png'
+      // On the server we need to return a full URL for Twitter preview to work.  Use our own domain.
+      const retImage = image || 'https://map.restarters.net/share.png'
 
       meta.push({
         hid: 'og:image',
