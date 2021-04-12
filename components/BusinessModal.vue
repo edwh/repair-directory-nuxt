@@ -35,7 +35,7 @@
               target="_blank"
               rel="noopener"
               class="small"
-              >({{ $t('source') }})</a
+              >(source)</a
             >
           </p>
           <p v-if="business.description" class="m-0 description">
@@ -45,9 +45,9 @@
       </template>
       <template slot="modal-footer" slot-scope="{ ok, cancel }">
         <div class="d-flex justify-content-between w-100">
-          <b-btn variant="light" @click="cancel"> {{ $t('close') }} </b-btn>
+          <b-btn variant="light" @click="cancel"> Close </b-btn>
           <b-btn variant="link" class="share" @click="share">
-            {{ $t('shareBusiness') }}
+            Share business
             <v-icon name="share" />
           </b-btn>
         </div>
@@ -106,7 +106,7 @@
 
         <p v-if="business.warrantyOffered">
           <v-icon name="calendar-check" class="fa-fw icon" />
-          <span>{{ $t('warranty') }}: {{ business.warranty }}</span>
+          <span>Warranty: {{ business.warranty }}</span>
         </p>
 
         <p v-if="business.qualifications">
@@ -116,7 +116,7 @@
 
         <p>
           <v-icon name="calendar" class="fa-fw icon" />
-          <span>{{ $t('lastUpdated') }}: {{ updated }}</span>
+          <span>Last updated: {{ updated }}</span>
         </p>
       </div>
     </b-modal>
@@ -179,9 +179,7 @@ export default {
             '&rd_language=' +
             encodeURIComponent(this.language) +
             '&rd_parenturl=' +
-            encodeURIComponent(this.domain) +
-            '&rd_name=' +
-            encodeURIComponent(this.business.name)
+            encodeURIComponent(this.domain)
         : null
     },
     completeAddress() {

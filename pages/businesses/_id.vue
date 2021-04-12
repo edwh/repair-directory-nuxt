@@ -3,6 +3,7 @@
 </template>
 <script>
 import BusinessPage from '@/components/BusinessPage'
+import { TAGLINE_GENERIC } from '@/regions'
 import page from '@/mixins/page'
 
 export default {
@@ -33,7 +34,7 @@ export default {
     if (this.business) {
       return this.buildHead(this.business.name, this.business.description)
     } else {
-      return this.buildHead('Repair Directory', this.$t('findBusinessGeneric'))
+      return this.buildHead('Repair Directory', TAGLINE_GENERIC)
     }
   },
 }

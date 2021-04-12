@@ -52,7 +52,7 @@
     </p>
     <template slot="modal-footer" slot-scope="{ cancel }">
       <div class="d-flex justify-content-end w-100">
-        <b-btn variant="light" @click="cancel"> $t('close') }} </b-btn>
+        <b-btn variant="light" @click="cancel"> Close </b-btn>
       </div>
     </template>
   </b-modal>

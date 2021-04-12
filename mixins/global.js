@@ -1,18 +1,19 @@
 // Global mixin so that every component can access the logged in state and user.
 import Vue from 'vue'
-import { REGION_WALES } from '@/regions'
+import { REGION_WALES, TAGLINE_LONDON, TAGLINE_WALES } from '@/regions'
 
 Vue.mixin({
   computed: {
     tagline() {
       let ret
+
       switch (this.region) {
         case REGION_WALES: {
-          ret = this.$t('findBusinessWales')
+          ret = TAGLINE_WALES
           break
         }
         default: {
-          ret = this.$t('findBusinessLondon')
+          ret = TAGLINE_LONDON
         }
       }
 
@@ -25,7 +26,6 @@ Vue.mixin({
       return this.$store.getters['config/get']('domain')
     },
     language() {
-      // Need to set a default as we will use this in the share links.
       return this.$store.getters['config/get']('language') || 'en'
     },
   },
@@ -70,8 +70,7 @@ Vue.mixin({
         },
       ]
 
-      // On the server we need to return a full URL for Twitter preview to work.  Use our own domain.
-      const retImage = image || 'https://map.restarters.net/share.png'
+      const retImage = image || require('~/static/share.png')
 
       meta.push({
         hid: 'og:image',

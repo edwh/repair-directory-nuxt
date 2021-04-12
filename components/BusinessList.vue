@@ -46,7 +46,6 @@ export default {
 @import 'bootstrap/scss/mixins/_breakpoints';
 
 .business-list {
-  color: black;
   list-style: none;
   margin-bottom: 0;
   padding: 0;
