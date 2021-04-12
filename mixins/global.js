@@ -1,12 +1,11 @@
 // Global mixin so that every component can access the logged in state and user.
 import Vue from 'vue'
-import { REGION_LONDON, REGION_WALES } from '@/regions'
+import { REGION_WALES } from '@/regions'
 
 Vue.mixin({
   computed: {
     tagline() {
       let ret
-
       switch (this.region) {
         case REGION_WALES: {
           ret = this.$t('findBusinessWales')
@@ -30,31 +29,6 @@ Vue.mixin({
     },
   },
   methods: {
-    async setConfig() {
-      // Check if we've been passed some key info in URL parameters.  If so, record that in the store so that
-      // it's accessible everywhere.
-      //
-      // This method is called by the fetch method in the page mixin, or manually if that's overriden.
-      await this.$store.dispatch('config/set', {
-        key: 'region',
-        value: this.$route.query.rd_region || REGION_LONDON,
-      })
-
-      await this.$store.dispatch('config/set', {
-        key: 'domain',
-        value: this.$route.query.rd_parenturl || 'https://map.restarters.net',
-      })
-
-      if (this.$route.query.rd_language) {
-        // Set the requested language.
-        await this.$i18n.setLocale(this.$route.query.rd_language)
-      }
-
-      await this.$store.dispatch('config/set', {
-        key: 'language',
-        value: this.$route.query.rd_language || null,
-      })
-    },
     waitForRef(name, callback) {
       // When a component is conditional using a v-if, it sometimes takes more than one tick for it to appear.  So
       // we have a bit of a timer.
@@ -95,7 +69,8 @@ Vue.mixin({
         },
       ]
 
-      const retImage = image || require('~/static/logo.png')
+      // On the server we need to return a full URL for Twitter preview to work.  Use our own domain.
+      const retImage = image || 'https://map.restarters.net/share.png'
 
       meta.push({
         hid: 'og:image',
