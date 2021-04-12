@@ -24,8 +24,11 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
 
       // We need to load this font as it is used by REW via the rd_style configuration.
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins' }]
-    ,
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Poppins',
+      },
+    ],
   },
 
   css: ['@/assets/css/global.scss'],
