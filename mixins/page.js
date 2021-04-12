@@ -1,2 +1,4 @@
 // Mixin used on every page.
-export default {}
+export default {
+  fetch() {},
+}
