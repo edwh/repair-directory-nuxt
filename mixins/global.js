@@ -70,7 +70,13 @@ Vue.mixin({
         },
       ]
 
-      const retImage = image || require('~/static/share.png')
+      const retImage =
+        image ||
+        location.protocol +
+          '//' +
+          location.hostname +
+          (location.port ? ':' + location.port : '') +
+          '/share.png'
 
       meta.push({
         hid: 'og:image',
