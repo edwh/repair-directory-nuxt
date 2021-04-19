@@ -26,6 +26,8 @@ export default {
   noBusinesses:
     'Yn anffodus, ar hyn o bryd, nid oes unrhiw fusnesau yn y Cyfeiriadur Aygyweirio ar gyfer yr eitem hon sy’n cwrdd â’ch meini prawf chwilio.',
   widerRadius: 'Try selecting a wider search radius.',
+  stillNoResults:
+    'Os na fyddwch yn derbyn canlyniadau o hyd, mae’n golygu nad ydym yn gwybod am fusnes atgyweirio ar gyfer yr eitem hon sy’n cwrdd â’n meini prawf rhestru.',
   share: 'Rhannu',
   email: 'E-bost',
   copy: 'Copio',

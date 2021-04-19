@@ -84,8 +84,7 @@
               {{ $t('widerRadius') }}
             </p>
             <p>
-              If you still don’t obtain results, it means that we don’t know of
-              a repair business for this item that meets our listing criteria.
+              {{ $t('stillNoResults') }}
             </p>
           </div>
           <div
