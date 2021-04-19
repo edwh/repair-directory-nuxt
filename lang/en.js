@@ -22,4 +22,13 @@ export default {
   lastUpdated: 'Last updated',
   close: 'Close',
   shareBusiness: 'Share business',
+  qualifications: 'Qualifications',
+  helpUsGrow: 'Help us grow!',
+  submitABusiness: 'Submit a business',
+  noBusinesses:
+    'Unfortunately, there are currently no businesses in the Repair Directory that match your search criteria.',
+  widerRadius: 'Try selecting a wider search radius.',
+  share: 'Share',
+  email: 'Email',
+  copy: 'Copy',
 }
