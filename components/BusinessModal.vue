@@ -130,6 +130,7 @@
 </template>
 <script>
 import ShareModal from '@/components/ShareModal'
+
 export default {
   components: { ShareModal },
   props: {
