@@ -27,6 +27,7 @@
     <a v-if="business.website" :href="business.website" itemprop="url">{{
       business.website
     }}</a>
+    <img itemprop="image" :src="image" :alt="business.name" />
     <div
       itemprop="aggregateRating"
       itemscope
@@ -52,6 +53,10 @@ export default {
   computed: {
     business() {
       return this.id ? this.$store.getters['businesses/get'](this.id) : null
+    },
+    image() {
+      // We have to provide an image as it's mandatory.  Relative images are ok.
+      return require('~/static/share.png')
     },
   },
 }
