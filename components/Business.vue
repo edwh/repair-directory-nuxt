@@ -12,6 +12,10 @@
       forcebreak: true,
     }"
   >
+    <BusinessSchema
+      v-if="!selected || selected === business.uid"
+      :id="business.uid"
+    />
     <div class="business" @click="select">
       <div ref="heading" class="business__heading">
         <h2 class="name rd-business-heading-color rd-primary-font">
@@ -77,9 +81,11 @@
   </div>
 </template>
 <script>
+import BusinessSchema from '@/components/BusinessSchema'
 const VueScrollTo = require('vue-scrollto')
 
 export default {
+  components: { BusinessSchema },
   props: {
     business: {
       type: Object,
