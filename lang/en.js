@@ -22,4 +22,15 @@ export default {
   lastUpdated: 'Last updated',
   close: 'Close',
   shareBusiness: 'Share business',
+  qualifications: 'Qualifications',
+  helpUsGrow: 'Help us grow!',
+  submitABusiness: 'Submit a business',
+  noBusinesses:
+    'Unfortunately, there are currently no businesses in the Repair Directory that match your search criteria.',
+  widerRadius: 'Try selecting a wider search radius.',
+  stillNoResults:
+    'If you still don’t obtain results, it means that we don’t know of a repair business for this item that meets our listing criteria.',
+  share: 'Share',
+  email: 'Email',
+  copy: 'Copy',
 }

@@ -65,8 +65,8 @@
         </div>
       </div>
       <div v-if="addbusiness" class="text-center bg-white p-2 font-weight-bold">
-        Help us grow!
-        <a :href="addbusiness" target="_blank"> Submit a business </a>
+        {{ $t('helpUsGrow') }}
+        <a :href="addbusiness" target="_blank">{{ $t('submitABusiness') }}</a>
       </div>
       <div class="business-list-container pl-md-2 pr-md-2 d-flex flex-wrap">
         <div
@@ -78,13 +78,13 @@
             class="business-list-container__result-count"
           >
             <p>
-              Unfortunately, there are currently no businesses in the Repair
-              Directory that match your search criteria.
+              {{ $t('noBusinesses') }}
             </p>
-            <p>Try selecting a wider search radius.</p>
             <p>
-              If you still don’t obtain results, it means that we don’t know of
-              a repair business for this item that meets our listing criteria.
+              {{ $t('widerRadius') }}
+            </p>
+            <p>
+              {{ $t('stillNoResults') }}
             </p>
           </div>
           <div

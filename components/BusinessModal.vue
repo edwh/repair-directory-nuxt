@@ -111,7 +111,7 @@
 
         <p v-if="business.qualifications">
           <v-icon name="graduation-cap" class="fa-fw icon" />
-          <span>Qualifications: {{ business.qualifications }}</span>
+          <span>{{ $t('qualifications') }}: {{ business.qualifications }}</span>
         </p>
 
         <p>

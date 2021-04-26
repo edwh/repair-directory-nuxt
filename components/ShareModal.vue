@@ -2,7 +2,7 @@
   <b-modal
     id="shareModal"
     v-model="showModal"
-    :title="'Share ' + name"
+    :title="$t('share') + ' ' + name"
     title-class="rd-primary-font"
     size="lg"
   >
@@ -53,7 +53,8 @@
                 size="lg"
                 class="gmail mt-1 mb-1 text-nowrap"
               >
-                <v-icon name="envelope" class="rd-icon-white" /> Email
+                <v-icon name="envelope" class="rd-icon-white" />
+                {{ $t('email') }}
               </b-btn>
             </network>
           </social-sharing>
@@ -81,14 +82,17 @@
               @click="doCopy"
             >
               <v-icon v-if="copied" name="check" class="rd-icon-white" />
-              <v-icon v-else name="copy" class="rd-icon-white" /> Copy
+              <v-icon v-else name="copy" class="rd-icon-white" />
+              {{ $t('copy') }}
             </b-btn>
           </div>
         </div>
       </div>
     </template>
     <template slot="modal-footer">
-      <b-button variant="secondary" @click="close"> Close </b-button>
+      <b-button variant="secondary" @click="close">
+        {{ $t('close') }}
+      </b-button>
     </template>
   </b-modal>
 </template>

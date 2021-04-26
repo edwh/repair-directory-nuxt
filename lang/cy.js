@@ -9,7 +9,7 @@ export default {
   searchRadius: 'Rhowch god post neu ardal?',
   allWales: 'Cyru i gyd',
   mile: 'milltir',
-  miles: 'milltiroedd',
+  miles: 'milltir/oedd',
   whatDoYouNeedToFix: 'Beth sydd angen i chi ei drwsio?',
   showAllProductCategories: 'Dangos yr holl gategoriau cynnyrc',
   search: 'Chwilio',
@@ -18,8 +18,19 @@ export default {
   source: 'ffynhonnell',
   warranty: 'Gwarant',
   lastUpdated: 'Wedi’i ddiweddaru ddiwethaf',
-  close: 'Gau',
+  close: 'Cau',
   shareBusiness: 'Rhannu busnes',
+  qualifications: 'Cymwysterau',
+  helpUsGrow: 'Helpa ni i dyfu!',
+  submitABusiness: 'Helpa ni i dyfu',
+  noBusinesses:
+    'Yn anffodus, ar hyn o bryd, nid oes unrhiw fusnesau yn y Cyfeiriadur Aygyweirio ar gyfer yr eitem hon sy’n cwrdd â’ch meini prawf chwilio.',
+  widerRadius: 'Try selecting a wider search radius.',
+  stillNoResults:
+    'Os na fyddwch yn derbyn canlyniadau o hyd, mae’n golygu nad ydym yn gwybod am fusnes atgyweirio ar gyfer yr eitem hon sy’n cwrdd â’n meini prawf rhestru.',
+  share: 'Rhannu',
+  email: 'E-bost',
+  copy: 'Copio',
 
   // Categories are returned from the server.  If translations appear here, they will be used, otherwise
   // the server text will be used instead.
@@ -30,7 +41,7 @@ export default {
   'Apple iPhone': 'iPhone Apple',
   'Clothes / textiles': 'Dillad / tecstilau',
   'Cooker / hob  / oven': 'Popty / Pentan/ Ffwrn',
-  'Decorative or safety lights': 'Decorative or safety lights',
+  'Decorative or safety lights': 'Goleuadau addurniadol neu diogelwch',
   'Desktop computer': 'Cyfrifiad bwrdd-gwaith',
   'Digital Camera': 'Camera digidol',
   Dishwasher: 'Peiriant golchi llestr',
