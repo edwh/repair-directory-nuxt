@@ -325,6 +325,8 @@ export default {
       return ret
     },
     shareUrl() {
+      // The URL to share.  We don't need rd_region, rd_language, rd_parenturl because they will come from
+      // the WordPress plugin or IFRAME that embeds us.
       return (
         this.domain +
         '?' +
@@ -335,13 +337,7 @@ export default {
           ? '&rd_category=' + encodeURIComponent(this.category)
           : '') +
         '&rd_radius=' +
-        this.radius +
-        '&rd_region=' +
-        this.region +
-        '&rd_language=' +
-        encodeURIComponent(this.language) +
-        '&rd_parenturl=' +
-        encodeURIComponent(this.domain)
+        this.radius
       )
     },
     addbusiness() {
