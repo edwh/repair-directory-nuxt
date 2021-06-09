@@ -171,16 +171,10 @@ export default {
         : ''
     },
     url() {
+      // The URL to share.  We don't need rd_region, rd_language, rd_parenturl because they will come from
+      // the WordPress plugin or IFRAME that embeds us.
       return this.business
-        ? this.domain +
-            '?rd_business=' +
-            this.business.uid +
-            '&rd_region=' +
-            encodeURIComponent(this.region) +
-            '&rd_language=' +
-            encodeURIComponent(this.language) +
-            '&rd_parenturl=' +
-            encodeURIComponent(this.domain)
+        ? this.domain + '?rd_business=' + this.business.uid
         : null
     },
     completeAddress() {
