@@ -26,7 +26,7 @@
     "scss-loader": "0.0.1",
     "vue-awesome": "^4.1.0",
     "vue-clipboard2": "^0.3.1",
-    "vue-social-sharing": "^2.4.7",
+    "vue-social-sharing": "^3.0.8",
     "vue-star-rating": "^1.7.0",
     "vue2-google-maps": "^0.10.7",
     "vue2-leaflet": "^2.6.0"
