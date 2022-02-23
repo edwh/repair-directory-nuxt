@@ -388,6 +388,12 @@ export default {
         'submit_' + this.region,
         this.category || 'All Categories'
       )
+
+      this.$ga.event(
+        'search',
+        'location_' + this.region,
+        this.location || 'No location'
+      )
     },
     select(uid) {
       this.selected = uid
