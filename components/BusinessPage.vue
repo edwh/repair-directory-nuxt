@@ -109,6 +109,8 @@
           :businesses="businessesInBounds"
           class="business-list"
           :selected="selected"
+          :center="center"
+          :show-distance="location && center"
           @select="select"
         />
       </div>

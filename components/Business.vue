@@ -18,8 +18,22 @@
     />
     <div class="business" @click="select">
       <div ref="heading" class="business__heading">
-        <h2 class="name rd-business-heading-color rd-primary-font">
-          {{ business.name }}
+        <h2
+          :class="{
+            name: true,
+            'rd-business-heading-color': true,
+            'rd-primary-font': true,
+            'd-flex': true,
+            'justify-content-between': distance !== null,
+            'justify-content-end': distance === null,
+          }"
+        >
+          <div>
+            {{ business.name }}
+          </div>
+          <div v-if="distance !== null" class="text-muted mt-1 small">
+            {{ distanceAway }}
+          </div>
         </h2>
         <div
           v-if="business.positiveReviewPc"
@@ -81,6 +95,7 @@
   </div>
 </template>
 <script>
+import pluralize from 'pluralize'
 import BusinessSchema from '@/components/BusinessSchema'
 const VueScrollTo = require('vue-scrollto')
 
@@ -96,11 +111,35 @@ export default {
       required: false,
       default: null,
     },
+    center: {
+      type: Array,
+      required: false,
+      default: null,
+    },
+    distance: {
+      type: Number,
+      required: false,
+      default: null,
+    },
   },
   data() {
     return {
       showShareModal: false,
     }
+  },
+  computed: {
+    distanceAway() {
+      if (this.distance) {
+        // Round it, so that it doesn't look foolishly precise..
+        const rounded =
+          this.distance >= 5
+            ? Math.round(this.distance)
+            : Math.round(this.distance * 10) / 10
+        return pluralize(this.$t('miles'), rounded, true)
+      }
+
+      return null
+    },
   },
   watch: {
     selected: {
