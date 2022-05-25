@@ -110,7 +110,6 @@
           class="business-list"
           :selected="selected"
           :center="center"
-          :show-distance="location && center"
           @select="select"
         />
       </div>
@@ -132,7 +131,11 @@
       name="results"
       :url="shareUrl"
     />
-    <BusinessModal :id="selected" ref="businessModal" />
+    <BusinessModal
+      :id="selected"
+      ref="businessModal"
+      :distance="distanceAway"
+    />
   </div>
 </template>
 <script>
@@ -148,9 +151,11 @@ import {
 } from '@/regions'
 import BusinessModal from '@/components/BusinessModal'
 import ShareModal from '@/components/ShareModal'
+import distance from '~/mixins/distance'
 
 export default {
   components: { ShareModal, BusinessModal, BusinessList, Map },
+  mixins: [distance],
   props: {
     id: {
       type: Number,
@@ -344,6 +349,17 @@ export default {
     },
     addbusiness() {
       return this.$store.getters['config/get']('addbusiness')
+    },
+    distanceAway() {
+      if (this.selected) {
+        const business = this.$store.getters['businesses/get'](this.selected)
+        return this.roundedPlural(this.center, [
+          business.geolocation.latitude,
+          business.geolocation.longitude,
+        ])
+      }
+
+      return null
     },
   },
   mounted() {

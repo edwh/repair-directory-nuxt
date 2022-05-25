@@ -5,11 +5,8 @@
       :key="'business-' + business.uid"
       :business="business"
       :selected="selected"
-      :distance="distanceAway(business)"
       @select="$emit('select', business.uid)"
-    >
-      {{ business.name }} {{ distance }}, {{ business.geolocation }}
-    </Business>
+    />
   </div>
 </template>
 <script>
@@ -29,32 +26,23 @@ export default {
       required: false,
       default: null,
     },
-    center: {
-      type: Array,
-      required: false,
-      default: null,
-    },
-    showDistance: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
   },
   computed: {
     sortedBusinesses() {
       const businesses = this.businesses.slice()
+      const location = this.$store.getters['businesses/searchLocation']
 
-      if (this.center) {
+      if (location) {
         return businesses.sort((a, b) => {
           // Sort by distance then alphabetical.
-          const aDistance = this.getDistance(this.center, [
-            a.geolocation.latitude,
-            a.geolocation.longitude,
-          ])
-          const bDistance = this.getDistance(this.center, [
-            b.geolocation.latitude,
-            b.geolocation.longitude,
-          ])
+          const aDistance = this.getDistance(
+            [location.latitude, location.longitude],
+            [a.geolocation.latitude, a.geolocation.longitude]
+          )
+          const bDistance = this.getDistance(
+            [location.latitude, location.longitude],
+            [b.geolocation.latitude, b.geolocation.longitude]
+          )
 
           if (aDistance === bDistance) {
             return b.positiveReviewPc - a.positiveReviewPc
@@ -76,7 +64,7 @@ export default {
   },
   methods: {
     distanceAway(business) {
-      return this.center
+      return this.showDistance
         ? this.getDistance(this.center, [
             business.geolocation.latitude,
             business.geolocation.longitude,

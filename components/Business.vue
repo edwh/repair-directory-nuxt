@@ -25,14 +25,14 @@
             'rd-primary-font': true,
             'd-flex': true,
             'justify-content-between': distance !== null,
-            'justify-content-end': distance === null,
+            'justify-content-start': distance === null,
           }"
         >
           <div>
             {{ business.name }}
           </div>
-          <div v-if="distance !== null" class="text-muted mt-1 small">
-            {{ distanceAway }}
+          <div v-if="distance !== null" class="text-muted pt-1 small">
+            {{ roundedPlural(distance) }}
           </div>
         </h2>
         <div
@@ -95,28 +95,19 @@
   </div>
 </template>
 <script>
-import pluralize from 'pluralize'
 import BusinessSchema from '@/components/BusinessSchema'
+import distance from '~/mixins/distance'
 const VueScrollTo = require('vue-scrollto')
 
 export default {
   components: { BusinessSchema },
+  mixins: [distance],
   props: {
     business: {
       type: Object,
       required: true,
     },
     selected: {
-      type: Number,
-      required: false,
-      default: null,
-    },
-    center: {
-      type: Array,
-      required: false,
-      default: null,
-    },
-    distance: {
       type: Number,
       required: false,
       default: null,
@@ -128,16 +119,18 @@ export default {
     }
   },
   computed: {
-    distanceAway() {
-      if (this.distance) {
-        // Round it, so that it doesn't look foolishly precise..
-        const rounded =
-          this.distance >= 5
-            ? Math.round(this.distance)
-            : Math.round(this.distance * 10) / 10
-        return pluralize(this.$t('miles'), rounded, true)
-      }
+    distance() {
+      const location = this.$store.getters['businesses/searchLocation']
 
+      if (location) {
+        return this.getDistance(
+          [
+            this.business.geolocation.latitude,
+            this.business.geolocation.longitude,
+          ],
+          [location.latitude, location.longitude]
+        )
+      }
       return null
     },
   },

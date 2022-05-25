@@ -1,3 +1,5 @@
+import pluralize from 'pluralize'
+
 function toRadian(degree) {
   return (degree * Math.PI) / 180
 }
@@ -21,6 +23,18 @@ export default {
       // Return in miles
       const EARTH_RADIUS = 3958.8
       return c * EARTH_RADIUS
+    },
+    roundedPlural(distance) {
+      if (distance) {
+        // Round it, so that it doesn't look foolishly precise..
+        const rounded =
+          distance >= 5
+            ? Math.round(this.distance)
+            : Math.round(this.distance * 10) / 10
+        return pluralize(this.$t('miles'), rounded, true)
+      }
+
+      return null
     },
   },
 }
