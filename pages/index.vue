@@ -25,7 +25,7 @@ export default {
 
     if (this.$route.query.rd_location) {
       location = this.$route.query.rd_location
-      location = location === 'null' ? location : null
+      location = location === 'null' ? null : location
     }
 
     if (this.$route.query.rd_category) {
