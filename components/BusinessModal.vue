@@ -112,11 +112,18 @@
           <span>{{ $t('warranty') }}: {{ business.warranty }}</span>
         </p>
 
-        <p v-if="business.qualifications">
-          <v-icon name="graduation-cap" class="fa-fw icon" />
-          <span>{{ $t('qualifications') }}: {{ business.qualifications }}</span>
-        </p>
-
+        <div v-if="business.qualifications" class="mt-2 mb-2 d-flex">
+          <v-icon name="graduation-cap" class="fa-fw icon mr-1" />
+          <div v-if="html">
+            {{ $t('qualifications') }}:
+            <!--            eslint-disable-next-line-->
+            <div
+            v-html="business.qualifications" />
+          </div>
+          <div v-else>
+            {{ $t('qualifications') }}: {{ business.qualifications }}
+          </div>
+        </div>
         <p>
           <v-icon name="calendar" class="fa-fw icon" />
           <span>{{ $t('lastUpdated') }}: {{ updated }}</span>
@@ -202,6 +209,12 @@ export default {
             .filter(Boolean)
             .join(', ')
         : null
+    },
+    html() {
+      return (
+        this.business.qualifications &&
+        this.business.qualifications.includes('<')
+      )
     },
   },
   watch: {
