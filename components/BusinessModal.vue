@@ -102,7 +102,13 @@
         <p v-if="business.address">
           <v-icon name="map-marker" class="fa-fw icon" />
           <span>{{ business.address }}, {{ business.city }}</span>
+          <<<<<<< HEAD
           <span v-if="business.postcode">{{ business.postcode }}</span>
+          =======
+          <span v-if="distance" class="text-muted text-small">
+            ({{ roundedPlural(distance) }})</span
+          >
+          >>>>>>> origin/REP-220_sort_by_distance
         </p>
 
         <p v-if="business.warrantyOffered">
@@ -131,9 +137,11 @@
 </template>
 <script>
 import ShareModal from '@/components/ShareModal'
+import distance from '~/mixins/distance'
 
 export default {
   components: { ShareModal },
+  mixins: [distance],
   props: {
     id: {
       type: Number,
@@ -150,6 +158,20 @@ export default {
   computed: {
     business() {
       return this.id ? this.$store.getters['businesses/get'](this.id) : null
+    },
+    distance() {
+      const location = this.$store.getters['businesses/searchLocation']
+
+      if (this.business && location) {
+        return this.getDistance(
+          [
+            this.business.geolocation.latitude,
+            this.business.geolocation.longitude,
+          ],
+          [location.latitude, location.longitude]
+        )
+      }
+      return null
     },
     website() {
       if (this.business && this.business.website) {

@@ -18,8 +18,22 @@
     />
     <div class="business" @click="select">
       <div ref="heading" class="business__heading">
-        <h2 class="name rd-business-heading-color rd-primary-font">
-          {{ business.name }}
+        <h2
+          :class="{
+            name: true,
+            'rd-business-heading-color': true,
+            'rd-primary-font': true,
+            'd-flex': true,
+            'justify-content-between': distance !== null,
+            'justify-content-start': distance === null,
+          }"
+        >
+          <div>
+            {{ business.name }}
+          </div>
+          <div v-if="distance !== null" class="text-muted pt-1 small">
+            {{ roundedPlural(distance) }}
+          </div>
         </h2>
         <div
           v-if="business.positiveReviewPc"
@@ -83,10 +97,12 @@
 </template>
 <script>
 import BusinessSchema from '@/components/BusinessSchema'
+import distance from '~/mixins/distance'
 const VueScrollTo = require('vue-scrollto')
 
 export default {
   components: { BusinessSchema },
+  mixins: [distance],
   props: {
     business: {
       type: Object,
@@ -102,6 +118,22 @@ export default {
     return {
       showShareModal: false,
     }
+  },
+  computed: {
+    distance() {
+      const location = this.$store.getters['businesses/searchLocation']
+
+      if (location) {
+        return this.getDistance(
+          [
+            this.business.geolocation.latitude,
+            this.business.geolocation.longitude,
+          ],
+          [location.latitude, location.longitude]
+        )
+      }
+      return null
+    },
   },
   watch: {
     selected: {
