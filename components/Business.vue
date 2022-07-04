@@ -82,6 +82,7 @@
                 <v-icon name="map-marker" class="icon" />
               </client-only>
               <span>{{ business.address }}, {{ business.city }}</span>
+              <span v-if="business.postcode">{{ business.postcode }}</span>
             </p>
           </div>
         </div>

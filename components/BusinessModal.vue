@@ -102,6 +102,7 @@
         <p v-if="business.address">
           <v-icon name="map-marker" class="fa-fw icon" />
           <span>{{ business.address }}, {{ business.city }}</span>
+          <span v-if="business.postcode">{{ business.postcode }}</span>
           <span v-if="distance" class="text-muted text-small">
             ({{ roundedPlural(distance) }})</span
           >
