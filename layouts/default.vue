@@ -25,6 +25,7 @@
       .rd-sidebar-background {
         background: {{ styles.sidebarBackground }} !important;
         background-color: {{ styles.sidebarBackgroundColor }} !important;
+        color: {{ styles.sidebarSearchTextColor }} !important;
       }
 
       .rd-sidebar-button {
@@ -56,6 +57,8 @@
 
       .rd-view-more-info:hover {
         border-color: {{ styles.sidebarButtonBackgroundColor }} !important;
+        background-color: {{ styles.sidebarButtonBackgroundColor }} !important;
+        color: {{ styles.sidebarButtonColor }} !important;
       }
 
       .rd-more-info-modal-header {
@@ -95,6 +98,7 @@ export default {
             primaryFont: 'Asap',
             secondaryFont: "'Open Sans', sans-serif",
             listPercentageColor: '#f9a543',
+            sidebarSearchTextColor: 'white',
             sidebarBackgroundColor: '#f7f5ed',
             sidebarBackground: '',
             sidebarButtonColor: 'white',
@@ -109,7 +113,7 @@ export default {
             moreInfoColor: 'black',
             viewMoreInfoColor: 'black',
             moreInfoModalHeader: '#f7f5ed',
-            moreInfoModalHeaderText: 'black',
+            moreInfoModalHeaderText: 'white',
           },
           styles ? JSON.parse(styles) : {}
           // ,

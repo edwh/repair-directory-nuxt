@@ -509,7 +509,6 @@ export default {
 
 .business-list-container {
   background-color: #f7f5ed;
-  margin-top: 10px;
 }
 
 .business-list-container__results-header {
