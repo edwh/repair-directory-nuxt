@@ -34,7 +34,7 @@
 
       .rd-sidebar input, .rd-sidebar select {
         color: {{ styles.sidebarInputColor }} !important;
-        background: {{ styles.sidebarInputBackgroundColor }} !important;
+        background-color: {{ styles.sidebarInputBackgroundColor }} !important;
       }
 
       .rd-sidebar input::placeholder, .rd-sidebar select::placeholder {
@@ -50,15 +50,22 @@
       }
 
       .rd-view-more-info {
+        border-color: {{ styles.sidebarButtonBackgroundColor }} !important;
         color: {{ styles.viewMoreInfoColor }} !important;
+      }
+
+      .rd-view-more-info:hover {
+        border-color: {{ styles.sidebarButtonBackgroundColor }} !important;
       }
 
       .rd-more-info-modal-header {
         background-color: {{ styles.moreInfoModalHeader }} !important;
+        color: {{ styles.moreInfoModalHeaderText }} !important;
       }
 
       .rd-more-info-modal-header .fa-icon {
         color: white !important;
+        color: {{ styles.moreInfoModalHeaderText }} !important;
       }
 
       .rd-business-heading-color {
@@ -85,24 +92,24 @@ export default {
           // Default values
           {
             bodyColor: 'black',
-            primaryFont: 'Patua One',
+            primaryFont: 'Asap',
             secondaryFont: "'Open Sans', sans-serif",
             listPercentageColor: '#f9a543',
-            sidebarBackgroundColor: 'transparent',
-            sidebarBackground:
-              'linear-gradient(rgb(30, 134, 148), rgb(6, 77, 87))',
+            sidebarBackgroundColor: '#f7f5ed',
+            sidebarBackground: '',
             sidebarButtonColor: 'white',
             sidebarButtonBackgroundColor: '#f9a33f',
-            sidebarInputColor: 'white',
-            sidebarInputBackgroundColor: 'linear-gradient(#22737d, #0e5f69)',
+            sidebarInputColor: 'black',
+            sidebarInputBackgroundColor: 'white',
             sidebarInputActiveColor: 'white',
             sidebarInputFocusColor: 'white',
             sidebarInputPlaceholderColor: 'lightgrey',
-            businessHeadingColor: '#606060',
+            businessHeadingColor: '#222',
             iconColor: '#0094a7',
-            moreInfoColor: '#f9a543',
-            viewMoreInfoColor: '#007bff',
-            moreInfoModalHeader: '#0094a7',
+            moreInfoColor: 'black',
+            viewMoreInfoColor: 'black',
+            moreInfoModalHeader: '#f7f5ed',
+            moreInfoModalHeaderText: 'black',
           },
           styles ? JSON.parse(styles) : {}
           // ,
