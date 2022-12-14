@@ -11,7 +11,6 @@
       v-for="business in businesses"
       :key="'marker-' + business.uid"
       :business="business"
-      :show-modal="showModal === business.uid"
       :selected="selected"
       :map="map"
       @select="select(business)"
