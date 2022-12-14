@@ -36,7 +36,6 @@ export default {
   plugins: [
     { src: '~/mixins/global.js' },
     { src: '~/plugins/axios-baseurl' },
-    { src: '@/plugins/vue-google-maps', ssr: false },
     { src: '@/plugins/vue2-leaflet', ssr: false },
     { src: '@/plugins/vue-star-rating', ssr: false },
     { src: '@/plugins/vue-social-sharing', ssr: false },
@@ -130,8 +129,6 @@ export default {
   },
 
   build: {
-    transpile: [/^vue2-google-maps($|\/)/],
-
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
