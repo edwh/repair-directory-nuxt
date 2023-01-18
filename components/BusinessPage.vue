@@ -401,13 +401,13 @@ export default {
       this.busy = false
 
       // Track the search.
-      this.$ga.event(
+      this.cabin(
         'search',
         'submit_' + this.region,
         this.category || 'All Categories'
       )
 
-      this.$ga.event(
+      this.cabin(
         'search',
         'location_' + this.region,
         this.location || 'No location'
@@ -421,7 +421,7 @@ export default {
       const value = [business.name, business.address, business.postcode].join(
         ', '
       )
-      this.$ga.event('map', 'select_' + this.region, value)
+      this.cabin('map', 'select_' + this.region, value)
     },
     showMoreInfo() {
       this.waitForRef('moreinfomodal', () => {

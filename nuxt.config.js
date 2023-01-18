@@ -29,12 +29,16 @@ export default {
         href: 'https://fonts.googleapis.com/css?family=Poppins',
       },
     ],
+    script: [
+      { src: 'https://scripts.withcabin.com/hello.js', ssr: false, defer: true },
+    ]
   },
 
   css: ['@/assets/css/global.scss'],
 
   plugins: [
     { src: '~/mixins/global.js' },
+    { src: '~/mixins/cabin.js' },
     { src: '~/plugins/axios-baseurl' },
     { src: '@/plugins/vue-google-maps', ssr: false },
     { src: '@/plugins/vue2-leaflet', ssr: false },
@@ -47,7 +51,6 @@ export default {
 
   buildModules: [
     '@nuxtjs/eslint-module',
-    '@nuxtjs/google-analytics',
     '@nuxtjs/google-fonts',
   ],
 
@@ -145,16 +148,6 @@ export default {
           },
         })
       }
-    },
-  },
-
-  googleAnalytics: {
-    id: 'UA-46050944-3',
-
-    // Enable debug in development mode so that we can see what events are tracked.
-    debug: {
-      enabled: process.env.NODE_ENV !== 'production',
-      sendHitTask: true,
     },
   },
 
