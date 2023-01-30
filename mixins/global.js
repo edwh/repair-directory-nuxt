@@ -42,7 +42,7 @@ Vue.mixin({
       }
     },
     trackOutboundLink(url) {
-      // this.cabin('outbound', 'click_' + this.region, url)
+      window._paq.push(['trackLink', url, 'click_' + this.region])
     },
     buildHead(title, description, image) {
       const meta = [

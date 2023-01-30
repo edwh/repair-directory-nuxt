@@ -401,17 +401,18 @@ export default {
       this.busy = false
 
       // Track the search.
-      // this.cabin(
-      //   'search',
-      //   'submit_' + this.region,
-      //   this.category || 'All Categories'
-      // )
-      //
-      // this.cabin(
-      //   'search',
-      //   'location_' + this.region,
-      //   this.location || 'No location'
-      // )
+      window._paq.push([
+        'trackEvent',
+        'search_category' + this.region,
+        'category',
+        this.category || 'All Categories',
+      ])
+      window._paq.push([
+        'trackEvent',
+        'search_location_' + this.region,
+        'location',
+        this.location || 'No location',
+      ])
     },
     select(uid) {
       this.selected = uid
@@ -419,7 +420,6 @@ export default {
       // Track the select.
       const business = this.$store.getters['businesses/get'](uid)
       const value = [business.address, business.postcode].join(', ')
-      // this.$ga.event('map', 'select_' + this.region, value)
       window._paq.push([
         'trackEvent',
         'select_' + this.region,
