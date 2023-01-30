@@ -29,16 +29,12 @@ export default {
         href: 'https://fonts.googleapis.com/css?family=Poppins',
       },
     ],
-    script: [
-      { src: 'https://scripts.withcabin.com/hello.js', ssr: false, defer: true },
-    ]
   },
 
   css: ['@/assets/css/global.scss'],
 
   plugins: [
     { src: '~/mixins/global.js' },
-    { src: '~/mixins/cabin.js' },
     { src: '~/plugins/axios-baseurl' },
     { src: '@/plugins/vue-google-maps', ssr: false },
     { src: '@/plugins/vue2-leaflet', ssr: false },

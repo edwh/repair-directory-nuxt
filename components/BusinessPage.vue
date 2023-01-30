@@ -401,27 +401,31 @@ export default {
       this.busy = false
 
       // Track the search.
-      this.cabin(
-        'search',
-        'submit_' + this.region,
-        this.category || 'All Categories'
-      )
-
-      this.cabin(
-        'search',
-        'location_' + this.region,
-        this.location || 'No location'
-      )
+      // this.cabin(
+      //   'search',
+      //   'submit_' + this.region,
+      //   this.category || 'All Categories'
+      // )
+      //
+      // this.cabin(
+      //   'search',
+      //   'location_' + this.region,
+      //   this.location || 'No location'
+      // )
     },
     select(uid) {
       this.selected = uid
 
       // Track the select.
       const business = this.$store.getters['businesses/get'](uid)
-      const value = [business.name, business.address, business.postcode].join(
-        ', '
-      )
-      this.cabin('map', 'select_' + this.region, value)
+      const value = [business.address, business.postcode].join(', ')
+      // this.$ga.event('map', 'select_' + this.region, value)
+      window._paq.push([
+        'trackEvent',
+        'select_' + this.region,
+        business.name,
+        value,
+      ])
     },
     showMoreInfo() {
       this.waitForRef('moreinfomodal', () => {
