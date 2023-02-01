@@ -3,7 +3,7 @@
     <l-tile-layer
       :url="osmtile"
       :attribution="attribution"
-      :tilesize="256"
+      :tile-size="256"
       :max-zoom="18"
       :zoom-offset="-1"
     />
@@ -12,7 +12,6 @@
       :key="'marker-' + business.uid"
       :business="business"
       :selected="selected"
-      :map="map"
       @select="select(business)"
     />
   </l-map>
@@ -56,15 +55,10 @@ export default {
       osmtile:
         'https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmVpbHJlc3RhcnQiLCJhIjoiY2ptbTV0bDM5MGJ6ODN2bnVzM3lzOXMxbyJ9.dUSm_n4UkDRcQY_LBw_ihQ&tilesize=256',
       attribution:
-        '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+        '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong>',
       bounds: null,
       lastBusinessesFitted: null,
     }
-  },
-  computed: {
-    map() {
-      return this.$refs.leafletMap ? this.$refs.leafletMap : null
-    },
   },
   watch: {
     businesses: {
@@ -93,8 +87,6 @@ export default {
       this.$emit('selected', business.uid)
     },
     fitMarkers(businesses) {
-      console.log('fitMarkers', this.$refs.map)
-
       if (!businesses.length) {
         // Nothing to show.
         console.log('Nothing to show')
