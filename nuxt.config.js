@@ -154,6 +154,10 @@ export default {
 
   googleAnalytics: {
     id: 'UA-46050944-3',
+    disabled: () => {
+      // temporary measure until got cookie passthrough from parent site
+      return window.location.href.includes('londonrepairs.org')
+    },
 
     // Enable debug in development mode so that we can see what events are tracked.
     debug: {
