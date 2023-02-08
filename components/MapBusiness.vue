@@ -48,7 +48,7 @@ export default {
       return new L.Icon({
         iconUrl: require('~/assets/images/marker-icon-2x-' + colour + '.png'),
         shadowUrl: require('~/assets/images/marker-shadow.png'),
-        iconSize: [25, 41],
+        iconSize: [20, 33],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
         shadowSize: [41, 41],
