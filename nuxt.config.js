@@ -28,6 +28,10 @@ export default {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Poppins',
       },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Asap',
+      },
     ],
   },
 
@@ -147,11 +151,18 @@ export default {
 
   googleAnalytics: {
     id: 'UA-46050944-3',
+    disabled: () => {
+      // temporary measure until got cookie passthrough from parent site
+      return window.location.href.includes('londonrepairs.org')
+    },
 
     // Enable debug in development mode so that we can see what events are tracked.
     debug: {
       enabled: process.env.NODE_ENV !== 'production',
       sendHitTask: true,
+    },
+    fields: {
+      cookieFlags: 'secure;samesite=none',
     },
   },
 

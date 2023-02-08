@@ -12,7 +12,7 @@
       <div class="sidebar__content p-2 rd-sidebar-background">
         <div class="sidebar__copy m-0 mb-3 d-flex">
           <div class="d-flex flex-column justify-content-center">
-            <span class="rd-primary-font">
+            <span id="tagline" class="rd-primary-font">
               {{ tagline }}
             </span>
           </div>
@@ -57,7 +57,6 @@
             <b-btn
               class="sidebar__button font-weight-bold rd-sidebar-button"
               variant="warning"
-              squared
               @click="search"
               >{{ $t('search') }}</b-btn
             >
@@ -69,10 +68,7 @@
         <a :href="addbusiness" target="_blank">{{ $t('submitABusiness') }}</a>
       </div>
       <div class="business-list-container pl-md-2 pr-md-2 d-flex flex-wrap">
-        <div
-          v-if="!busy"
-          class="business-list-container__results-header text-white"
-        >
+        <div v-if="!busy" class="business-list-container__results-header">
           <div
             v-if="businessesInBounds.length === 0"
             class="business-list-container__result-count"
@@ -461,12 +457,12 @@ export default {
   overflow-y: scroll;
 
   .sidebar__content {
-    color: white;
+    color: black;
 
     .sidebar__copy {
       margin: 1rem; //0 1rem 1rem 10px;
       font-size: 1.1rem;
-      letter-spacing: 0.5px;
+      font-weight: bold;
 
       .more-info {
         font-size: 0.8rem;
@@ -486,9 +482,9 @@ export default {
 .sidebar__select {
   -webkit-appearance: none;
   -moz-appearance: none;
-  -webkit-border-radius: 0; /* Safari 3-4, iOS 1-3.2, Android 1.6- */
-  -moz-border-radius: 0; /* Firefox 1-3.6 */
-  border-radius: 0; /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+  -webkit-border-radius: 5px; /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+  -moz-border-radius: 5px; /* Firefox 1-3.6 */
+  border-radius: 5px; /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
 
   ::v-deep option {
     color: black;
@@ -499,16 +495,20 @@ export default {
   }
 }
 
+.tagline {
+  font-size: larger;
+}
+
 .sidebar__button {
   width: 100%;
-  border-radius: 0;
   //@include button-variant(#f9a33f, #f9a33f, #958751);
   border: 0;
+  border-radius: 5px;
   height: calc(1.5em + 0.75rem + 2px);
 }
 
 .business-list-container {
-  background-color: #606060;
+  background-color: #f7f5ed;
 }
 
 .business-list-container__results-header {
@@ -523,6 +523,7 @@ export default {
 
 .business-list-container__result-count {
   font-size: 1rem;
+  font-weight: bold;
   flex: 1;
 }
 
@@ -566,7 +567,6 @@ export default {
 }
 
 .share-link {
-  color: white;
   box-shadow: none;
 }
 </style>

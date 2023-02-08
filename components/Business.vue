@@ -89,7 +89,11 @@
       </div>
     </div>
     <div class="d-flex justify-content-end">
-      <b-btn variant="link" class="moreinfo rd-view-more-info" @click="select">
+      <b-btn
+        variant="outline-warning"
+        class="moreinfo rd-view-more-info"
+        @click="select"
+      >
         {{ $t('viewMoreInfo') }}
       </b-btn>
     </div>
@@ -164,6 +168,7 @@ export default {
   margin: 0 1rem 1rem 1rem;
   padding: 1rem;
   background-color: white;
+  box-shadow: 0 0 2px 1px #ccc;
 
   &:hover {
     background-color: #eee !important;
@@ -182,6 +187,7 @@ export default {
     color: #606060;
     margin-top: 0;
     font-size: 1.8rem;
+    font-weight: bold;
   }
 
   .icon {
@@ -189,8 +195,8 @@ export default {
   }
 
   &.business-list__item.business-list__item--inactive {
-    background-color: #707070;
-    color: #333 !important;
+    background-color: #909090;
+    color: #666 !important;
 
     .name,
     a,
@@ -198,7 +204,7 @@ export default {
     .fa-icon,
     .percentage,
     .moreinfo {
-      color: #333 !important;
+      color: #666 !important;
     }
   }
 }
@@ -216,5 +222,9 @@ export default {
 
 a {
   color: $colour-link2;
+}
+
+p.business-detail {
+  margin-bottom: 0.1rem;
 }
 </style>

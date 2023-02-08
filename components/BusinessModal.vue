@@ -13,7 +13,7 @@
           class="large title w-100 rd-secondary-font rd-more-info-modal-header"
         >
           <b-btn variant="link" class="float-right clickme" @click="cancel">
-            <v-icon name="times" class="text-white" scale="2" />
+            <v-icon name="times" class="text-black" scale="2" />
           </b-btn>
           <h1 class="m-0 rd-primary-font">{{ business.name }}</h1>
           <p v-if="business.positiveReviewPc" class="rd-primary-font">
