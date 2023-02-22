@@ -52,6 +52,7 @@ export default {
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
         shadowSize: [41, 41],
+        shadowAnchor: [15, 48],
       })
     },
   },
