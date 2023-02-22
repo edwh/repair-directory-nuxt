@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="moreinfo" v-model="showModal" size="lg" no-stacking>
+  <b-modal id="moreinfo" v-model="showModal" size="md" no-stacking>
     <h4>Broken gadget?</h4>
     <p>
       <strong
@@ -38,8 +38,9 @@
         software with the source code
         <a
           target="_blank"
-          href="https://github.com/TheRestartProject/RepairDirectory"
-          >available on Github TODO new location</a
+          rel="noopener"
+          href="https://github.com/TheRestartProject/repair-directory-nuxt"
+          >available on Github</a
         >. If you’re a coder, a designer, a UX person, or a tester, you can get
         involved.
       </li>

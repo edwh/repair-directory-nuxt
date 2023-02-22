@@ -3,6 +3,7 @@ export const state = () => ({
   // storage.
   list: {},
   center: [51.5074, 0.1278],
+  searchLocation: null,
 })
 
 export const mutations = {
@@ -16,6 +17,9 @@ export const mutations = {
   setcenter(state, center) {
     state.center = center
   },
+  setSearch(state, location) {
+    state.searchLocation = location
+  },
 }
 
 export const getters = {
@@ -25,6 +29,7 @@ export const getters = {
   },
   list: (state) => Object.values(state.list),
   center: (state) => state.center,
+  searchLocation: (state) => state.searchLocation,
 }
 
 export const actions = {
@@ -32,8 +37,11 @@ export const actions = {
     commit('setList', params.list)
   },
 
+  setCenter({ commit }, params) {
+    commit('setcenter', [params.lat, params.lng])
+  },
+
   async search({ commit }, params) {
-    // CORS blocks us
     const ret = await this.$axios.get('/api/business/search', {
       params,
     })
@@ -45,6 +53,13 @@ export const actions = {
         ret.data.searchLocation.latitude,
         ret.data.searchLocation.longitude,
       ])
+
+      if (params.location) {
+        // We have searched from a specific location.
+        commit('setSearch', ret.data.searchLocation)
+      } else {
+        commit('setSearch', null)
+      }
     }
   },
 }

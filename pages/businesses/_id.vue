@@ -3,15 +3,21 @@
 </template>
 <script>
 import BusinessPage from '@/components/BusinessPage'
+import { TAGLINE_GENERIC } from '@/regions'
+import page from '@/mixins/page'
 
 export default {
   components: { BusinessPage },
-  async asyncData({ store }) {
+  mixins: [page],
+  async fetch() {
     // For SSR we want to have all the businesses loaded.  The business selected will pop up in a modal.
-    await store.dispatch('businesses/search', {
-      location: 'London, UK',
+    //
+    // Until the server has a concept of regions, we'll just search with a big radius, which will include anything in
+    // this region.
+    await this.$store.dispatch('businesses/search', {
+      location: null,
       category: null,
-      radius: 18,
+      radius: 2000,
     })
   },
   data() {
@@ -24,17 +30,11 @@ export default {
       return this.id ? this.$store.getters['businesses/get'](this.id) : null
     },
   },
-  created() {
-    this.id = parseInt(this.$route.params.id)
-  },
   head() {
     if (this.business) {
       return this.buildHead(this.business.name, this.business.description)
     } else {
-      return this.buildHead(
-        'Repair Directory',
-        'Find a London business to repair your broken devices.'
-      )
+      return this.buildHead('Repair Directory', TAGLINE_GENERIC)
     }
   },
 }

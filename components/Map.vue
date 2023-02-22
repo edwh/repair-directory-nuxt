@@ -1,26 +1,30 @@
 <template>
-  <GmapMap
-    ref="map"
-    :center="{ lat: center[0], lng: center[1] }"
-    :zoom="7"
-    map-type-id="roadmap"
-    style="width: 100%; height: 100vh"
-    @idle="idle"
-  >
+  <l-map ref="map" style="width: 100%; height: 100vh" :center="center">
+    <l-tile-layer
+      :url="osmtile"
+      :attribution="attribution"
+      :tile-size="256"
+      :max-zoom="18"
+      :zoom-offset="-1"
+    />
     <MapBusiness
       v-for="business in businesses"
       :key="'marker-' + business.uid"
       :business="business"
-      :show-modal="showModal === business.uid"
       :selected="selected"
-      :map="map"
       @select="select(business)"
     />
-  </GmapMap>
+  </l-map>
 </template>
 <script>
 import MapBusiness from '@/components/MapBusiness'
-import { gmapApi } from 'vue2-google-maps'
+import { BOUNDS_LONDON, BOUNDS_WALES, REGION_WALES } from '@/regions'
+
+let L = null
+
+if (process.browser) {
+  L = require('leaflet')
+}
 
 export default {
   components: { MapBusiness },
@@ -38,20 +42,23 @@ export default {
       required: false,
       default: null,
     },
+    location: {
+      type: String,
+      required: false,
+      default: null,
+    },
   },
   data() {
     return {
-      map: null,
-      fitted: false,
+      zoom: null,
       showModal: false,
       osmtile:
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png',
+        'https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmVpbHJlc3RhcnQiLCJhIjoiY2ptbTV0bDM5MGJ6ODN2bnVzM3lzOXMxbyJ9.dUSm_n4UkDRcQY_LBw_ihQ&tilesize=256',
       attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>',
+        '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong>',
+      bounds: null,
+      lastBusinessesFitted: null,
     }
-  },
-  computed: {
-    google: gmapApi,
   },
   watch: {
     businesses: {
@@ -60,45 +67,91 @@ export default {
         this.fitMarkers(newVal)
       },
     },
-    selected: {
-      immediate: true,
-      handler(newVal) {
-        // Delay modal as this interferes with list scrolling.
-        setTimeout(() => {
-          this.showModal = newVal
-        }, 1000)
-      },
-    },
   },
   methods: {
     idle() {
-      if (!this.fitted) {
+      console.log('Idle, fit markers')
+
+      // We only want to fit the map to the markers if the businesses have changed since last time we did this.
+      if (
+        !this.lastBusinessesFitted ||
+        JSON.stringify(this.businesses) !== this.lastBusinessesFitted
+      ) {
+        this.lastBusinessesFitted = JSON.stringify(this.businesses)
         this.fitMarkers(this.businesses)
-        this.fitted = true
+      } else {
+        console.log('No change to businesses')
       }
     },
     select(business) {
       this.$emit('selected', business.uid)
     },
     fitMarkers(businesses) {
-      if (this.$refs.map) {
-        this.map = this.$refs.map
+      if (!businesses.length) {
+        // Nothing to show.
+        console.log('Nothing to show')
+        if (this.location) {
+          // ...but zoom to the location to at least indicate that we searched.
+          console.log('Got location')
+          this.zoom = 14
+        } else {
+          // ...and no location specified - show the whole region.
+          console.log('No location')
+          let bounds = null
+
+          switch (this.region) {
+            case REGION_WALES: {
+              bounds = BOUNDS_WALES
+              break
+            }
+            default: {
+              bounds = BOUNDS_LONDON
+              break
+            }
+          }
+
+          const markers = []
+          markers.push(new L.Marker([bounds.sw.lat, bounds.sw.lng]))
+          markers.push(new L.Marker([bounds.ne.lat, bounds.ne.lng]))
+
+          // eslint-disable-next-line new-cap
+          const fg = new L.featureGroup(markers)
+          this.waitForRef('map', () => {
+            this.$refs.map.mapObject.fitBounds(fg.getBounds().pad(0.1))
+          })
+        }
+      } else {
+        // Got some businesses.
+        console.log('Got some businesses')
+
+        const markers = []
 
         // We want to fit the map to the new businesses
-        const bounds = new this.google.maps.LatLngBounds()
+        markers.push(new L.Marker([this.center[0], this.center[1]]))
         businesses.forEach((b) => {
-          bounds.extend(
+          markers.push(
             // eslint-disable-next-line new-cap
-            new this.google.maps.LatLng(
-              b.geolocation.latitude,
-              b.geolocation.longitude
-            )
+            new L.Marker([b.geolocation.latitude, b.geolocation.longitude])
           )
         })
 
-        if (businesses.length) {
-          this.$refs.map.$mapPromise.then((map) => {
-            map.fitBounds(bounds)
+        if (businesses.length === 1) {
+          // Ensure we're not too zoomed in - set a decent zoom and centre.
+          console.log('...only 1')
+          this.$store.dispatch('businesses/setCenter', {
+            lat: businesses[0].geolocation.latitude,
+            lng: businesses[0].geolocation.longitude,
+          })
+
+          this.zoom = 14
+        } else if (businesses.length > 1) {
+          // Pad the map so the markers will show if they're at the edge.
+          // eslint-disable-next-line new-cap
+          const fg = new L.featureGroup(markers)
+          console.log('...multiple', markers)
+
+          this.waitForRef('map', () => {
+            this.$refs.map.mapObject.fitBounds(fg.getBounds().pad(0.1))
           })
         }
       }

@@ -1,7 +1,34 @@
 // Global mixin so that every component can access the logged in state and user.
 import Vue from 'vue'
+import { REGION_WALES } from '@/regions'
 
 Vue.mixin({
+  computed: {
+    tagline() {
+      let ret
+
+      switch (this.region) {
+        case REGION_WALES: {
+          ret = this.$t('findBusinessWales')
+          break
+        }
+        default: {
+          ret = this.$t('findBusinessLondon')
+        }
+      }
+
+      return ret
+    },
+    region() {
+      return this.$store.getters['config/get']('region')
+    },
+    domain() {
+      return this.$store.getters['config/get']('domain')
+    },
+    language() {
+      return this.$store.getters['config/get']('language') || 'en'
+    },
+  },
   methods: {
     waitForRef(name, callback) {
       // When a component is conditional using a v-if, it sometimes takes more than one tick for it to appear.  So
@@ -15,7 +42,7 @@ Vue.mixin({
       }
     },
     trackOutboundLink(url) {
-      this.$ga.event('outbound', 'click', url)
+      this.$ga.event('outbound', 'click_' + this.region, url)
     },
     buildHead(title, description, image) {
       const meta = [
@@ -43,7 +70,7 @@ Vue.mixin({
         },
       ]
 
-      const retImage = image || require('~/static/logo.png')
+      const retImage = image || require('~/static/share.png')
 
       meta.push({
         hid: 'og:image',

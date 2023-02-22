@@ -1,23 +1,56 @@
 <template>
-  <div>
-    <div
-      :class="{
-        business: true,
-        faded: selected && selected !== business.uid,
-      }"
-      @click="select"
-    >
+  <div
+    :class="{
+      'business-list__item': true,
+      'business-list__item--active': selected && selected === business.uid,
+      'business-list__item--inactive': selected && selected !== business.uid,
+      'bg-white': !selected,
+      'p-3': true,
+      'mb-3': true,
+      'm-0': true,
+      rounded: true,
+      forcebreak: true,
+    }"
+  >
+    <BusinessSchema
+      v-if="!selected || selected === business.uid"
+      :id="business.uid"
+    />
+    <div class="business" @click="select">
       <div ref="heading" class="business__heading">
-        <h2 class="name">{{ business.name }}</h2>
-        <div class="business__positive-review-percentage">
-          <h2 class="percentage font-weight-bold">100%</h2>
-          <span>positive reviews</span>
+        <h2
+          :class="{
+            name: true,
+            'rd-business-heading-color': true,
+            'rd-primary-font': true,
+            'd-flex': true,
+            'justify-content-between': distance !== null,
+            'justify-content-start': distance === null,
+          }"
+        >
+          <div>
+            {{ business.name }}
+          </div>
+          <div v-if="distance !== null" class="text-muted pt-1 small">
+            {{ roundedPlural(distance) }}
+          </div>
+        </h2>
+        <div
+          v-if="business.positiveReviewPc"
+          class="business__positive-review-percentage"
+        >
+          <h2
+            class="percentage font-weight-bold rd-primary-font rd-list-percentage-color"
+          >
+            {{ business.positiveReviewPc }}%
+          </h2>
+          <span>{{ $t('positiveReviews') }}</span>
         </div>
       </div>
       <div class="business__details">
         <div class="row">
           <div class="col-md-12">
-            <p class="business-detail">
+            <p v-if="business.website" class="business-detail">
               <client-only>
                 <v-icon name="globe" class="icon" />
               </client-only>
@@ -31,7 +64,7 @@
               </a>
             </p>
 
-            <p class="business-detail">
+            <p v-if="business.landline" class="business-detail">
               <client-only>
                 <v-icon name="phone" class="icon" />
               </client-only>
@@ -44,37 +77,36 @@
               </a>
             </p>
 
-            <p class="business-detail">
+            <p v-if="business.address" class="business-detail">
               <client-only>
                 <v-icon name="map-marker" class="icon" />
               </client-only>
-              <span>{{ business.address }}</span>
+              <span>{{ business.address }}, {{ business.city }}</span>
+              <span v-if="business.postcode">{{ business.postcode }}</span>
             </p>
           </div>
         </div>
       </div>
     </div>
     <div class="d-flex justify-content-end">
-      <b-btn variant="link" @click="share">
-        Share business
-        <client-only>
-          <v-icon name="share" />
-        </client-only>
+      <b-btn
+        variant="outline-warning"
+        class="moreinfo rd-view-more-info"
+        @click="select"
+      >
+        {{ $t('viewMoreInfo') }}
       </b-btn>
     </div>
-    <ShareModal
-      v-if="showShareModal"
-      ref="shareModal"
-      :name="business.name"
-      :url="url"
-    />
   </div>
 </template>
 <script>
-import ShareModal from '@/components/ShareModal'
+import BusinessSchema from '@/components/BusinessSchema'
+import distance from '~/mixins/distance'
+const VueScrollTo = require('vue-scrollto')
 
 export default {
-  components: { ShareModal },
+  components: { BusinessSchema },
+  mixins: [distance],
   props: {
     business: {
       type: Object,
@@ -92,14 +124,19 @@ export default {
     }
   },
   computed: {
-    url() {
-      return (
-        window.location.protocol +
-        '//' +
-        window.location.hostname +
-        '/businesses/' +
-        this.business.uid
-      )
+    distance() {
+      const location = this.$store.getters['businesses/searchLocation']
+
+      if (location) {
+        return this.getDistance(
+          [
+            this.business.geolocation.latitude,
+            this.business.geolocation.longitude,
+          ],
+          [location.latitude, location.longitude]
+        )
+      }
+      return null
     },
   },
   watch: {
@@ -108,9 +145,9 @@ export default {
       handler(newVal) {
         if (newVal === this.business.uid) {
           this.waitForRef('heading', () => {
-            this.$refs.heading.scrollIntoView({
-              behavior: 'smooth',
-              block: 'center',
+            VueScrollTo.scrollTo(this.$refs.heading, 750, {
+              container: '#sidebar',
+              offset: -60,
             })
           })
         }
@@ -121,35 +158,73 @@ export default {
     select() {
       this.$emit('select', this.business.uid)
     },
-    share() {
-      this.showShareModal = true
-
-      this.waitForRef('shareModal', () => {
-        this.$refs.shareModal.show()
-      })
-    },
   },
 }
 </script>
-<style scoped lang="scss">
-.percentage {
-  display: inline-block;
-  font-family: PatuaOne, serif;
-  color: #f9a543;
-  margin: 0 0.5rem 0 0;
+<style lang="scss">
+@import 'assets/css/colours.scss';
+
+.business-list__item {
+  margin: 0 1rem 1rem 1rem;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0 0 2px 1px #ccc;
+
+  &:hover {
+    background-color: #eee !important;
+  }
+
+  .business__heading > h2 {
+    color: #606060;
+  }
+
+  .percentage {
+    display: inline-block;
+    margin: 0 0.5rem 0 0;
+  }
+
+  .name {
+    color: #606060;
+    margin-top: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+
+  .icon {
+    color: #0094a7;
+  }
+
+  &.business-list__item.business-list__item--inactive {
+    background-color: #909090;
+    color: #666 !important;
+
+    .name,
+    a,
+    li,
+    .fa-icon,
+    .percentage,
+    .moreinfo {
+      color: #666 !important;
+    }
+  }
 }
 
-.name {
-  color: #606060;
-  font-family: PatuaOne, serif;
-  margin-top: 0;
+.business-list-cta {
+  background-color: white;
+
+  &__inner {
+    color: #606060;
+    padding: 0.5rem;
+    width: 100%;
+    text-align: center;
+  }
 }
 
-.icon {
-  color: #0094a7;
+a {
+  color: $colour-link2;
 }
 
-.faded {
-  opacity: 50%;
+p.business-detail {
+  margin-bottom: 0.1rem;
 }
 </style>

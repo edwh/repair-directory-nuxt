@@ -1,40 +1,63 @@
 <template>
-  <BusinessPage />
+  <BusinessPage :id="id" />
 </template>
 <script>
 import BusinessPage from '@/components/BusinessPage'
+import page from '@/mixins/page'
+import { TAGLINE_GENERIC } from '@/regions'
 
 export default {
   components: { BusinessPage },
-  async asyncData({ route, store }) {
+  mixins: [page],
+  async fetch() {
+    // We have been asked to show a business page.  This is passed via a query parameter so that we can do this
+    // when embedded.  The url is created inside MapBusiness.
+    this.id = this.$route.query.rd_business
+      ? parseInt(this.$route.query.rd_business)
+      : null
+
     // For SSR we want to have all the businesses loaded, unless we have a specific search filter.
     let category = null
-    let location = 'London, UK'
-    let radius = 18
 
-    if (route.query.location) {
-      location = route.query.location
+    // We'll just search with a big radius, which will include anything in this region.
+    let radius = 2000
+    let location = null
+
+    if (this.$route.query.rd_location) {
+      location = this.$route.query.rd_location
+      location = location === 'null' ? null : location
     }
 
-    if (route.query.category) {
-      category = route.query.category
+    if (this.$route.query.rd_category) {
+      category = this.$route.query.rd_category
     }
 
-    if (route.query.radius) {
-      radius = route.query.radius
+    if (this.$route.query.rd_radius) {
+      radius = this.$route.query.rd_radius
     }
 
-    await store.dispatch('businesses/search', {
+    await this.$store.dispatch('businesses/search', {
       category,
       location,
       radius,
+      region: this.region,
     })
   },
+  data() {
+    return {
+      id: null,
+    }
+  },
   head() {
-    return this.buildHead(
-      'Repair Directory',
-      'Find a London business to repair your broken devices.'
-    )
+    const business = this.id
+      ? this.$store.getters['businesses/get'](this.id)
+      : null
+
+    if (business) {
+      return this.buildHead(business.name, business.description)
+    } else {
+      return this.buildHead('Repair Directory', TAGLINE_GENERIC)
+    }
   },
 }
 </script>
